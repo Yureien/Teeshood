@@ -14,9 +14,11 @@ from ...product.models import (
     Stock, StockLocation)
 from ...product.utils import (
     get_availability, get_product_costs_data, get_variant_costs_data)
+from ...product.filters import get_now_sorted_by
 from ...settings import DASHBOARD_PAGINATE_BY
 from ..views import staff_member_required, superuser_required
 from . import forms
+from . import filters
 
 
 @superuser_required
@@ -107,11 +109,21 @@ def product_list(request):
     if form.is_valid():
         return redirect(
             'dashboard:product-add', class_pk=form.cleaned_data['product_cls'])
+
+    product_filter = filters.ProductFilter(request.GET, queryset=products)
+
     products = get_paginator_items(
-        products, DASHBOARD_PAGINATE_BY, request.GET.get('page'))
+        product_filter.qs, DASHBOARD_PAGINATE_BY, request.GET.get('page'))
+
+    now_sorted_by = get_now_sorted_by(product_filter)
+    arg_sort_by = request.GET.get('sort_by')
+    is_descending = arg_sort_by.startswith('-') if arg_sort_by else False
+
     ctx = {
         'bulk_action_form': forms.ProductBulkUpdate(), 'form': form,
-        'products': products, 'product_classes': product_classes}
+        'products': products, 'product_classes': product_classes,
+        'filter': product_filter,
+        'now_sorted_by': now_sorted_by, 'is_descending': is_descending}
     return TemplateResponse(request, 'dashboard/product/list.html', ctx)
 
 
