@@ -21,6 +21,7 @@
 {% block menu_discounts_class %} active{% endblock %}
 
 {% block content %}
+  {% include './../../_filters.html' %}
   <div class="card">
     {% if perms.sale.edit_sale %}
       <div class="data-table-header-action">
