@@ -6,6 +6,7 @@ from django.template.response import TemplateResponse
 from django.utils.translation import pgettext_lazy
 
 from .emails import send_set_password_email
+from .filters import StaffFilter
 from .forms import StaffForm
 from ..views import superuser_required
 from ...core.utils import get_paginator_items
@@ -18,9 +19,10 @@ def staff_list(request):
     staff_members = (User.objects.filter(is_staff=True)
                      .prefetch_related('default_billing_address')
                      .order_by('email'))
+    staff_filter = StaffFilter(request.GET, queryset=staff_members)
     staff_members = get_paginator_items(
-        staff_members, DASHBOARD_PAGINATE_BY, request.GET.get('page'))
-    ctx = {'staff': staff_members}
+        staff_filter.qs, DASHBOARD_PAGINATE_BY, request.GET.get('page'))
+    ctx = {'staff': staff_members, 'filter': staff_filter}
     return TemplateResponse(request, 'dashboard/staff/list.html', ctx)
 
 
