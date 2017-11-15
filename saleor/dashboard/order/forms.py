@@ -301,9 +301,5 @@ PAYMENT_STATUS_CHOICES = [
 ] + PaymentStatus.CHOICES
 
 
-class OrderFilterForm(forms.Form):
-    status = forms.ChoiceField(choices=ORDER_STATUS_CHOICES)
-
-
 class PaymentFilterForm(forms.Form):
     status = forms.ChoiceField(choices=PAYMENT_STATUS_CHOICES)

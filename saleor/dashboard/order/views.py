@@ -12,13 +12,13 @@ from django_prices.templatetags.prices_i18n import gross
 from payments import PaymentStatus
 from prices import Price
 
+from .filters import OrderFilter
 from .forms import (CancelGroupForm, CancelItemsForm, CancelOrderForm,
                     CapturePaymentForm, ChangeQuantityForm, MoveItemsForm,
                     OrderNoteForm, RefundPaymentForm, ReleasePaymentForm,
                     RemoveVoucherForm, ShipGroupForm)
 from .utils import (create_packing_slip_pdf, create_invoice_pdf,
                     get_statics_absolute_url)
-from ..order.forms import OrderFilterForm
 from ..views import staff_member_required
 from ...core.utils import get_paginator_items
 from ...order import OrderStatus
@@ -31,19 +31,12 @@ from ...userprofile.i18n import AddressForm
 @staff_member_required
 @permission_required('order.view_order')
 def order_list(request):
-    orders_all = Order.objects.prefetch_related(
-        'groups', 'payments', 'groups__items', 'user')
-    status = request.GET.get('status')
-    if status:
-        orders = orders_all.filter(status=status)
-    else:
-        orders = orders_all.all()
+    orders = (Order.objects.prefetch_related(
+        'groups', 'payments', 'groups__items', 'user').order_by('-pk'))
+    order_filter = OrderFilter(request.GET, queryset=orders)
     orders = get_paginator_items(
-        orders, DASHBOARD_PAGINATE_BY, request.GET.get('page'))
-    form = OrderFilterForm(
-        request.POST or None, initial={'status': status or None})
-    ctx = {'orders': orders,
-           'form': form}
+        order_filter.qs, DASHBOARD_PAGINATE_BY, request.GET.get('page'))
+    ctx = {'orders': orders, 'filter': order_filter}
     return TemplateResponse(request, 'dashboard/order/list.html', ctx)
 
 
