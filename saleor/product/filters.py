@@ -109,4 +109,5 @@ class ProductCollectionFilter(ProductFilter):
 
     def _get_variant_attributes_lookup(self):
         return Q(
-            **{'product_variant_types__products__collections': self.collection})
+            **{'product_variant_types__products__collections':
+                   self.collection})
