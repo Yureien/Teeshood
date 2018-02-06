@@ -33,3 +33,10 @@ class CollectionForm(forms.ModelForm):
         self.instance.slug = slugify(unidecode(self.instance.name))
         super().save(commit=commit)
         return self.instance
+
+
+class ProductAddToCollection(forms.Form):
+    collections = forms.ModelChoiceField(
+        queryset=Collection.objects.all(),
+        label=pgettext_lazy('Collection form label', 'Collection'),
+        widget=forms.RadioSelect, empty_label=None)

@@ -388,9 +388,14 @@ class ProductBulkUpdate(forms.Form):
             self._publish_products()
         elif action == ProductBulkAction.UNPUBLISH:
             self._unpublish_products()
+        elif action == ProductBulkAction.ADD_TO_COLLECTION:
+            self._choose_collection()
 
     def _publish_products(self):
         self.cleaned_data['products'].update(is_published=True)
 
     def _unpublish_products(self):
         self.cleaned_data['products'].update(is_published=False)
+
+    def _choose_collection(self):
+        pass

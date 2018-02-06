@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.utils.translation import pgettext_lazy
 
 from ...core.utils import get_paginator_items
+from .forms import ProductAddToCollection
 from ...product.models import Collection
 from ..views import staff_member_required
 from .filters import CollectionFilter
@@ -72,3 +73,15 @@ def collection_delete(request, pk=None):
     ctx = {'collection': collection}
     return TemplateResponse(
         request, 'dashboard/collection/confirm_delete.html', ctx)
+
+
+@staff_member_required
+@permission_required('product.edit_product')
+def add_products_to_collection(request):
+    """
+    View for assigning selected products to chosen collection
+    """
+    form = ProductAddToCollection(request.POST or None)
+    status = 200
+    if form.is_valid():
+        print('ok')
