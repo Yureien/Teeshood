@@ -77,11 +77,17 @@ def collection_delete(request, pk=None):
 
 @staff_member_required
 @permission_required('product.edit_product')
-def add_products_to_collection(request):
+def select_collection(request):
     """
     View for assigning selected products to chosen collection
     """
     form = ProductAddToCollection(request.POST or None)
     status = 200
+    # import ipdb; ipdb.set_trace()
     if form.is_valid():
-        print('ok')
+        form.save(request.session.get('products'))
+        del request.session['products']
+        return redirect('dashboard:product-list')
+    ctx = {'form': form}
+    return TemplateResponse(
+        request, 'dashboard/collection/modal/select_collection.html', ctx)

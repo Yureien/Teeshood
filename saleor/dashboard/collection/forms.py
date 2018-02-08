@@ -40,3 +40,12 @@ class ProductAddToCollection(forms.Form):
         queryset=Collection.objects.all(),
         label=pgettext_lazy('Collection form label', 'Collection'),
         widget=forms.RadioSelect, empty_label=None)
+
+    def save(self, products):
+        import ipdb; ipdb.set_trace()
+        collection = self.cleaned_data['collections']
+        products_in_collection = collection.products.values_list(
+            'id', flat=True)
+        products_in_collection = [str(id) for id in products_in_collection]
+        products = list(set(products) - set(products_in_collection))
+        return collection.products.add(*products)

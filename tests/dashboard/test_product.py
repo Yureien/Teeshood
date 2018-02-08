@@ -665,7 +665,6 @@ def test_hide_field_in_variant_choice_field_form():
 def test_assign_collection_to_product(product_in_stock):
     product = product_in_stock
     collection = Collection.objects.create(name='test_collections')
-    data = product.__dict__
     data = {
         'name': product.name,
         'price': product.price.gross,

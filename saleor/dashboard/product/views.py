@@ -764,6 +764,10 @@ def ajax_upload_image(request, product_pk):
 @require_POST
 @staff_member_required
 def product_bulk_update(request):
+    if request.POST.get('action') == 'Add to collection':
+        request.session['products'] = request.POST.getlist('products')
+        return redirect(
+            'dashboard:collection-select-collection')
     form = forms.ProductBulkUpdate(request.POST)
     if form.is_valid():
         form.save()

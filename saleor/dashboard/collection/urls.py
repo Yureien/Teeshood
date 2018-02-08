@@ -9,5 +9,5 @@ urlpatterns = [
         views.collection_update, name='collection-update'),
     url(r'^(?P<pk>[0-9]+)/delete/$',
         views.collection_delete, name='collection-delete'),
-    url(r'^/add-products/$',
-        views.add_products_to_collection, name='collection-add-products')]
+    url(r'^add-products/$',
+        views.select_collection, name='collection-select-collection')]
