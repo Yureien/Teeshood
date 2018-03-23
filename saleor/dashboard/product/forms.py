@@ -9,16 +9,16 @@ from django.utils.text import slugify
 from django.utils.translation import pgettext_lazy
 from mptt.forms import TreeNodeChoiceField
 
+from . import ProductBulkAction
 from ...core.utils.text import generate_seo_description
 from ...product.models import (
     AttributeChoiceValue, Category, Collection, Product, ProductAttribute,
     ProductImage, ProductType, ProductVariant, Stock, StockLocation,
     VariantImage)
 from ...product.thumbnails import create_product_thumbnails
-from ..forms import OrderedModelMultipleChoiceField, ModelChoiceOrCreationField
+from ..forms import ModelChoiceOrCreationField, OrderedModelMultipleChoiceField
 from ..widgets import RichTextEditorWidget
 from .widgets import ImagePreviewWidget
-from . import ProductBulkAction
 
 
 class RichTextField(forms.CharField):
