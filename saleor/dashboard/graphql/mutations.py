@@ -9,7 +9,6 @@ from graphql_jwt.decorators import staff_member_required
 
 from ...graphql.core.types import Error
 from ...graphql.utils import get_node
-from .utils import get_attributes_dict_from_list
 
 registry = get_global_registry()
 

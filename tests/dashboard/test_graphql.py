@@ -362,7 +362,8 @@ def test_create_product(
 
 
 def test_update_product(
-    admin_client, default_category, non_default_category, product_in_stock):
+        admin_client, default_category, non_default_category,
+        product_in_stock):
     query = """
         mutation updateProduct(
             $productId: ID!,
@@ -408,7 +409,7 @@ def test_update_product(
                         }
                       }
     """
-    product_id = graphene.Node.to_global_id('Product', product_in_stock.pk)
+    product_id = graphene.Node.to_global_id('ProductDashboard', product_in_stock.pk)
     category_id = graphene.Node.to_global_id(
         'Category', non_default_category.pk)
     product_description = 'updated description'
@@ -455,7 +456,8 @@ def test_delete_product(admin_client, product_in_stock):
             }
     """
     variables = json.dumps({
-        'id': graphene.Node.to_global_id('Product', product_in_stock.id)})
+        'id': graphene.Node.to_global_id('ProductDashboard',
+                                         product_in_stock.id)})
     response = admin_client.post(
         reverse('dashboard:api'), {'query': query, 'variables': variables})
     content = get_graphql_content(response)

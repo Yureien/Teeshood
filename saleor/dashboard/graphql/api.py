@@ -15,6 +15,7 @@ from .product.filters import ProductFilter
 from .product.mutations import (
     CategoryCreateMutation, CategoryDelete, CategoryUpdateMutation,
     ProductCreateMutation, ProductDeleteMutation, ProductUpdateMutation)
+from .product.types import ProductDashboard
 
 
 class Query(graphene.ObjectType):
@@ -30,9 +31,9 @@ class Query(graphene.ObjectType):
     pages = DjangoFilterConnectionField(
         Page, filterset_class=DistinctFilterSet)
 
-    product = graphene.Field(Product, id=graphene.Argument(graphene.ID))
+    product = graphene.Field(ProductDashboard, id=graphene.Argument(graphene.ID))
     products = DjangoFilterConnectionField(
-        Product, filterset_class=ProductFilter,
+        ProductDashboard, filterset_class=ProductFilter,
         category_id=graphene.Argument(graphene.ID))
 
     @staff_member_required
