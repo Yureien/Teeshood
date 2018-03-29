@@ -5,7 +5,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 
 from ...product import models
 from ...product.templatetags.product_images import product_first_image
-from ...product.utils import get_availability
+from ...product.utils import get_availability, get_product_costs_data
 from ..core.filters import DistinctFilterSet
 from ..core.types import (
     CountableDjangoObjectType, Money, TaxedMoney, TaxedMoneyRange)
@@ -16,6 +16,11 @@ from .filters import ProductFilterSet
 class SelectedAttribute(graphene.ObjectType):
     name = graphene.String(default_value=None)
     value = graphene.String(default_value=None)
+
+
+class GrossMargin(graphene.ObjectType):
+    start = graphene.Int()
+    stop = graphene.Int()
 
 
 class ProductVariant(CountableDjangoObjectType):
@@ -53,6 +58,9 @@ class Product(CountableDjangoObjectType):
     availability = graphene.Field(ProductAvailability)
     price = graphene.Field(Money)
     attributes = graphene.List(SelectedAttribute)
+    price_range = graphene.Field(TaxedMoneyRange)
+    purchase_cost = graphene.Field(TaxedMoneyRange)
+    gross_margin = graphene.List(GrossMargin)
 
     class Meta:
         model = models.Product
@@ -66,14 +74,25 @@ class Product(CountableDjangoObjectType):
     def resolve_url(self, info):
         return self.get_absolute_url()
 
+    def resolve_attributes(self, info):
+        return resolve_attribute_list(self.attributes)
+
     def resolve_availability(self, info):
         context = info.context
         availability = get_availability(
             self, context.discounts, context.currency)
         return ProductAvailability(**availability._asdict())
 
-    def resolve_attributes(self, info):
-        return resolve_attribute_list(self.attributes)
+    def resolve_purchase_cost(self, info):
+        purchase_cost, _ = get_product_costs_data(self)
+        return purchase_cost
+
+    def resolve_gross_margin(self, info):
+        _, gross_margin = get_product_costs_data(self)
+        return [GrossMargin(gross_margin[0], gross_margin[1])]
+
+    def resolve_price_range(self, info):
+        return self.get_price_range()
 
 
 class ProductType(CountableDjangoObjectType):
