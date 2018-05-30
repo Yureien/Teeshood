@@ -2,8 +2,8 @@ import graphene
 import graphql_jwt
 from graphene_django.filter import DjangoFilterConnectionField
 
-from .menu.resolvers import resolve_menus
-from .menu.types import Menu
+from .menu.resolvers import resolve_menus, resolve_menu_items
+from .menu.types import Menu, MenuItem
 from .descriptions import DESCRIPTIONS
 from ..page import models as page_models
 from .core.filters import DistinctFilterSet
@@ -56,8 +56,12 @@ class Query(graphene.ObjectType):
         Menu, id=graphene.Argument(graphene.ID),
         description='Lookup a menu by ID.')
     menus = DjangoFilterConnectionField(
-        Menu, filterset_class=DistinctFilterSet,
-        description="List of the shop\'s menus.")
+        Menu, description="List of the shop\'s menus.")
+    menu_item = graphene.Field(
+        MenuItem, id=graphene.Argument(graphene.ID),
+        description='Lookup a menu item by ID.')
+    menu_items = DjangoFilterConnectionField(
+        MenuItem, description='List of the shop\'s menu items.')
     order = graphene.Field(
         Order, description='Lookup an order by ID.',
         id=graphene.Argument(graphene.ID))
@@ -108,6 +112,12 @@ class Query(graphene.ObjectType):
 
     def get_menus(self, info, **kwargs):
         return resolve_menus(info)
+
+    def resolve_menu_item(self, info, id):
+        return get_node(info, id, only_type=MenuItem)
+
+    def get_menu_items(self, info, **kwargs):
+        return resolve_menu_items(info)
 
     def resolve_page(self, info, id=None, slug=None):
         if slug is not None:
