@@ -1,59 +1,162 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% load i18n %}
+{% block stylesheet %}
+<style>
+ .homepage-section-title {
+     color: #000;
+ }
 
-{% block content %}
-  <div class="home">
-    <div class="row">
-      <div class="col-sm-12 home__block1">
-        <div class="home--square">
-          <div class="home--content">
-            <div class="home--content-wrapper">
-              <div class="home--content-inner">
-                <h1>{% trans "Promo & Sale" context "Homepage title" %}</h1>
-                <h2>{% trans "from the Northpole" context "Homepage title" %}</h2>
-                  <a class="btn btn-secondary home__button" href="#">
-                    {% trans "Shop now" context "Homepage action" %}
-                  </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+ #product-1 {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 450px;
+     background-size: cover;
+     background-color: #555;
+     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
+ }
+ 
+ #product-2 {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 200px;
+     background-color: #555;
+     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
+ }
+ 
+ #product-3 {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 200px;
+     background-color: #555;
+     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
+ }
+
+ 
+ #upload-art {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: #555;
+ }
+ 
+ .upload-subtitle {
+     text-transform: uppercase;
+ }
+
+ .eq-col-container {
+     display: flex;
+ }
+
+ .eq-col {
+     flex: 1;
+ }
+
+ .hall-of-fame {
+     height: 225px;
+ }
+
+ .empty {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: #555;
+ }
+</style>
+{% endblock %}
+{% block banners %}
+<div id="carouselProductBanners" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">		    
+	{% for banner in site.settings.productbanner_set.all %}
+	<li data-target="#carouselProductBanners" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
+	{% endfor %}
+    </ol>
+    <div class="carousel-inner">
+	{% for banner in site.settings.productbanner_set.all %}
+	<div class="carousel-item{% if forloop.first %} active{% endif %}">
+	    <a href="{{ banner.product_url }}">
+		<img class="d-block w-100" src="{{ banner.image.url }}" alt="{{ banner.title }}" style="height:80vh;">
+	    </a>
+	    <div class="carousel-caption d-none d-md-block">
+		<h5>{{ banner.title }}</h5>
+		<p>{{ banner.text }}</p>
+	    </div>
+	</div>
+	{% endfor %}
     </div>
+    <a class="carousel-control-prev" href="#carouselProductBanners" role="button" data-slide="prev">
+	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	<span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselProductBanners" role="button" data-slide="next">
+	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	<span class="sr-only">Next</span>
+    </a>
+</div>
+{% endblock %}
+{% block content %}
+<div class="home">
+    <h1 class="homepage-section-title m-4">Products</h1>
     <div class="row">
-      <div class="col-sm-12 col-md-6 home__block2">
-        <div class="home--square">
-          <div class="home--content">
-            <div class="home--content-wrapper">
-              <div class="home--content-inner">
-                <h1>{% trans "Size & Colours" context "Homepage title" %}</h1>
-                <a class="btn btn-secondary home__button" href="#">{% trans "Shop now" context "Homepage action" %}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-6 home__block3">
-        <div class="home--square">
-          <div class="home--content">
-            <div class="home--content-wrapper">
-              <div class="home--content-inner">
-                <h1>{% trans "Digital Downloads" context "Homepage title" %}</h1>
-                <a class="btn btn-secondary home__button" href="#">{% trans "Shop now" context "Homepage action" %}</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+	<div class="col-12 col-md-5">
+	    <div class="row">
+		<div class="col-12 m-4" id="product-1">
+		    <h1>T-Shirts</h1>
+		</div>
+	    </div>
+	</div>
+	<div class="col-12 col-md-6 offset-md-1">
+	    <div class="row">
+		<div class="col-12 m-4" id="product-2">
+		    <h1>Cups</h1>
+		</div>
+		<div class="col-12 m-4" id="product-3">
+		    <h1>Bands</h1>
+		</div>
+	    </div>
+	</div>
+    </div>
+    <h1 class="homepage-section-title m-4">Become "The Designer"</h1>
+    <h2 class="text-muted upload-subtitle">Bring out & showcase the artist in you</h2>
+    <div class="row m-4 eq-col-container">
+	<div class="col-12 col-md-3 eq-col" id="upload-art">
+	    <h1>Upload<br>your<br>art</h1>
+	</div>
+	<div class="col-12 col-md-8 offset-md-1 eq-col">
+	    <h2 class="text-dark upload-subtitle">Hall of Fame</h2>
+	    <div class="row">
+		{% for i in site.settings.halloffame_set.all %}
+		<div class="col-12 col-md-4 hall-of-fame">
+		    <a href="{% if i.product_url %}{{ i.product_url }}{% else %}javascript:void(0);{% endif %}">
+			<img src="{{ i.image.crop.200x200 }}">
+		    </a>
+		</div>
+		{% empty %}
+		<div class="col m-2 hall-of-fame empty">
+		    Image goes here.
+		</div>
+		<div class="col m-2 hall-of-fame empty">
+		    Image goes here.
+		</div>
+		<div class="col m-2 hall-of-fame empty">
+		    Image goes here.
+		</div>
+		{% endfor %}
+	    </div>
+	</div>
+	</div>
     </div>
     {% if products %}
-      <div class="home__featured">
+    <div class="home__featured">
         <h2 class="text-center">{% trans "Featured products" context "Homepage title" %}</h2>
         <div class="row">
-          {% include "product/_items.html" %}
+            {% include "product/_items.html" %}
         </div>
-      </div>
+    </div>
     {% endif %}
     <script type="application/ld+json">{{ webpage_schema|safe }}</script>
-  </div>
+</div>
 {% endblock %}

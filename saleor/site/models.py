@@ -1,6 +1,7 @@
 from django.contrib.sites.models import Site
 from django.db import models
 from django.utils.translation import pgettext_lazy
+from versatileimagefield.fields import VersatileImageField
 
 from . import AuthenticationBackends
 from .patch_sites import patch_contrib_sites
@@ -38,6 +39,25 @@ class SiteSettings(models.Model):
 
     def available_backends(self):
         return self.authorizationkey_set.values_list('name', flat=True)
+
+
+class ProductBanner(models.Model):
+    site_settings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE)
+    title = models.CharField(max_length=80, blank=True, null=True)
+    text = models.CharField(max_length=500)
+    image = VersatileImageField(upload_to='product-banners')
+    product_url = models.URLField()
+
+    def __str__(self):
+        if self.title:
+            return self.title
+        return self.name
+
+
+class HallOfFame(models.Model):
+    site_settings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE)
+    image = VersatileImageField(upload_to='hall-of-fame')
+    product_url = models.URLField(blank=True, null=True)
 
 
 class AuthorizationKey(models.Model):

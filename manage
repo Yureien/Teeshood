@@ -1,0 +1,3 @@
+#!/bin/bash
+export SECRET_KEY='foobar'
+python manage.py "$@"

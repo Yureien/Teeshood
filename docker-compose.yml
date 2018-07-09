@@ -3,10 +3,10 @@ services:
   db:
     image: postgres
     environment:
-      - POSTGRES_USER=saleor
-      - POSTGRES_PASSWORD=saleor
+      - POSTGRES_USER=teeshood
+      - POSTGRES_PASSWORD=teeshood
     ports:
-      - '127.0.0.1:5432:5432'
+      - '127.0.0.1:5433:5432'
   redis:
     image: redis
     ports:
@@ -42,7 +42,7 @@ services:
       - redis
       - search
     ports:
-      - '8000:8000'
+      - '8002:8000'
     volumes:
       - ./saleor:/app/saleor:Z
       - ./locale:/app/locale:Z

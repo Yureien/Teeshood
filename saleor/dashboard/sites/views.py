@@ -4,10 +4,12 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from django.utils.translation import pgettext_lazy
+from django.forms import modelformset_factory
 
-from ...site.models import AuthorizationKey, SiteSettings
+from ...site.models import AuthorizationKey, SiteSettings, ProductBanner, HallOfFame
 from ..views import staff_member_required
-from .forms import AuthorizationKeyForm, SiteForm, SiteSettingsForm
+from .forms import AuthorizationKeyForm, SiteForm, \
+    SiteSettingsForm, ProductBannerForm, HallOfFameForm
 
 
 @staff_member_required
@@ -39,6 +41,51 @@ def site_settings_edit(request, pk):
            'site_form': site_form}
     return TemplateResponse(request, 'dashboard/sites/form.html', ctx)
 
+
+@staff_member_required
+@permission_required('site.edit_settings')
+def product_banner_edit(request, pk):
+    site_settings = get_object_or_404(SiteSettings, pk=pk)
+    site = site_settings.site
+    ProductBannerFormSet = modelformset_factory(
+        ProductBanner, form=ProductBannerForm, extra=5)
+    product_banner_formset = ProductBannerFormSet(request.POST or None, request.FILES or None)
+
+    if product_banner_formset.is_valid():
+        product_banners = product_banner_formset.save(commit=False)
+        for banner in product_banners:
+            banner.site_settings = site_settings
+            banner.save()
+        messages.success(request, pgettext_lazy(
+            'Dashboard message', 'Updated banners'))
+        return redirect('dashboard:site-details', pk=site_settings.id)
+    ctx = {'site_settings': site_settings,
+           'site': site,
+           'product_banner_formset': product_banner_formset}
+    return TemplateResponse(request, 'dashboard/sites/product_banner_form.html', ctx)
+
+
+@staff_member_required
+@permission_required('site.edit_settings')
+def hall_of_fame_edit(request, pk):
+    site_settings = get_object_or_404(SiteSettings, pk=pk)
+    site = site_settings.site
+    HallOfFameFormSet = modelformset_factory(
+        HallOfFame, form=HallOfFameForm, max_num=3, extra=3)
+    hall_of_fame_formset = HallOfFameFormSet(request.POST or None, request.FILES or None)
+
+    if hall_of_fame_formset.is_valid():
+        hall_of_fames = hall_of_fame_formset.save(commit=False)
+        for instance in hall_of_fames:
+            instance.site_settings = site_settings
+            instance.save()
+        messages.success(request, pgettext_lazy(
+            'Dashboard message', 'Updated hall of fame'))
+        return redirect('dashboard:site-details', pk=site_settings.id)
+    ctx = {'site_settings': site_settings,
+           'site': site,
+           'hall_of_fame_formset': hall_of_fame_formset}
+    return TemplateResponse(request, 'dashboard/sites/hall_of_fame_form.html', ctx)
 
 @staff_member_required
 @permission_required('site.edit_settings')

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.sites.models import Site
 from django.utils.translation import pgettext_lazy
 
-from ...site.models import AuthorizationKey, SiteSettings
+from ...site.models import AuthorizationKey, SiteSettings, ProductBanner, HallOfFame
 
 
 class SiteForm(forms.ModelForm):
@@ -49,3 +49,29 @@ class AuthorizationKeyForm(forms.ModelForm):
         widgets = {'password': forms.PasswordInput(render_value=True),
                    'key': forms.TextInput(),
                    'site_settings': forms.widgets.HiddenInput()}
+
+
+class ProductBannerForm(forms.ModelForm):
+    class Meta:
+        model = ProductBanner
+        exclude = ['site_settings']
+        labels = {
+            'text': pgettext_lazy(
+                'Banner text', 'Text'),
+            'image': pgettext_lazy(
+                'Banner image', 'Image'),
+            'product_url': pgettext_lazy(
+                'Link to product', 'Link'),
+        }
+
+
+class HallOfFameForm(forms.ModelForm):
+    class Meta:
+        model = HallOfFame
+        exclude = ['site_settings']
+        labels = {
+            'image': pgettext_lazy(
+                'Banner image', 'Image'),
+            'product_url': pgettext_lazy(
+                'Link to product', 'Link'),
+        }
