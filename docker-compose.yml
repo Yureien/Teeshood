@@ -5,6 +5,7 @@ services:
     environment:
       - POSTGRES_USER=teeshood
       - POSTGRES_PASSWORD=teeshood
+      - DB_PORT=5433
     ports:
       - '127.0.0.1:5433:5432'
   redis:

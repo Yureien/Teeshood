@@ -48,10 +48,10 @@ REDIS_URL = os.environ.get('REDIS_URL')
 if REDIS_URL:
     CACHE_URL = os.environ.setdefault('CACHE_URL', REDIS_URL)
 CACHES = {'default': django_cache_url.config()}
-
+DB_PORT = os.environ.get('DB_PORT', '5432')
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://teeshood:teeshood@localhost:5432/saleor',
+        default='postgres://teeshood:teeshood@localhost:{}/saleor'.format(DB_PORT),
         conn_max_age=600)}
 
 
