@@ -5,13 +5,14 @@ services:
     environment:
       - POSTGRES_USER=teeshood
       - POSTGRES_PASSWORD=teeshood
-      - DB_PORT=5433
+      - POSTGRES_PORT=5433
+      - REDIS_PORT=6380
     ports:
-      - '127.0.0.1:5433:5432'
+      - '127.0.0.1:5433:5433'
   redis:
     image: redis
     ports:
-      - '127.0.0.1:6379:6379'
+      - '127.0.0.1:6380:6380'
   celery:
     build:
       context: .
