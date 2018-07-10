@@ -15,6 +15,7 @@ from .shipping.urls import urlpatterns as shipping_urls
 from .sites.urls import urlpatterns as site_urls
 from .staff.urls import urlpatterns as staff_urls
 from .taxes.urls import urlpatterns as taxes_urls
+from .custom_design.urls import urlpatterns as custom_design_urls
 
 urlpatterns = [
     url(r'^$', core_views.index, name='index'),
@@ -23,6 +24,7 @@ urlpatterns = [
     url(r'^orders/', include(order_urls)),
     url(r'^page/', include(page_urls)),
     url(r'^products/', include(product_urls)),
+    url(r'^custom_designs/', include(custom_design_urls)),
     url(r'^customers/', include(customer_urls)),
     url(r'^staff/', include(staff_urls)),
     url(r'^groups/', include(groups_urls)),

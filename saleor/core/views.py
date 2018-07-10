@@ -3,8 +3,11 @@ import json
 from django.contrib import messages
 from django.template.response import TemplateResponse
 from django.utils.translation import pgettext_lazy
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 from impersonate.views import impersonate as orig_impersonate
 
+from .forms import CustomDesignForm
 from ..account.models import User
 from ..dashboard.views import staff_member_required
 from ..product.utils import products_for_homepage
@@ -47,3 +50,21 @@ def handle_404(request, exception=None):
 def manifest(request):
     return TemplateResponse(
         request, 'manifest.json', content_type='application/json')
+
+
+@login_required
+def design_upload(request):
+    custom_design_form = CustomDesignForm(request.POST or None, request.FILES)
+    if custom_design_form.is_valid():
+        design = custom_design_form.save(commit=False)
+        design.user = request.user
+        design.save()
+        messages.success(
+            request,
+            pgettext_lazy(
+                'Custom Design message',
+                'Sent custom design.')
+        )
+        return redirect('home')
+    ctx = {'custom_design_form': custom_design_form}
+    return TemplateResponse(request, 'design_upload.html', ctx)

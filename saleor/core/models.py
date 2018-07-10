@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.db.models import F, Max
+from versatileimagefield.fields import VersatileImageField
 
 
 class BaseNote(models.Model):
@@ -37,3 +38,13 @@ class SortableModel(models.Model):
         qs.filter(sort_order__gt=self.sort_order).update(
             sort_order=F('sort_order') - 1)
         super().delete(*args, **kwargs)
+
+
+class CustomDesign(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    image = VersatileImageField(upload_to='custom-design-uploads')
+
+    def __str__(self):
+        return self.name

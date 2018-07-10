@@ -159,10 +159,7 @@
 	    </div>
 	</header>
 	{% endblock %}
-	{% block banners %}
-	{% endblock %}
-	<div class="container maincontent">
-	    {% block topcontent %}{% endblock topcontent %}
+	<div class="container">
 	    {% if messages %}
 	    {% for message in messages %}
 	    <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
@@ -171,6 +168,11 @@
 	    </div>
 	    {% endfor %}
 	    {% endif %}
+	</div>
+	{% block banners %}
+	{% endblock %}
+	<div class="container maincontent">
+	    {% block topcontent %}{% endblock topcontent %}
 	    {% block breadcrumb %}
 	    {% endblock breadcrumb %}
 	    {% block content %}

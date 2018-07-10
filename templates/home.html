@@ -41,6 +41,22 @@
      justify-content: center;
      align-items: center;
      background-color: #555;
+     color: #aaa;
+     transition: all 0.2s ease;
+ }
+
+ #upload-art a {
+     color: #aaa;
+     transition: all 0.2s ease;
+ }
+
+ #upload-art:hover {
+     background-color: #333;
+ }
+
+ #upload-art a:hover {
+     color: #fff;
+     text-decoration: none;
  }
  
  .upload-subtitle {
@@ -123,7 +139,9 @@
     <h2 class="text-muted upload-subtitle">Bring out & showcase the artist in you</h2>
     <div class="row m-4 eq-col-container">
 	<div class="col-12 col-md-3 eq-col" id="upload-art">
-	    <h1>Upload<br>your<br>art</h1>
+	    <a href="{% url 'design-upload' %}">
+		<h1>Upload<br>your<br>art</h1>
+	    </a>
 	</div>
 	<div class="col-12 col-md-8 offset-md-1 eq-col">
 	    <h2 class="text-dark upload-subtitle">Hall of Fame</h2>

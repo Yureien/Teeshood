@@ -118,9 +118,16 @@
                 {% endif %}
                 {% if perms.product.view_product %}
                 <li class="{% block menu_collections_class %}{% endblock %}">
-                  <a href="{% url 'dashboard:collection-list' %}">
-                    {% trans "Collections" context "Dashboard side navigation link" %}
-                  </a>
+                    <a href="{% url 'dashboard:collection-list' %}">
+			{% trans "Collections" context "Dashboard side navigation link" %}
+                    </a>
+                </li>
+                {% endif %}
+		{% if perms.product.view_product %}
+                <li class="{% block menu_custom_designs_class %}{% endblock %}">
+                    <a href="{% url 'dashboard:custom-design-list' %}">
+			{% trans "Custom Designs" context "Custom Designs list" %}
+                    </a>
                 </li>
                 {% endif %}
               </ul>

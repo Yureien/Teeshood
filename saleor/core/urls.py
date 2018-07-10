@@ -10,6 +10,7 @@ urlpatterns = [
         name='impersonate-start'),
     url(r'^impersonate/stop/$', stop_impersonate,
         name='impersonate-stop'),
+    url(r'^design-upload/', views.design_upload, name='design-upload'),
     url(r'^404', views.handle_404, name='handle-404'),
     url(r'^manifest\.json$', views.manifest, name='manifest'),
 ]
