@@ -1,72 +1,152 @@
+.carousel-inner > .carousel-item {
+    height: 70vh;
+}
+
+.carousel-inner > .carousel-item img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-height: 800px;
+    width: auto;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+    background-image: none;
+}
+
 .home {
-  text-align: center;
-  color: $white;
-  h1 {
-    font-weight: 300;
-    text-transform: uppercase;
-    @include media-breakpoint-down(sm) {
-      font-size: 2.5rem;
+    text-align: center;
+    color: $white;
+
+    h1 {
+	font-weight: 300;
+	text-transform: uppercase;
+	@include media-breakpoint-down(sm) {
+	    font-size: 2.5rem;
+	}
     }
-  }
-  .btn {
-    margin-top: $global-margin;
-  }
-  &--content-wrapper {
-     display: table;
-     width: 100%;
-     height: 100%;
-  }
-  &--content-inner {
-      display: table-cell;
-      text-align: center;
-      vertical-align: middle;
-      color: white;
-      padding-left: $global-padding;
-      padding-right: $global-padding;
-  }
-  &--content {
-    position:  absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-  }
-  &--square {
-    background-size: cover;
-    position: relative;
-    &:before {
-      content: "";
-      display: block;
-      padding-top: 100%;
+
+    .btn {
+	margin-top: $global-margin;
     }
-  }
-  &__block1 {
-    .home--square {
-      background-image: url('../images/block1.jpg');
-      @include media-breakpoint-up(md) {
-        &:before {
-          padding-top: 50%;
-        }
-      }
+
+    &--content-wrapper {
+	display: table;
+	width: 100%;
+	height: 100%;
     }
-  }
-  &__block2 {
-    margin-top: $global-margin * 2;
-    .home--square {
-      background-image: url('../images/block2.jpg');
+    &--content-inner {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	color: white;
+	padding-left: $global-padding;
+	padding-right: $global-padding;
     }
-  }
-  &__block3 {
-    margin-top: $global-margin * 2;
-    .home--square {
-      background-image: url('../images/block3.jpg');
+    &--content {
+	position:  absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
     }
-  }
-  &__featured {
-    color: $body-color;
-    h2 {
-      text-transform: uppercase;
-      margin: $global-margin * 2 0;
+    &--square {
+	background-size: cover;
+	position: relative;
+	&:before {
+	    content: "";
+	    display: block;
+	    padding-top: 100%;
+	}
     }
-  }
+    &__featured {
+	color: $body-color;
+	h2 {
+	    text-transform: uppercase;
+	    margin: $global-margin * 2 0;
+	}
+    }
+
+
+    .homepage-section-title {
+	color: #000;
+    }
+
+    #product-1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 450px;
+	background-size: cover;
+	background-color: #555;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
+    }
+    
+    #product-2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 200px;
+	background-color: #555;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
+    }
+    
+    #product-3 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 200px;
+	background-color: #555;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
+    }
+
+    #upload-art {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #555;
+	color: #aaa;
+	transition: all 0.2s ease;
+
+	&:hover {
+	    background-color: #333;
+	}
+    }
+
+    #upload-art a {
+	color: #aaa;
+	transition: all 0.2s ease;
+
+	&:hover {
+	    color: #fff;
+	    text-decoration: none;
+	}
+    }
+    
+    .upload-subtitle {
+	text-transform: uppercase;
+    }
+
+    .eq-col-container {
+	display: flex;
+    }
+
+    .eq-col {
+	flex: 1;
+    }
+
+    .hall-of-fame {
+	height: 225px;
+    }
+
+    .empty {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #555;
+    }
 }

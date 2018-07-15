@@ -1,88 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load i18n %}
-{% block stylesheet %}
-<style>
- .homepage-section-title {
-     color: #000;
- }
-
- #product-1 {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     height: 450px;
-     background-size: cover;
-     background-color: #555;
-     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
- }
- 
- #product-2 {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     height: 200px;
-     background-color: #555;
-     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
- }
- 
- #product-3 {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     height: 200px;
-     background-color: #555;
-     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
- }
-
- 
- #upload-art {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     background-color: #555;
-     color: #aaa;
-     transition: all 0.2s ease;
- }
-
- #upload-art a {
-     color: #aaa;
-     transition: all 0.2s ease;
- }
-
- #upload-art:hover {
-     background-color: #333;
- }
-
- #upload-art a:hover {
-     color: #fff;
-     text-decoration: none;
- }
- 
- .upload-subtitle {
-     text-transform: uppercase;
- }
-
- .eq-col-container {
-     display: flex;
- }
-
- .eq-col {
-     flex: 1;
- }
-
- .hall-of-fame {
-     height: 225px;
- }
-
- .empty {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     background-color: #555;
- }
-</style>
-{% endblock %}
 {% block banners %}
 <div id="carouselProductBanners" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">		    
@@ -94,7 +12,7 @@
 	{% for banner in site.settings.productbanner_set.all %}
 	<div class="carousel-item{% if forloop.first %} active{% endif %}">
 	    <a href="{{ banner.product_url }}">
-		<img class="d-block w-100" src="{{ banner.image.url }}" alt="{{ banner.title }}" style="height:80vh;">
+		<img class="d-block w-100" src="{{ banner.image.url }}" alt="{{ banner.title }}">
 	    </a>
 	    <div class="carousel-caption d-none d-md-block">
 		<h5>{{ banner.title }}</h5>
@@ -135,6 +53,14 @@
 	    </div>
 	</div>
     </div>
+    {% if products %}
+    <div class="home__featured">
+        <h2 class="text-center">{% trans "Featured products" context "Homepage title" %}</h2>
+        <div class="row">
+            {% include "product/_items.html" %}
+        </div>
+    </div>
+    {% endif %}
     <h1 class="homepage-section-title m-4">Become "The Designer"</h1>
     <h2 class="text-muted upload-subtitle">Bring out & showcase the artist in you</h2>
     <div class="row m-4 eq-col-container">
@@ -165,16 +91,7 @@
 		{% endfor %}
 	    </div>
 	</div>
-	</div>
     </div>
-    {% if products %}
-    <div class="home__featured">
-        <h2 class="text-center">{% trans "Featured products" context "Homepage title" %}</h2>
-        <div class="row">
-            {% include "product/_items.html" %}
-        </div>
-    </div>
-    {% endif %}
     <script type="application/ld+json">{{ webpage_schema|safe }}</script>
 </div>
 {% endblock %}

@@ -44,9 +44,9 @@ class SiteSettings(models.Model):
 class ProductBanner(models.Model):
     site_settings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE)
     title = models.CharField(max_length=80, blank=True, null=True)
-    text = models.CharField(max_length=500)
+    text = models.CharField(max_length=500, blank=True, null=True)
     image = VersatileImageField(upload_to='product-banners')
-    product_url = models.URLField()
+    product_url = models.URLField(blank=True, null=True)
 
     def __str__(self):
         if self.title:
