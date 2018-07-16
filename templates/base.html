@@ -46,7 +46,7 @@
 
     <body>
 	{% block header %}
-	<header class="navbar bg-dark" role="navigation">
+	<header class="navbar" role="navigation">
 	    <div class="navbar__login container-fluid {% if user.is_impersonate %} bg-warning{% endif %}">
 		<div class=" d-none d-md-block container">
 		    <div class="row">
@@ -96,68 +96,71 @@
 		    </div>
 		</div>
 	    </div>
-	</header>
-	<navbar class="navbar navbar-expand-md sticky-top bg-light pl-4 pr-4" role="navigation">
-	    <a class="navbar-brand" href="{% url 'home' %}">
-		<img src="{% static "images/logo_dark.png" %}" height="38px" width="176px"/>
-	    </a>
-	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	    </button>
-	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav ml-4 mr-auto">
-		    <li class="nav-item dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Shop <span class="caret"></span></a>
-			{% menu site_menu=site.settings.top_menu %}
-			<script>
-			 document.getElementsByClassName('menu')[0].classList.add('dropdown-menu');
-			 document.getElementsByClassName('menu')[0].classList.add('w-100');
-			</script>
-		    </li>
-		</ul>
-		<div class="navbar__search static ml-auto" style="width:20em">
-		    {% if SEARCH_IS_ENABLED %}
-		    <div class="d-md-none mobile-search-icon">
-			<svg data-src="{% static "images/search.svg" %}" width="30" height="30"/>
-		    </div>
-		    <form class="form-inline search-form" action="{% url "search:search" %}">
-			<div class="mobile-close-search d-md-none">
-			    <svg data-src="{% static "images/close.svg" %}" width="30" height="30"/>
-			</div>
-			<input class="form-control" type="text" name="q"
-			       value="{% if query %}{{ query }}{% endif %}"
-			       placeholder="{% trans "Search for product" %}"
-			       required>
-			<button class="btn btn-link" type="submit">
-			    <svg data-src="{% static "images/search.svg" %}" width="30" height="30"/>
-			</button>
-		    </form>
-		    {% endif %}
-		</div>
-		<div class="navbar__cart ml-auto">
-		    <div class="navbar__brand__cart">
-			<a rel="nofollow" class="cart__icon" href="{% url "cart:index" %}">
-			    <span class="cart-label d-none d-md-inline-block">
-				{% trans "Your Cart" context "Main navigation item" %}
-			    </span>
-			    <div class="navbar__brand__cart__icon">
-				<svg data-src="{% static "images/cart.svg" %}" width="35" height="30"/>
+	    <div class="navbar__brand container-fluid d-block">
+		<div class="container">
+		    <div class="row no-gutters">
+			<div class="col-6 col-md-1 navbar__logo">
+			    <div class="menu-icon-mobile d-md-none navbar__brand__menu-toggle closed open">
+				<svg data-src="{% static "images/mobile-menu.svg" %}" width="28px" height="20px"/>
+				<span>{% trans "menu" context "Hamburger button text" %}</span>
 			    </div>
-			    <span class="badge {% if not cart_counter %}empty{% endif %}">
-				{% if cart_counter %}
-				{{ cart_counter }}
-				{% else %}
-				0
-				{% endif %}
-			    </span>
-			</a>
-			<div class="cart-dropdown d-none">
-			    {% include 'cart_dropdown.html' %}
+			    <a href="{% url 'home' %}">
+				<img src="{% static "images/logo_dark.png" %}" height="45px" width="150px"/>
+			    </a>
+			</div>
+			<div class="col-2 col-md-4 navbar__nav">
+			    <a href="#" class="dropdown-toggle d-none d-md-block" id="navToggle">Shop <span class="caret"></span></a>
+			</div>
+			<div class="col-2 col-md-4 navbar__search static">
+			    {% if SEARCH_IS_ENABLED %}
+			    <div class="d-md-none mobile-search-icon">
+				<svg data-src="{% static "images/search.svg" %}" width="30" height="30"/>
+			    </div>
+			    <form class="form-inline search-form" action="{% url "search:search" %}">
+				<div class="mobile-close-search d-md-none">
+				    <svg data-src="{% static "images/close.svg" %}" width="30" height="30"/>
+				</div>
+				<input class="form-control" type="text" name="q"
+				       value="{% if query %}{{ query }}{% endif %}"
+				       placeholder="{% trans "Search for product" %}"
+				       required>
+				<button class="btn btn-link" type="submit">
+				    <svg data-src="{% static "images/search.svg" %}" width="30" height="30"/>
+				</button>
+			    </form>
+			    {% endif %}
+			</div>
+			<div class="col-2 col-md-2">
+			    <div class="navbar__brand__cart float-right">
+				<a rel="nofollow" class="cart__icon" href="{% url "cart:index" %}">
+				    <span class="cart-label d-none d-md-inline-block">
+					{% trans "Your Cart" context "Main navigation item" %}
+				    </span>
+				    <div class="navbar__brand__cart__icon">
+					<svg data-src="{% static "images/cart.svg" %}" width="35" height="30"/>
+				    </div>
+				    <span class="badge {% if not cart_counter %}empty{% endif %}">
+					{% if cart_counter %}
+					{{ cart_counter }}
+					{% else %}
+					0
+					{% endif %}
+				    </span>
+				</a>
+				<div class="cart-dropdown d-none">
+				    {% include 'cart_dropdown.html' %}
+				</div>
+			    </div>
 			</div>
 		    </div>
 		</div>
 	    </div>
-	</navbar>
+	    <div class="navbar__menu container d-block d-md-none">
+		<nav class="navigation">
+		    {% menu site_menu=site.settings.top_menu horizontal=True %}
+		</nav>
+	    </div>
+	</header>
 	{% endblock %}
 	<div class="container">
 	    {% if messages %}

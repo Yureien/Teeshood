@@ -15,3 +15,13 @@ import './components/address-form';
 import './components/password-input';
 import './components/styleguide';
 import './components/misc';
+
+$('document').ready(function () {
+    $('#navToggle').on('click', function() {
+	let navbarMenu = $('.navbar__menu');
+	if (navbarMenu.hasClass('d-md-none'))
+	    navbarMenu.removeClass('d-md-none');
+	else
+	    navbarMenu.addClass('d-md-none');
+    });
+});

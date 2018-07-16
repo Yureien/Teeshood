@@ -89,60 +89,6 @@
     }
 }
 
-navbar .navbar-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.8em;
-    font-family: $font-family-sans-serif;
-    text-transform: uppercase;
-    a {
-	text-decoration: none;
-	color: $dark;
-	&:hover {
-	    color: $dark-red;
-	    text-decoration: none;
-	}
-    }
-
-    .dropdown.show {
-	position: static;
-    }
-
-    .dropdown.show .dropdown-menu {
-	display: table;
-	border-radius: 0px;
-	width: 100%;
-	text-align: center;
-	left: 0;
-	right: 0;
-    }
-
-    .dropdown-menu {
-	.children {
-	    line-height: 1em;
-	    text-align: center;
-
-	    &> li {
-		display: inline-block;
-	    }
-	}
-    }
-
-    .dropdown-menu > li {
-	display: table-cell;
-	height: 50px;
-	line-height: 50px;
-	vertical-align: top;
-    }
-
-    @media screen and (max-width: 767px) {
-	.dropdown-menu > li {
-	    display: block;
-	}
-    }
-}
-
 .menu {
     .menu__item {
 	ul {
@@ -200,6 +146,22 @@ navbar .navbar-nav {
 	    width: auto;
 	}
     }
+    &__nav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.8em;
+	font-family: $font-family-sans-serif;
+	text-transform: uppercase;
+	a {
+	    text-decoration: none;
+	    color: $dark;
+	    &:hover {
+		color: $dark-red;
+		text-decoration: none;
+	    }
+	}
+    }    
     &__login {
 	p {
 	    font-size: 0.7rem;
@@ -267,7 +229,7 @@ navbar .navbar-nav {
 	}
     }
     &__brand {
-	background-color: $body-color;
+	background-color: $white;
 	@include media-breakpoint-down(sm) {
 	    position: fixed;
 	    top: 0;
