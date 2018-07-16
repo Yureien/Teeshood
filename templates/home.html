@@ -33,36 +33,22 @@
 {% endblock %}
 {% block content %}
 <div class="home">
+    {% if site.settings.categorytile_set.all %}
     <div class="container">
 	<h1 class="homepage-section-title m-4">Products</h1>
 	<div class="row no-gutters">
+	    {% for i in site.settings.categorytile_set.all %}
 	    <div class="col-12 col-md-6">
-		<div id="product-cat-1" class="product-cat mr-md-1">
-		    <div class="background" data-src='http://u55.mpmserv.co.uk/users/55/7877/blankImage.png'>
-			<h1>T-Shirts</h1>
+		<div class="product-cat mt-1 {% if forloop.counter0|divisibleby:2 %}mr-md-1{% endif %}">
+		    <div class="background" data-src="{{ i.image.url }}">
+			<h1>{{ i }}</h1>
 		    </div>
 		</div>
 	    </div>
-	    <div class="col-12 col-md-6">
-		<div class="row no-gutters">
-		    <div class="col-6 col-md-12">
-			<div class="product-cat mt-1 mt-md-0 mb-md-1" id="product-cat-2">
-			    <div class="background" data-src='http://u55.mpmserv.co.uk/users/55/7877/blankImage.png'>
-				<h1>Cups</h1>
-			    </div>
-			</div>
-		    </div>
-		    <div class="col-6 col-md-12">
-			<div class="product-cat mt-1 mt-md-0 ml-1 ml-md-0" id="product-cat-3">
-			    <div class="background" data-src='http://u55.mpmserv.co.uk/users/55/7877/blankImage.png'>
-				<h1>Bands</h1>
-			    </div>
-			</div>
-		    </div>
-		</div>
-	    </div>
+	    {% endfor %}
 	</div>
     </div>
+    {% endif %}
     {% if products %}
     <div class="home__featured">
         <h2 class="text-center">{% trans "Featured products" context "Homepage title" %}</h2>

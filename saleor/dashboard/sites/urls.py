@@ -14,6 +14,8 @@ urlpatterns = [
         name='site-home-product-banner-update'),
     url(r'^(?P<pk>\d+)/hall_of_fame_update/$', views.hall_of_fame_edit,
         name='site-home-hall-of-fame-update'),
+    url(r'^(?P<pk>\d+)/category_tile_update/$', views.category_tile_edit,
+        name='site-home-category-tile-update'),
 
     url(r'^(?P<site_settings_pk>\d+)/authorization_key/add/$',
         views.authorization_key_add, name='authorization-key-add'),

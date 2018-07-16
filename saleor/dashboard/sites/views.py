@@ -6,10 +6,10 @@ from django.template.response import TemplateResponse
 from django.utils.translation import pgettext_lazy
 from django.forms import modelformset_factory
 
-from ...site.models import AuthorizationKey, SiteSettings, ProductBanner, HallOfFame
+from ...site.models import AuthorizationKey, SiteSettings, ProductBanner, HallOfFame, CategoryTile
 from ..views import staff_member_required
 from .forms import AuthorizationKeyForm, SiteForm, \
-    SiteSettingsForm, ProductBannerForm, HallOfFameForm
+    SiteSettingsForm, ProductBannerForm, HallOfFameForm, CategoryTileForm
 
 
 @staff_member_required
@@ -86,6 +86,30 @@ def hall_of_fame_edit(request, pk):
            'site': site,
            'hall_of_fame_formset': hall_of_fame_formset}
     return TemplateResponse(request, 'dashboard/sites/hall_of_fame_form.html', ctx)
+
+
+@staff_member_required
+@permission_required('site.edit_settings')
+def category_tile_edit(request, pk):
+    site_settings = get_object_or_404(SiteSettings, pk=pk)
+    site = site_settings.site
+    CategoryTileFormSet = modelformset_factory(
+        CategoryTile, form=CategoryTileForm, extra=5)
+    category_tile_formset = CategoryTileFormSet(request.POST or None, request.FILES or None)
+
+    if category_tile_formset.is_valid():
+        category_tiles = category_tile_formset.save(commit=False)
+        for instance in category_tiles:
+            instance.site_settings = site_settings
+            instance.save()
+        messages.success(request, pgettext_lazy(
+            'Dashboard message', 'Updated category tiles'))
+        return redirect('dashboard:site-details', pk=site_settings.id)
+    ctx = {'site_settings': site_settings,
+           'site': site,
+           'category_tile_formset': category_tile_formset}
+    return TemplateResponse(request, 'dashboard/sites/category_tile_form.html', ctx)
+
 
 @staff_member_required
 @permission_required('site.edit_settings')

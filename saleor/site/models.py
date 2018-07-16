@@ -54,6 +54,18 @@ class ProductBanner(models.Model):
         return self.name
 
 
+class CategoryTile(models.Model):
+    site_settings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE)
+    name = models.CharField(max_length=80, blank=True, null=True)
+    image = VersatileImageField(upload_to='product-banners')
+    category_url = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        if self.name:
+            return self.name
+        return ""
+
+
 class HallOfFame(models.Model):
     site_settings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE)
     image = VersatileImageField(upload_to='hall-of-fame')
