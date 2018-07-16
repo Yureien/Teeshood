@@ -213,7 +213,8 @@ INSTALLED_APPS = [
     'impersonate',
     'phonenumber_field',
     'captcha',
-    'raven.contrib.django.raven_compat']
+    'raven.contrib.django.raven_compat',
+    'django_payments_cod']
 
 if DEBUG:
     MIDDLEWARE.append(
@@ -296,13 +297,16 @@ PAYMENT_HOST = get_host
 PAYMENT_MODEL = 'order.Payment'
 
 PAYMENT_VARIANTS = {
-    'default': ('payments.dummy.DummyProvider', {})}
+    'default': ('payments.dummy.DummyProvider', {}),
+    'cod': ('django_payments_cod.CODProvider', {})
+}
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 CHECKOUT_PAYMENT_CHOICES = [
-    ('default', 'Dummy provider')]
+    ('default', 'Dummy provider'),
+    ('cod', 'Cash on Delivery')]
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'}
