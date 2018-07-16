@@ -24,4 +24,10 @@ $('document').ready(function () {
 	else
 	    navbarMenu.addClass('d-md-none');
     });
+
+    $('.background').each(function() {
+	let img_link = $(this).attr('data-src');
+	if (img_link)
+	    $(this).css('background-image', 'url("' + img_link + '")');
+    });
 });

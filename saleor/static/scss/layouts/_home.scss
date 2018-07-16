@@ -76,32 +76,39 @@
 	color: #000;
     }
 
-    #product-1 {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 450px;
-	background-size: cover;
-	background-color: #555;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
+    .product-cat {
+	height: 100%;
+	overflow: hidden;
+	@media (max-width: 768px) {
+	    height: 200px;
+	}
+	.background {
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    height: 100%;
+	    width: 100%;
+	    overflow: hidden;
+	    background-repeat: repeat;
+	    background-position: center;
+	    background-size: cover;
+	    transition: all 0.5s ease;
+
+	    &:hover, &:focus {
+		transform: scale(1.2);
+	    }
+	}
+    }
+
+    #product-cat-1 {
     }
     
-    #product-2 {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    #product-cat-2 {
 	height: 200px;
-	background-color: #555;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
     }
     
-    #product-3 {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    #product-cat-3 {
 	height: 200px;
-	background-color: #555;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://u55.mpmserv.co.uk/users/55/7877/blankImage.png');
     }
 
     #upload-art {
@@ -138,7 +145,7 @@
     .eq-col {
 	flex: 1;
     }
-
+    
     .hall-of-fame {
 	height: 225px;
     }
