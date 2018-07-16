@@ -1,5 +1,9 @@
 .carousel-inner > .carousel-item {
-    height: 70vh;
+    height: 43vh;
+    margin-top: 8em;
+    @include media-breakpoint-down(sm) {
+	height: 50vh;
+    }
 }
 
 .carousel-inner > .carousel-item img {

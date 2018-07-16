@@ -36,9 +36,3 @@
 	}
     }
 }
-
-.maincontent {
-    @include media-breakpoint-down(sm) {
-	margin-top: $global-margin * 7;
-    }
-}

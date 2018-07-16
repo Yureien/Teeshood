@@ -136,7 +136,7 @@
 	    padding: 0;
 	}
 	svg {
-	    max-height: 30px;
+	    max-height: 42px;
 	    width: auto;
 	}
     }
@@ -239,6 +239,7 @@
 	    z-index: 5;
 	    border-bottom: 1px solid $gray;
 	}
+	
 	.static {
 	    position: static;
 	}
