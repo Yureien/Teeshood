@@ -1,5 +1,5 @@
 .carousel-inner > .carousel-item {
-    height: 43vh;
+    height: 58vh;
     margin-top: 8em;
     @include media-breakpoint-down(sm) {
 	height: 50vh;
@@ -81,7 +81,10 @@
     }
 
     .product-cat {
-	height: 200px;
+	height: 300px;
+	@include media-breakpoint-down(sm) {
+	    height: 250px;
+	}
 	overflow: hidden;
 	.background {
 	    display: flex;

@@ -174,7 +174,7 @@
 	</div>
 	{% block banners %}
 	{% endblock %}
-	<div class="container maincontent">
+	<div class="container-fluid maincontent">
 	    {% block topcontent %}{% endblock topcontent %}
 	    {% block breadcrumb %}
 	    {% endblock breadcrumb %}
@@ -266,7 +266,12 @@
 			</a>
 		    </div>
 		</div>
-		<p>100% secure payment: </p>
+		<p class="d-block d-md-inline-block">100% secure payment: </p>
+		<div class="d-block d-md-inline-block">
+		    <img src="{% static 'images/masterdcard.png' %}" height="30" class="mr-1">
+		    <img src="{% static 'images/americanExpress.png' %}" height="30" class="mr-1">
+		    <img src="{% static 'images/cod.png' %}" height="30" class="mr-1">
+		</div>
 	    </div>
 	</footer>
 	{% endblock %}

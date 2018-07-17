@@ -34,8 +34,7 @@
 {% block content %}
 <div class="home">
     {% if site.settings.categorytile_set.all %}
-    <div class="container">
-	<h1 class="homepage-section-title m-4">Products</h1>
+    <div class="mt-4">
 	<div class="row no-gutters">
 	    {% for i in site.settings.categorytile_set.all %}
 	    <div class="col-12 col-md-6">
@@ -50,41 +49,43 @@
     </div>
     {% endif %}
     {% if products %}
-    <div class="home__featured">
+    <div class="home__featured container">
         <h2 class="text-center">{% trans "Featured products" context "Homepage title" %}</h2>
         <div class="row">
             {% include "product/_items.html" %}
         </div>
     </div>
     {% endif %}
-    <h1 class="homepage-section-title m-4">Become "The Designer"</h1>
-    <h2 class="text-muted upload-subtitle">Bring out & showcase the artist in you</h2>
-    <div class="row m-4 eq-col-container">
-	<div class="col-12 col-md-3 eq-col" id="upload-art">
-	    <a href="{% url 'design-upload' %}">
-		<h1>Upload<br>your<br>art</h1>
-	    </a>
-	</div>
-	<div class="col-12 col-md-8 offset-md-1 eq-col">
-	    <h2 class="text-dark upload-subtitle">Hall of Fame</h2>
-	    <div class="row">
-		{% for i in site.settings.halloffame_set.all %}
-		<div class="col-12 col-md-4 hall-of-fame">
-		    <a href="{% if i.product_url %}{{ i.product_url }}{% else %}javascript:void(0);{% endif %}">
-			<img src="{{ i.image.crop.200x200 }}">
-		    </a>
+    <div class="container">
+	<h1 class="homepage-section-title m-4">Become "The Designer"</h1>
+	<h2 class="text-muted upload-subtitle">Bring out & showcase the artist in you</h2>
+	<div class="row m-4 eq-col-container">
+	    <div class="col-12 col-md-3 eq-col" id="upload-art">
+		<a href="{% url 'design-upload' %}">
+		    <h1>Upload<br>your<br>art</h1>
+		</a>
+	    </div>
+	    <div class="col-12 col-md-8 offset-md-1 eq-col">
+		<h2 class="text-dark upload-subtitle">Hall of Fame</h2>
+		<div class="row">
+		    {% for i in site.settings.halloffame_set.all %}
+		    <div class="col-12 col-md-4 hall-of-fame">
+			<a href="{% if i.product_url %}{{ i.product_url }}{% else %}javascript:void(0);{% endif %}">
+			    <img src="{{ i.image.crop.200x200 }}">
+			</a>
+		    </div>
+		    {% empty %}
+		    <div class="col m-2 hall-of-fame empty">
+			Image goes here.
+		    </div>
+		    <div class="col m-2 hall-of-fame empty">
+			Image goes here.
+		    </div>
+		    <div class="col m-2 hall-of-fame empty">
+			Image goes here.
+		    </div>
+		    {% endfor %}
 		</div>
-		{% empty %}
-		<div class="col m-2 hall-of-fame empty">
-		    Image goes here.
-		</div>
-		<div class="col m-2 hall-of-fame empty">
-		    Image goes here.
-		</div>
-		<div class="col m-2 hall-of-fame empty">
-		    Image goes here.
-		</div>
-		{% endfor %}
 	    </div>
 	</div>
     </div>
