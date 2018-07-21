@@ -1,8 +1,7 @@
 .carousel-inner > .carousel-item {
-    height: 58vh;
-    margin-top: 8em;
+    height: 85vh;
     @include media-breakpoint-down(sm) {
-	height: 50vh;
+	height: 100vh;
     }
 }
 
