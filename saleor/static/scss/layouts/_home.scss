@@ -115,6 +115,9 @@
 	background-color: #555;
 	color: #aaa;
 	transition: all 0.2s ease;
+	@include media-breakpoint-down(sm) {
+	    height: 300px;
+	}
 
 	&:hover {
 	    background-color: #333;

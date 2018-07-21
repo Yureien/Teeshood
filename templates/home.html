@@ -66,7 +66,7 @@
 		</a>
 	    </div>
 	    <div class="col-12 col-md-8 offset-md-1 eq-col">
-		<h2 class="text-dark upload-subtitle">Hall of Fame</h2>
+		<h2 class="text-dark upload-subtitle mt-4 mb-4">Hall of Fame</h2>
 		<div class="row">
 		    {% for i in site.settings.halloffame_set.all %}
 		    <div class="col-12 col-md-4 hall-of-fame">
@@ -75,13 +75,13 @@
 			</a>
 		    </div>
 		    {% empty %}
-		    <div class="col m-2 hall-of-fame empty">
+		    <div class="col-12 col-md-4 hall-of-fame empty">
 			Image goes here.
 		    </div>
-		    <div class="col m-2 hall-of-fame empty">
+		    <div class="col-12 col-md-4 hall-of-fame empty">
 			Image goes here.
 		    </div>
-		    <div class="col m-2 hall-of-fame empty">
+		    <div class="col-12 col-md-4 hall-of-fame empty">
 			Image goes here.
 		    </div>
 		    {% endfor %}
