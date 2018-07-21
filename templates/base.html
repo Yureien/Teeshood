@@ -105,7 +105,7 @@
 				<span>{% trans "menu" context "Hamburger button text" %}</span>
 			    </div>
 			    <a href="{% url 'home' %}">
-				<svg data-src="{% static "images/logo_new.svg" %}" height="50px" width="230px" />
+				<svg data-src="{% static "images/logo_new.svg" %}" height="200%" width="200%" />
 			    </a>
 			</div>
 			<div class="col-2 col-md-4 navbar__nav">
@@ -130,7 +130,7 @@
 			    </form>
 			    {% endif %}
 			</div>
-			<div class="col-2 col-md-2">
+			<div class="col-2 col-md-3">
 			    <div class="navbar__brand__cart float-right">
 				<a rel="nofollow" class="cart__icon" href="{% url "cart:index" %}">
 				    <span class="cart-label d-none d-md-inline-block">
