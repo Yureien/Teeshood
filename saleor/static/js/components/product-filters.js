@@ -22,7 +22,7 @@ $('.filters-toggle').on('click', () => {
 
 $('#pincode-checker').submit(function(e) {
 	let opts = $(this).serializeArray();
-	let url = opts[1]['value'].replace('0', opts[0]['value']);
+	let url = opts[1]['value'].replace('-0/', opts[0]['value']);
 	$.getJSON(url, function(data) {
 		if (data['available']) {
 			$('#pincode-validator span').removeClass('text-danger');
