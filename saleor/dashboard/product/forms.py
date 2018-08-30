@@ -219,7 +219,9 @@ class ProductForm(forms.ModelForm, AttributesMixin):
             'charge_taxes': pgettext_lazy(
                 'Charge taxes on product', 'Charge taxes on this product'),
             'tax_rate': pgettext_lazy(
-                'Product tax rate type', 'Tax rate')}
+                'Product tax rate type', 'Tax rate'),
+            'available_pin_codes': pgettext_lazy(
+                'Pincodes Availability', 'Pincodes')}
 
     category = TreeNodeChoiceField(queryset=Category.objects.all())
     collections = forms.ModelMultipleChoiceField(

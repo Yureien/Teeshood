@@ -105,6 +105,7 @@ class Product(SeoModel):
         currency=settings.DEFAULT_CURRENCY, max_digits=12,
         decimal_places=settings.DEFAULT_DECIMAL_PLACES)
     available_on = models.DateField(blank=True, null=True)
+    available_pin_codes = models.CharField(max_length=128, blank=True, null=True)
     is_published = models.BooleanField(default=True)
     attributes = HStoreField(default={}, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
@@ -156,6 +157,21 @@ class Product(SeoModel):
     def is_available(self):
         today = datetime.date.today()
         return self.available_on is None or self.available_on <= today
+
+    def available_in_pincode(self, pincode):
+        _range = self.available_pin_codes
+        if not _range or _range == "-":
+            return True
+        prange = [int(i) if i.isdigit() else i for i in _range.split(",")]
+        for i in prange:
+            if isinstance(i, int):
+                if pincode == i:
+                    return True
+            else:
+                x, y = [int(x) for x in i.split('-')]
+                if x <= pincode <= y:
+                    return True
+        return False
 
     def get_first_image(self):
         first_image = self.images.first()

@@ -79,6 +79,10 @@
                   <div class="col s12 m9">
                     {{ product_form.available_on|materializecss }}
                   </div>
+				  <div class="col s12">
+					  {{ product_form.available_pin_codes|materializecss }}
+					  <p class="help-block">Comma separated list of pincodes. Range can be added with '-'. Leave blank for all pincodes.<br>Example:<br><code style="background-color: #eee;border: 1px solid #999;">353672,400000-600000,256723</code> includes the pincodes 353672, 256723 and all pincodes between 400000 to 600000, both inclusive.</p>
+				  </div>
                 </div>
                 {% include "dashboard/includes/_google_preview.html" with object=product form=product_form %}
               </div>

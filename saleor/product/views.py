@@ -83,6 +83,22 @@ def product_details(request, slug, product_id, form=None):
     return TemplateResponse(request, 'product/details.html', ctx)
 
 
+def check_pincode_availability(request, slug, product_id, pincode):
+    """
+    if not request.method == 'POST':
+        return redirect(reverse(
+            'product:details',
+            kwargs={'product_id': product_id, 'slug': slug}))
+    """
+    products = products_with_details(user=request.user)
+    product = get_object_or_404(products, pk=product_id)
+    try:
+        is_available = product.available_in_pincode(int(pincode))
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=400)
+    return JsonResponse({'available': is_available})
+
+
 def product_add_to_cart(request, slug, product_id):
     # types: (int, str, dict) -> None
 
