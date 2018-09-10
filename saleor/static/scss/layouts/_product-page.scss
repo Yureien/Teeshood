@@ -74,6 +74,9 @@
     }
     .carousel-item {
       flex-flow: column;
+	  @include media-breakpoint-down(sm) {
+		  height: 50vh;
+	  }
       img {
         width: 100%;
         height: 100%;

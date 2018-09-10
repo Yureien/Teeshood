@@ -75,7 +75,7 @@
                 <div class="carousel-item{% if forloop.first %} active{% endif %}">
 					<img class="d-block img-fluid lazyload lazypreload"
 						 data-src="{% get_thumbnail image.image method="crop" size="540x540" %}"
-						 data-src="{% get_thumbnail image.image method="crop" size="540x540" %} 1x, {% get_thumbnail image.image method="crop" size="1080x1080" %} 2x"
+						 data-srcset="{% get_thumbnail image.image method="crop" size="540x540" %} 1x, {% get_thumbnail image.image method="crop" size="1080x1080" %} 2x"
 						 alt=""
 						 src="{% placeholder size=540 %}">
                 </div>

@@ -6,36 +6,42 @@
 {% load placeholder %}
 
 {% for product, availability in products %}
-  <div class="col-6 col-lg-3 product-list">
+{% include 'product/_quickview.html' with product=product %}
+<div class="col-6 col-lg-3 product-list">
     <a href="{{ product.get_absolute_url }}" class="link--clean">
-      <div class="text-center">
-        <div>
-          <img class="img-responsive lazyload lazypreload"
-               data-src="{% product_first_image product method="crop" size="255x255" %}"
-               data-srcset="{% product_first_image product method="crop" size="255x255" %} 1x, {% product_first_image product method="crop" size="510x510" %} 2x"
-               alt=""
-               src="{% placeholder size=255 %}">
-          <span class="product-list-item-name" title="{{ product }}">{{ product }}</span>
-        </div>
-        <div class="panel-footer">
-          {% if availability.available %}
-            {% price_range availability.price_range %}
-            {% if availability.discount %}
-              {% if availability.price_range_undiscounted.start != availability.price_range.start %}
+		<div class="text-center">
+			<div>
+				<div class="container-image">
+					<img class="img-responsive lazyload lazypreload"
+						 data-src="{% product_first_image product method="crop" size="255x255" %}"
+						 data-srcset="{% product_first_image product method="crop" size="255x255" %} 1x, {% product_first_image product method="crop" size="510x510" %} 2x"
+						 alt=""
+						 src="{% placeholder size=255 %}">
+					<div class="hover">
+						<h5><a id="quick-view" data-toggle="modal" data-target="#product-{{ product.pk }}-quickview">Quick View</a></h5>
+					</div>
+				</div>
+				<span class="product-list-item-name" title="{{ product }}">{{ product }}</span>
+			</div>
+			<div class="panel-footer">
+				{% if availability.available %}
+				{% price_range availability.price_range %}
+				{% if availability.discount %}
+				{% if availability.price_range_undiscounted.start != availability.price_range.start %}
                 <div class="product-list__sale">
-                  <svg data-src="{% static "images/sale-bg.svg" %}" />
-                  <span class="product-list__sale__text">
-                    {% comment %}Translators: Layout may break if character length is different than four.{% endcomment %}
-                    {% trans "Sale" context "Sale (discount) label for item in product list" %}
-                  </span>
+					<svg data-src="{% static "images/sale-bg.svg" %}" />
+					<span class="product-list__sale__text">
+						{% comment %}Translators: Layout may break if character length is different than four.{% endcomment %}
+						{% trans "Sale" context "Sale (discount) label for item in product list" %}
+					</span>
                 </div>
-              {% endif %}
-            {% endif %}
-          {% else %}
-            &nbsp;
-          {% endif %}
-        </div>
-      </div>
+				{% endif %}
+				{% endif %}
+				{% else %}
+				&nbsp;
+				{% endif %}
+			</div>
+		</div>
     </a>
-  </div>
+</div>
 {% endfor %}
