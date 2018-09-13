@@ -108,10 +108,10 @@
 				<svg data-src="{% static "images/logo_new.svg" %}" height="140%" width="140%" />
 			    </a>
 			</div>
-			<div class="col-2 col-md-4 navbar__nav">
+			<div class="col-2 col-md-2 navbar__nav">
 			    <a href="#" class="dropdown-toggle d-none d-md-block" id="navToggle" style="font-size: 16px;">Shop <span class="caret"></span></a>
 			</div>
-			<div class="col-2 col-md-4 navbar__search static">
+			<div class="col-2 col-md-3 offset-md-4 navbar__search static">
 			    {% if SEARCH_IS_ENABLED %}
 			    <div class="d-md-none mobile-search-icon">
 				<svg data-src="{% static "images/search.svg" %}" width="30" height="30"/>
@@ -130,7 +130,7 @@
 			    </form>
 			    {% endif %}
 			</div>
-			<div class="col-2 col-md-3">
+			<div class="col-2 col-md-2">
 			    <div class="navbar__brand__cart float-right">
 				<a rel="nofollow" class="cart__icon" href="{% url "cart:index" %}">
 				    <span class="cart-label d-none d-md-inline-block">
