@@ -114,6 +114,7 @@
 	@include media-breakpoint-down(sm) {
 	    .nav-item__submenu ul {
 		text-align: center;
+		font-size: 0.8rem;
 
 		ul {
 		    padding-left: 0;
