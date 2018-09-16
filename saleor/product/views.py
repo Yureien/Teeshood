@@ -83,6 +83,41 @@ def product_details(request, slug, product_id, form=None):
     return TemplateResponse(request, 'product/details.html', ctx)
 
 
+def product_quickview(request, slug, product_id, form=None):
+    products = products_with_details(user=request.user)
+    product = get_object_or_404(products, id=product_id)
+    if product.get_slug() != slug:
+        return HttpResponsePermanentRedirect(product.get_absolute_url())
+    today = datetime.date.today()
+    is_visible = (
+        product.available_on is None or product.available_on <= today)
+    if form is None:
+        form = handle_cart_form(request, product, create_cart=False)[0]
+    availability = get_availability(
+        product, discounts=request.discounts, taxes=request.taxes,
+        local_currency=request.currency)
+    product_images = get_product_images(product)
+    variant_picker_data = get_variant_picker_data(
+        product, request.discounts, request.taxes, request.currency)
+    product_attributes = get_product_attributes_data(product)
+    # show_variant_picker determines if variant picker is used or select input
+    show_variant_picker = all([v.attributes for v in product.variants.all()])
+    json_ld_data = product_json_ld(product, product_attributes)
+    ctx = {
+        'is_visible': is_visible,
+        'form': form,
+        'availability': availability,
+        'product': product,
+        'product_attributes': product_attributes,
+        'product_images': product_images,
+        'show_variant_picker': show_variant_picker,
+        'variant_picker_data': json.dumps(
+            variant_picker_data, default=serialize_decimal),
+        'json_ld_product_data': json.dumps(
+            json_ld_data, default=serialize_decimal)}
+    return TemplateResponse(request, 'product/_quickview_render.html', ctx)
+
+
 def check_pincode_availability(request, slug, product_id, pincode):
     """
     if not request.method == 'POST':

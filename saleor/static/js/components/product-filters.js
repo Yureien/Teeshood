@@ -20,6 +20,10 @@ $('.filters-toggle').on('click', () => {
   $('.filters-menu__body').toggleClass('d-none');
 });
 
+$('.modal').on('show.bs.modal', function(){
+    $(this).find('.modal-body').load($(this).data("remote"));
+});
+
 $('#pincode-checker').submit(function(e) {
 	let opts = $(this).serializeArray();
 	let url = opts[1]['value'].replace('-0/', '-' + opts[0]['value'] + '/');

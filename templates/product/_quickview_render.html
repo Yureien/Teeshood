@@ -1,0 +1,132 @@
+{% load i18n %}
+{% load bootstrap_field from bootstrap4 %}
+{% load build_absolute_uri from urls %}
+{% load get_object_properties from attributes %}
+{% load get_thumbnail product_first_image from product_images %}
+{% load placeholder %}
+{% load staticfiles %}
+{% load taxed_prices %}
+{% if not is_visible %}
+<div class="alert alert-warning" role="alert">
+    {% blocktrans trimmed with date=product.available_on|date context "Product details text" %}
+    <strong>Warning!</strong>
+    You are previewing a product that will become visible on <strong>{{ date }}</strong>.
+    {% endblocktrans %}
+</div>
+{% endif %}
+<div class="row product">
+    <script type="application/ld+json">{{ json_ld_product_data|safe }}</script>
+    <div class="col-md-6 col-12 product__gallery">
+		{% with images=product_images %}
+        {% if images %}
+        <div id="carousel-example-generic" class="carousel slide">
+            <div class="carousel-inner" role="listbox">
+				{% for image in images %}
+                <div class="carousel-item{% if forloop.first %} active{% endif %}">
+					<img class="d-block img-fluid lazyload lazypreload"
+						 data-src="{% get_thumbnail image.image method="crop" size="540x540" %}"
+						 data-src="{% get_thumbnail image.image method="crop" size="540x540" %} 1x, {% get_thumbnail image.image method="crop" size="1080x1080" %} 2x"
+						 alt=""
+						 src="{% placeholder size=540 %}">
+                </div>
+				{% endfor %}
+            </div>
+            {% if images|length > 1 %}
+            <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
+                <svg data-src="{% static "images/gallery-arrow.svg" %}" />
+            </a>
+            <a class="carousel-control-next" href="#carousel-example-generic" role="button" data-slide="next">
+                <svg data-src="{% static "images/gallery-arrow.svg" %}" />
+            </a>
+            {% endif %}
+            <ol class="carousel-indicators d-none d-md-block">
+				{% for image in images %}
+                {% if images|length > 1 %}
+                <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}>
+                    <img data-src="{% get_thumbnail image.image method="crop" size="60x60" %}"
+                         data-srcset="{% get_thumbnail image.image method="crop" size="60x60" %} 1x, {% get_thumbnail image.image method="crop" size="120x120" %} 2x"
+                         alt=""
+                         class="lazyload lazypreload"
+                         src="{% placeholder size=60 %}">
+                </li>
+                {% endif %}
+				{% endfor %}
+            </ol>
+        </div>
+        {% else %}
+        <img data-src="{% placeholder size=540 %}"
+             data-srcset="{% placeholder size=540 %} 1x, {% placeholder size=1080 %} 2x"
+             alt=""
+             class="img-fluid lazyload lazypreload">
+        {% endif %}
+		{% endwith %}
+    </div>
+    <div class="col-md-6 col-12 product__info">
+		<h1 class="product__info__name">
+			{{ product }}
+		</h1>
+		{% if user.is_staff %}
+        <p>
+			<a href="{% url "dashboard:product-details" pk=product.pk %}">
+				{% trans "Edit in dashboard" context "Product details link text" %}
+			</a>
+        </p>
+		{% endif %}
+		{% if availability.available %}
+        {% if show_variant_picker %}
+        <div id="variant-price-component"></div>
+        {% else %}
+        <h2 class="product__info__price">
+            <span>{% price_range availability.price_range %}</span>
+            {% if availability.discount %}
+            <small class="product__info__price__undiscounted">
+                {% price availability.price_range_undiscounted %}
+            </small>
+            {% endif %}
+            {% if availability.price_range_local_currency %}
+            <br>
+            <small class="text-info">
+                &asymp;
+                {% price availability.price_range_local_currency %}
+            </small>
+            {% endif %}
+            {% if request.taxes %}
+            <small>
+                {% tax_rate request.taxes product.tax_rate as tax_rate %}
+                {% if site.settings.display_gross_prices %}
+                {% blocktrans trimmed with tax_rate=tax_rate context "Product details page vat rate value" %}
+                including {{ tax_rate }}% VAT
+                {% endblocktrans %}
+                {% else %}
+                {% blocktrans trimmed with tax_rate=tax_rate context "Product details page vat rate value" %}
+                excluding {{ tax_rate }}% VAT
+                {% endblocktrans %}
+                {% endif %}
+            </small>
+            {% endif %}
+        </h2>
+        {% endif %}
+		{% endif %}
+		{% if is_visible and product.is_in_stock %}
+		<a href="{{ product.get_absolute_url }}"><button class="btn primary text-light">Buy</button></a>
+		{% else %}
+        <p class="alert alert-warning">
+			{% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
+        </p>
+		{% endif %}
+		<div class="product__info__description">
+			<h3>{% trans "Description" context "Product details title" %}</h3>
+			<hr>
+			{{ product.description|safe }}
+		</div>
+		<hr>
+		<table>
+			{% for attribute, value in product_attributes.items %}
+			<tr>
+				<td>{{ attribute }}:</td>
+				<td><strong>{{ value }}</strong></td>
+			</tr>
+			{% endfor %}
+		</table>
+    </div>
+</div>
