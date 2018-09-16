@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 {% load i18n %}
 {% load staticfiles %}
@@ -185,64 +186,77 @@
 		<footer class="footer bg-dark">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 col-sm-6">
-						{% menu site_menu=site.settings.bottom_menu %}
+					<div class="col-md-4 col-sm-12">
+						<h1>Sitemap</h1>
+						<div class="row">
+							<div class="col-md-6 col-sm-12">
+								<ul>
+									<li>
+										<a rel="nofollow" href="{% url "cart:index" %}">
+											{% trans "Your Cart" context "Main navigation item" %}
+										</a>
+									</li>
+									{% if user.is_authenticated %}
+									{% if user.is_staff %}
+									<li>
+										<a href="{% url "dashboard:index" %}" target="_blank" rel="noopener">
+											{% trans "Dashboard" context "Main navigation item" %}
+										</a>
+									</li>
+									<li>
+										<a href="{% url "styleguide" %}" target="_blank">
+											{% trans "Style guide" context "Main navigation item" %}
+										</a>
+									</li>
+									{% endif %}
+									<li>
+										<a href="{% url "account:details" %}">
+											{% trans "Your account" context "Main navigation item" %}
+										</a>
+									</li>
+									{% if user.is_impersonate %}
+									<li>
+										<a href="{% url "impersonate-stop" %}">
+											{% trans 'Stop impersonating' context 'Main navigation item' %}
+										</a>
+									</li>
+									{% else %}
+									<li>
+										<a href="{% url "account:logout" %}">
+											{% trans "Log out" context "Main navigation item" %}</a>
+									</li>
+									{% endif %}
+									{% else %}
+									<li>
+										<a rel="nofollow" href="{% url "account:signup" %}">
+											{% trans "Register" context "Main navigation item" %}
+										</a>
+									</li>
+									<li>
+										<a rel="nofollow" href="{% url "account:login" %}">
+											{% trans "Log in" context "Main navigation item" %}
+										</a>
+									</li>
+									{% endif %}
+								</ul>
+							</div>
+							<div class="col-md-6 col-sm-12">								
+								{% menu site_menu=site.settings.bottom_menu %}
+							</div>
+						</div>
 					</div>
-					<div class="col-md-6 col-sm-6 text-center">
-						<ul>
-							<li>
-								<a rel="nofollow" href="{% url "cart:index" %}">
-									{% trans "Your Cart" context "Main navigation item" %}
-								</a>
-							</li>
-							{% if user.is_authenticated %}
-							{% if user.is_staff %}
-							<li>
-								<a href="{% url "dashboard:index" %}" target="_blank" rel="noopener">
-									{% trans "Dashboard" context "Main navigation item" %}
-								</a>
-							</li>
-							<li>
-								<a href="{% url "styleguide" %}" target="_blank">
-									{% trans "Style guide" context "Main navigation item" %}
-								</a>
-							</li>
-							{% endif %}
-							<li>
-								<a href="{% url "account:details" %}">
-									{% trans "Your account" context "Main navigation item" %}
-								</a>
-							</li>
-							{% if user.is_impersonate %}
-							<li>
-								<a href="{% url "impersonate-stop" %}">
-									{% trans 'Stop impersonating' context 'Main navigation item' %}
-								</a>
-							</li>
-							{% else %}
-							<li>
-								<a href="{% url "account:logout" %}">
-									{% trans "Log out" context "Main navigation item" %}</a>
-							</li>
-							{% endif %}
-							{% else %}
-							<li>
-								<a rel="nofollow" href="{% url "account:signup" %}">
-									{% trans "Register" context "Main navigation item" %}
-								</a>
-							</li>
-							<li>
-								<a rel="nofollow" href="{% url "account:login" %}">
-									{% trans "Log in" context "Main navigation item" %}
-								</a>
-							</li>
-							{% endif %}
-						</ul>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-12 ml-auto text-right order-md-last d-flex" style="align-items: center;">
-						<span class="d-block d-md-inline-block">Follow Us:&nbsp;&nbsp;&nbsp;</span>
+					<div class="col-md-4 col-sm-12">
+						<h1>Newsletter</h1>
+						<form action="">
+							<div class="form-row align-items-center text-center mb-4 mt-3">
+								<div class="col-sm-8">
+									<input class="form-control" type="email" placeholder="Email"></input>
+								</div>
+								<div class="col-sm-4">
+									<button class="btn btn-secondary" href="#" id="button">Sign Up!</button>
+								</div>
+							</div>
+						</form>
 						<a target="_blank" rel="noopener" class="social-footer" href="https://www.facebook.com/mirumeelabs/">
 							<svg data-src="{% static "images/facebook-logo.svg" %}" width="25px" height="25px"/>
 						</a>
@@ -268,12 +282,26 @@
 							<svg data-src="{% static "images/instagram-logo.svg" %}" width="25px" height="25px"/>
 						</a>
 					</div>
-					<div class="col-md-6 col-sm-12 order-md-first d-flex" style="align-items: center;">
-						<span class="d-block d-md-inline-block">100% secure payment: </span>
-						<div class="d-block d-md-inline-block">
-							<img src="{% static 'images/masterdcard.png' %}" height="30" class="mr-1">
-							<img src="{% static 'images/americanExpress.png' %}" height="30" class="mr-1">
-							<img src="{% static 'images/cod.png' %}" height="30" class="mr-1">
+					<div class="col-md-4 col-sm-12">
+						<h1>Contact Us</h1>
+						<span style='display: block;color: #fff;'>Office: Kolkata</span><br>
+						<span style='display: block;color: #fff;'>Phone: +91-9083250-171/225/226</span><br>
+						<span style='display: block;color: #fff;'>Email: contact@teeshood.com</span>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						Copyright &copy; 2018 design by Graphikker. All rights reserved.
+					</div>
+					<div class="col-md-6 col-sm-12 text-right float-right" style="align-items: middle;">
+						<span class="d-md-inline-block">100% secure payment: </span>
+						<div class="d-md-inline-block">
+							<img src="{% static 'images/masterdcard.png' %}" height="30px" class="mr-1">
+							<img src="{% static 'images/americanExpress.png' %}" height="30px" class="mr-1">
+							<img src="{% static 'images/cod.png' %}" height="30px" class="mr-1">
 						</div>
 					</div>
 				</div>

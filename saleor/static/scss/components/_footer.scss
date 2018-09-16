@@ -6,6 +6,11 @@
 	text-align: center;
 	margin-top: $global-margin * 2;
     }
+	h1 {
+		font-family: $font-family-sans-serif;
+		color: $gray;
+		font-size: 1.6em;
+	}
     &__logo {
 	margin-bottom: $global-margin;
 	svg {
