@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import F, Max
 from versatileimagefield.fields import VersatileImageField
+from django.core.validators import RegexValidator
 
 
 class BaseNote(models.Model):
@@ -45,6 +46,39 @@ class CustomDesign(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     image = VersatileImageField(upload_to='custom-design-uploads')
+
+    def __str__(self):
+        return self.name
+
+
+class BulkOrderType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class BulkOrderColor(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class BulkOrder(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{9,15}$',
+        message="Phone number must be entered in the format: '+999999999'. Max 15 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=17)
+    order_type = models.ForeignKey(BulkOrderType, on_delete=models.CASCADE)
+    order_color = models.ForeignKey(BulkOrderColor, on_delete=models.CASCADE)
+    number_of_pieces = models.IntegerField()
+    upload_design = models.FileField(upload_to='bulk-order-upload-design', blank=True)
+    list_of_names = models.FileField(upload_to='bulk-order-lon', blank=True)
+    additional_description = models.TextField()
+    teeshood_designs_product = models.BooleanField()
 
     def __str__(self):
         return self.name

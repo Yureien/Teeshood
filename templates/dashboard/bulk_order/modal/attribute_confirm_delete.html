@@ -1,0 +1,31 @@
+{% extends "dashboard/base_modal.html" %}
+
+{% load i18n %}
+
+{% block form_class %}{% endblock %}
+
+{% block action_url %}
+{% if action == "type" %}
+{% url 'dashboard:bulk-order-type-value-delete' value_pk=value.pk %}
+{% elif action == "color" %}
+{% url 'dashboard:bulk-order-color-value-delete' value_pk=value.pk %}
+{% endif %}
+{% endblock %}
+
+{% block title %}
+{% blocktrans trimmed context "Modal delete attribute text" %}
+Delete attribute choice value {{ value }}
+{% endblocktrans %}
+{% endblock title %}
+
+{% block content %}
+  <div class="col s12">
+    {% blocktrans trimmed context "Modal delete attribute text" %}
+      Are you sure you want to remove attribute choice value <strong>{{ value }}</strong>?
+    {% endblocktrans %}
+  </div>
+{% endblock content %}
+
+{% block primary_action %}
+{% trans "Remove" context "Dashboard delete action" %}
+{% endblock %}

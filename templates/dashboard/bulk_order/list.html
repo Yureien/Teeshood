@@ -1,0 +1,200 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% load materializecss %}
+{% load price from taxed_prices %}
+{% load product_first_image from product_images %}
+{% load staticfiles %}
+{% load utils %}
+
+{% block title %}
+{% trans "Products" context "Dashboard products list" %} - {{ block.super }}
+{% endblock %}
+
+{% block body_class %}body-products-list{% endblock %}
+
+{% block menu_bulk_orders_class %}active{% endblock %}
+
+{% block header_extra %}
+{% if product_types %}
+{% if perms.product.edit_product %}
+<div class="btn-fab-fixed">
+    <a data-href="{% url "bulk-order" %}" class="btn-fab-default waves-effect waves-light modal-trigger-custom" href="#base-modal" title="{% trans "Add product" context "Product list add button text" %}">
+        <svg data-src="{% static "dashboard/images/add.svg" %}" />
+    </a>
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumbs">
+    <li class="visible-s">
+		{% trans "Bulk Orders" context "Dashboard bulk orders list" %}
+    </li>
+</ul>
+{% endblock %}
+
+{% block menu_catalogue_class %} active{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12 l9" id="product-list">
+		{% if products %}
+		<div class="card">
+			<div class="data-table-container">
+				<table class="bordered highlight responsive data-table last-right-align">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Phone Number</th>
+							<th>Number of Pieces</th>
+							<th>Type</th>
+							<th>Color</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for product in products %}
+						<tr class="avatar" data-action-go="{% url 'dashboard:bulk-order-details' pk=product.pk %}">
+							<td>
+								{{ product.name }}
+							</td>
+							<td>
+								{{ product.email }}
+							</td>
+							<td>
+								{{ product.phone_number }}
+							</td>
+							<td>
+								{{ product.number_of_pieces }}
+							</td>
+							<td>
+								{{ product.order_type }}
+							</td>
+							<td>
+								{{ product.order_color }}
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		{% paginate products %}
+		{% else %}
+		{% if is_empty %}
+        {% include 'dashboard/bulk_order/zero_page.html' %}
+		{% else %}
+        <div class="col s12">
+            <div class="not-found">
+				<p class="grey-text">
+					{% trans "No bulk orders found." context "Empty bulk order list message" %}
+				</p>
+            </div>
+        </div>
+		{% endif %}
+		{% endif %}
+    </div>
+    <div class="col s12 l3" id="filters">
+		{% if not is_empty %}{% filters filter_set %}{% endif %}
+    </div>
+	<div class="col s12 l9">
+		<div class="card">
+			<div class="card-content">
+				<span class="card-title">{% trans "Order Types" %}</span>
+			</div>
+			{% if perms.product.edit_product %}
+			<div class="data-table-header-action">
+				<a href="{% url 'dashboard:bulk-order-type-value-add' %}" class="btn-flat waves-effect">
+					{% trans "Add" %}
+				</a>
+			</div>
+			{% endif %}
+			<div class="data-table-container">
+				<table class="bordered highlight responsive data-table">
+					<thead>
+						<tr>
+							<th>{% trans "Display name" %}</th>
+							{% if perms.product.edit_product %}
+							<th></th>
+							{% endif %}
+						</tr>
+					</thead>
+					<tbody>
+						{% for value in order_type_values %}
+						<tr data-id="{{ value.pk }}">
+							<td>
+								{{ value.name }}
+							</td>
+							{% if perms.product.edit_product %}
+							<td class="right-align">
+								<a href="{% url 'dashboard:bulk-order-type-value-update' value_pk=value.pk %}" class="btn-flat waves-effect">
+									{% trans 'Edit' context 'Attribute choice value edit action' %}
+								</a>
+								<a class="btn-flat waves-effect modal-trigger-custom" href="#base-modal" data-href="{% url 'dashboard:bulk-order-type-value-delete' value_pk=value.pk %}">
+									{% trans 'Remove' context 'Attribute choice value edit action' %}
+								</a>
+							</td>
+							{% endif %}
+						</tr>
+						{% empty %}
+						<tr>
+							<td colspan="2">{% trans "No attribute values" context "Empty list of attribute values" %}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+    </div>
+	<div class="col s12 l9">
+		<div class="card">
+			<div class="card-content">
+				<span class="card-title">{% trans "Order Colors" %}</span>
+			</div>
+			{% if perms.product.edit_product %}
+			<div class="data-table-header-action">
+				<a href="{% url 'dashboard:bulk-order-color-value-add' %}" class="btn-flat waves-effect">
+					{% trans "Add" %}
+				</a>
+			</div>
+			{% endif %}
+			<div class="data-table-container">
+				<table class="bordered highlight responsive data-table">
+					<thead>
+						<tr>
+							<th>{% trans "Display name" %}</th>
+							{% if perms.product.edit_product %}
+							<th></th>
+							{% endif %}
+						</tr>
+					</thead>
+					<tbody>
+						{% for value in order_color_values %}
+						<tr data-id="{{ value.pk }}">
+							<td>
+								{{ value.name }}
+							</td>
+							{% if perms.product.edit_product %}
+							<td class="right-align">
+								<a href="{% url 'dashboard:bulk-order-color-value-update' value_pk=value.pk %}" class="btn-flat waves-effect">
+									{% trans 'Edit' context 'Attribute choice value edit action' %}
+								</a>
+								<a class="btn-flat waves-effect modal-trigger-custom" href="#base-modal" data-href="{% url 'dashboard:bulk-order-color-value-delete' value_pk=value.pk %}">
+									{% trans 'Remove' context 'Attribute choice value edit action' %}
+								</a>
+							</td>
+							{% endif %}
+						</tr>
+						{% empty %}
+						<tr>
+							<td colspan="2">{% trans "No attribute values" context "Empty list of attribute values" %}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+    </div>
+</div>
+{% endblock %}

@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from impersonate.views import impersonate as orig_impersonate
 
-from .forms import CustomDesignForm
+from .forms import CustomDesignForm, BulkOrderForm
 from ..account.models import User
 from ..dashboard.views import staff_member_required
 from ..product.utils import products_for_homepage
@@ -68,3 +68,21 @@ def design_upload(request):
         return redirect('home')
     ctx = {'custom_design_form': custom_design_form}
     return TemplateResponse(request, 'design_upload.html', ctx)
+
+
+@login_required
+def bulk_order(request):
+    bulk_order_form = BulkOrderForm(request.POST or None, request.FILES)
+    if bulk_order_form.is_valid():
+        design = bulk_order_form.save(commit=False)
+        design.user = request.user
+        design.save()
+        messages.success(
+            request,
+            pgettext_lazy(
+                'Bulk Order message',
+                'Sent bulk order.')
+        )
+        return redirect('home')
+    ctx = {'bulk_order_form': bulk_order_form}
+    return TemplateResponse(request, 'bulk_order.html', ctx)

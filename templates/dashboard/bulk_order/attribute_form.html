@@ -1,0 +1,59 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% load materializecss %}
+{% load staticfiles %}
+
+{% block title %}
+{% if attribute.pk %}
+{% trans "Edit" context "Dashboard attributes list" %} - {{ attribute }}
+{% else %}
+{% trans "Add new attribute" context "Attribute detail page title" %}
+{% endif %}
+- {{ block.super }}
+{% endblock %}
+
+{% block body_class %}body-attributes{% endblock %}
+
+{% block menu_bulk_orders_class %}active{% endblock %}
+
+{% block header_menu %}
+  {% url "dashboard:bulk-order-list" as url %}
+  {% include "dashboard/includes/_back_link.html" with url=url %}
+{% endblock %}
+
+{% block menu_catalogue_class %} active{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col m12 l9">
+      <div class="card">
+        <form method="post" enctype="multipart/form-data" id="form-attributes" novalidate>
+          {% csrf_token %}
+          <div class="card-content">
+            <span class="card-title">
+              {% trans "Attribute values" context "Attribute values form title" %}
+            </span>
+            <div class="row">
+              {{ form|materializecss }}
+            </div>
+          </div>
+          <div class="card-action right-align">
+            <a href="{% url 'dashboard:bulk-order-list' %}" class="btn-flat waves-effect">
+              {% trans "Cancel" context "Dashboard cancel action" %}
+            </a>
+            {% if value.pk %}
+              <button type="submit" class="btn waves-effect">
+                {% trans "Save" context "Dashboard update action" %}
+              </button>
+            {% else %}
+              <button type="submit" class="btn waves-effect">
+                {% trans "Create" context "Dashboard create action" %}
+              </button>
+            {% endif %}
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col m12 l3 help-box"></div>
+  </div>
+{% endblock %}

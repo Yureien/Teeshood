@@ -1,0 +1,86 @@
+{% extends "dashboard/base.html" %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}{{ product.name }} - {{ block.super }}{% endblock %}
+
+{% block body_class %}body-products{% endblock %}
+
+{% block menu_bulk_orders_class %}active{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumbs breadcrumbs--history">
+    <li>
+	<a href="{% url "dashboard:product-list" %}" class="breadcrumb">
+            {% trans "Bulk Orders" context "Custom design breadcrumbs" %}
+	</a>
+    </li>
+    <li class="back-mobile">
+	<a href="{% url "dashboard:product-list" %}">
+            <svg data-src="{% static "dashboard/images/arrow-left.svg" %}" fill="#fff" width="20px" height="20px" />
+	</a>
+    </li>
+    <li>
+	<span class="breadcrumbs--ellipsed-item">
+            {{ product.name }}
+	</span>
+    </li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col s12">
+	<div class="card">
+            <div class="card-content">
+		<div class="product-header">
+		    <div class="product-header__title">
+			<span class="card-title">
+			    {{ product }} - {{ product.order_type }} - {{ product.order_color }}
+			</span>
+		    </div>
+		</div>
+		<div class="row">
+		    <div class="col s12">
+				<b>Name: </b> {{ product.name }}
+		    </div>
+		    <div class="col s12">
+				<b>E-Mail: </b> {{ product.email }}
+		    </div>
+		    <div class="col s12">
+				<b>Phone Number: </b> {{ product.phone_number }}
+		    </div>
+		    <div class="col s12">
+				<b>Type: </b> {{ product.order_type }}
+		    </div>
+		    <div class="col s12">
+				<b>Color: </b> {{ product.order_color }}
+		    </div>
+		    <div class="col s12">
+				<b>Number of Pieces: </b> {{ product.number_of_pieces }}
+		    </div>
+		    <div class="col s12">
+				<b>Upload Design: </b> {% if product.upload_design %}<a href="{{ product.upload_design.url }}">View file</a>{% else %}Not given.{% endif %}
+		    </div>
+		    <div class="col s12">
+				<b>List of Names: </b> {% if product.list_of_names %}<a href="{{ product.list_of_names.url }}">View file</a>{% else %}Not given.{% endif %}
+		    </div>
+		    <div class="col s12">
+				<b>Additional Description: </b> {{ product.additional_description }}
+		    </div>
+		    <div class="col s12">
+				<b>Will TEESHOOD Design Product: </b> {{ product.teeshood_designs_product }}
+		    </div>
+		</div>
+            </div>
+            <div class="card-action">
+				{% if perms.product.edit_product %}
+				<a href="#base-modal" data-href="{% url 'dashboard:bulk-order-delete' pk=product.pk %}" class="modal-trigger-custom btn-flat waves-effect">
+		    {% trans "Remove bulk order" context "Design action" %}
+		</a>
+		{% endif %}
+            </div>
+	</div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% block stylesheet %}
+<style>
+ h1 {
+     font-family: 'Lato', sans-serif;
+     font-weight: 300;
+     text-transform: uppercase;
+ }
+</style>
+{% endblock %}
+{% block content %}
+<h1 class="m-4 text-center">Bulk Order</h1>
+<div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+	<form method="post" enctype="multipart/form-data" novalidate>
+	    {% csrf_token %}
+		{% for field in bulk_order_form %}
+	    {% bootstrap_field field %}
+		{% endfor %}
+	    <div class="form-group text-center m-4">
+		<a class="btn btn-secondary" href="{% url 'bulk-order' %}" target="_blank">
+		    {% trans "Cancel" context "Dashboard cancel action" %}
+		</a>
+		<button type="submit" class="btn btn-primary">
+		    {% trans "Submit" context "Submit action" %}
+		</button>
+	    </div>
+	</form>
+    </div>
+</div>
+{% endblock %}
