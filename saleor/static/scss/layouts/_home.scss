@@ -1,7 +1,7 @@
 .carousel-inner > .carousel-item {
     height: 85vh;
     @include media-breakpoint-down(sm) {
-	height: 100vh;
+	height: 50vh;
     }
 }
 
@@ -12,8 +12,6 @@
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    max-height: 800px;
-    width: auto;
 }
 
 .carousel-control.left,

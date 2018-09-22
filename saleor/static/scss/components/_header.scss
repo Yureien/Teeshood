@@ -310,7 +310,7 @@
 	&__menu-toggle {
 	    max-height: 22px;
 	    padding-right: $global-padding;
-	    padding-left: $global-padding;
+	    padding-left: $global-padding * 0.4;
 	    vertical-align: super;
 	}
     }
