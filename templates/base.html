@@ -183,11 +183,11 @@
 		</div>
 		{% block footer %}
 		<footer class="footer bg-dark">
-			<div class="container">
+			<div class="container text-left pl-4 pl-sm-0">
 				<div class="row">
 					<div class="col-md-4 col-sm-12">
 						<h1>Sitemap</h1>
-						<div class="row">
+						<div class="row pl-4 pl-sm-0">
 							<div class="col-md-6 col-sm-12">
 								<ul>
 									<li>
@@ -239,53 +239,57 @@
 									{% endif %}
 								</ul>
 							</div>
-							<div class="col-md-6 col-sm-12">								
+							<div class="col-md-6 col-sm-12">							
 								{% menu site_menu=site.settings.bottom_menu %}
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-12">
 						<h1>Contact Us</h1>
-						<span style='display: block;color: #fff;'>Office: Kolkata</span><br>
-						<span style='display: block;color: #fff;'>Phone: +91-9083250-171/225/226</span><br>
-						<span style='display: block;color: #fff;'>Email: contact@teeshood.com</span>
+						<div class="pl-4 pl-sm-0">
+							<span style='display: block;color: #fff;'>Office: Kolkata</span><br>
+							<span style='display: block;color: #fff;'>Phone: +91-9083250-171/225/226</span><br>
+							<span style='display: block;color: #fff;'>Email: contact@teeshood.com</span>
+						</div>
 					</div>
 					<div class="col-md-4 col-sm-12">
-						<h1>Newsletter</h1>
-						<form action="">
-							<div class="form-row align-items-center text-center mb-4 mt-3">
-								<div class="col-8">
-									<input class="form-control" type="email" placeholder="Email"></input>
+						<h1 class="mt-4 mt-sm-0">Newsletter</h1>
+						<div class="pl-4 pl-sm-0">
+							<form action="">
+								<div class="form-row align-items-center mb-4 mt-3">
+									<div class="col-8">
+										<input class="form-control" type="email" placeholder="Email"></input>
+									</div>
+									<div class="col-4">
+										<button class="btn btn-secondary" href="#" id="button">Sign Up!</button>
+									</div>
 								</div>
-								<div class="col-4">
-									<button class="btn btn-secondary" href="#" id="button">Sign Up!</button>
-								</div>
-							</div>
-						</form>
-						<a target="_blank" rel="noopener" class="social-footer" href="https://www.facebook.com/mirumeelabs/">
-							<svg data-src="{% static "images/facebook-logo.svg" %}" width="25px" height="25px"/>
+							</form>
+							<a target="_blank" rel="noopener" class="social-footer" href="https://www.facebook.com/mirumeelabs/">
+								<svg data-src="{% static "images/facebook-logo.svg" %}" width="25px" height="25px"/>
+							</a>
+							<a target="_blank" rel="noopener" class="social-footer" href="https://github.com/mirumee/saleor">
+								<svg data-src="{% static "images/github-logo.svg" %}" width="25px" height="25px"/>
+							</a>
+							<a target="_blank" rel="noopener" class="social-footer" href="https://twitter.com/getsaleor">
+								<svg data-src="{% static "images/twitter-logo.svg" %}" width="25px" height="25px"/>
+							</a>
+							<a target="_blank" rel="noopener" class="social-footer" href="https://plus.google.com/+Mirumee">
+								<svg data-src="{% static "images/google-logo.svg" %}" width="25px" height="25px"/>
+							</a>
+							<a target="_blank" rel="noopener" class="social-footer" href="https://www.meetup.com/Mirumee-Talks/">
+								<svg data-src="{% static "images/meetup-logo.svg" %}" width="25px" height="25px"/>
+							</a>
+							<a target="_blank" rel="noopener" class="social-footer" href="https://linkedin.com/company/mirumee-software">
+								<svg data-src="{% static "images/linkedin-logo.svg" %}" width="25px" height="25px"/>
+							</a>
+							<a target="_blank" rel="noopener" class="social-footer" href="https://dribbble.com/mirumee">
+								<svg data-src="{% static "images/dribbble-logo.svg" %}" width="25px" height="25px"/>
+							</a>
+							<a target="_blank" rel="noopener" class="social-footer" href="https://www.instagram.com/explore/tags/mirumee/">
+								<svg data-src="{% static "images/instagram-logo.svg" %}" width="25px" height="25px"/>
 						</a>
-						<a target="_blank" rel="noopener" class="social-footer" href="https://github.com/mirumee/saleor">
-							<svg data-src="{% static "images/github-logo.svg" %}" width="25px" height="25px"/>
-						</a>
-						<a target="_blank" rel="noopener" class="social-footer" href="https://twitter.com/getsaleor">
-							<svg data-src="{% static "images/twitter-logo.svg" %}" width="25px" height="25px"/>
-						</a>
-						<a target="_blank" rel="noopener" class="social-footer" href="https://plus.google.com/+Mirumee">
-							<svg data-src="{% static "images/google-logo.svg" %}" width="25px" height="25px"/>
-						</a>
-						<a target="_blank" rel="noopener" class="social-footer" href="https://www.meetup.com/Mirumee-Talks/">
-							<svg data-src="{% static "images/meetup-logo.svg" %}" width="25px" height="25px"/>
-						</a>
-						<a target="_blank" rel="noopener" class="social-footer" href="https://linkedin.com/company/mirumee-software">
-							<svg data-src="{% static "images/linkedin-logo.svg" %}" width="25px" height="25px"/>
-						</a>
-						<a target="_blank" rel="noopener" class="social-footer" href="https://dribbble.com/mirumee">
-							<svg data-src="{% static "images/dribbble-logo.svg" %}" width="25px" height="25px"/>
-						</a>
-						<a target="_blank" rel="noopener" class="social-footer" href="https://www.instagram.com/explore/tags/mirumee/">
-							<svg data-src="{% static "images/instagram-logo.svg" %}" width="25px" height="25px"/>
-						</a>
+						</div>
 					</div>
 				</div>
 			</div>

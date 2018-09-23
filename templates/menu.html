@@ -3,7 +3,7 @@
   {% for item in menu_items %}
   {% with children=item.get_children %}
     <li class="{% if horizontal %}nav-item{% endif %} {% if children %}nav-item__dropdown{% endif %} menu__item">
-	<a class="{% if horizontal %}nav-link{% endif %} mt-4 mb-4" href="{{ item.get_url }}">
+	<a class="{% if horizontal %}nav-link{% endif %}" href="{{ item.get_url }}">
           <strong>{{ item }}</strong>
       </a>
       {% if children %}
