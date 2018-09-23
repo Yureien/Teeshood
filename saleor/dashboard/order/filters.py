@@ -8,7 +8,7 @@ from payments import PaymentStatus
 
 from ...core.filters import SortedFilterSet
 from ...order import OrderStatus
-from ...order.models import Order
+from ...order.models import Order, OrderComplaint
 from ..widgets import DateRangeWidget, MoneyRangeWidget
 
 SORT_BY_FIELDS = [
@@ -65,6 +65,36 @@ class OrderFilter(SortedFilterSet):
             Q(user__email__icontains=value) |
             Q(user__default_billing_address__first_name__icontains=value) |
             Q(user__default_billing_address__last_name__icontains=value))
+
+    def get_summary_message(self):
+        counter = self.qs.count()
+        return npgettext(
+            'Number of matching records in the dashboard orders list',
+            'Found %(counter)d matching order',
+            'Found %(counter)d matching orders',
+            number=counter) % {'counter': counter}
+
+
+class ComplaintFilter(SortedFilterSet):
+    id = NumberFilter(
+        label=pgettext_lazy('Order list filter label', 'ID'))
+    name_or_email = CharFilter(
+        label=pgettext_lazy(
+            'Order list filter label', 'Customer name'),
+        method='filter_by_order_customer')
+    created = DateFromToRangeFilter(
+        label=pgettext_lazy('Order list filter label', 'Placed on'),
+        name='created', widget=DateRangeWidget)
+
+    class Meta:
+        model = OrderComplaint
+        fields = []
+
+    def filter_by_order_customer(self, queryset, name, value):
+        return queryset.filter(
+            Q(order__user__email__icontains=value) |
+            Q(order__user__default_billing_address__first_name__icontains=value) |
+            Q(order__user__default_billing_address__last_name__icontains=value))
 
     def get_summary_message(self):
         counter = self.qs.count()

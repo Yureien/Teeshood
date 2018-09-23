@@ -22,11 +22,11 @@ from ...order import CustomPaymentChoices, OrderStatus
 from ...order.emails import (
     send_fulfillment_confirmation, send_fulfillment_update,
     send_order_confirmation)
-from ...order.models import Fulfillment, FulfillmentLine, Order, OrderNote
+from ...order.models import Fulfillment, FulfillmentLine, Order, OrderNote, OrderComplaint
 from ...order.utils import update_order_prices, update_order_status
 from ...shipping.models import ShippingMethodCountry
 from ..views import staff_member_required
-from .filters import OrderFilter
+from .filters import OrderFilter, ComplaintFilter
 from .forms import (
     AddressForm, AddVariantToOrderForm, BaseFulfillmentLineFormSet,
     CancelFulfillmentForm, CancelOrderForm, CancelOrderLineForm,
@@ -53,6 +53,45 @@ def order_list(request):
         'orders': orders, 'filter_set': order_filter,
         'is_empty': not order_filter.queryset.exists()}
     return TemplateResponse(request, 'dashboard/order/list.html', ctx)
+
+
+@staff_member_required
+@permission_required('order.view_order')
+def complaint_list(request):
+    complaints = OrderComplaint.objects.prefetch_related('order')
+    complaint_filter = ComplaintFilter(request.GET, queryset=complaints)
+    complaints = get_paginator_items(
+        complaint_filter.qs, settings.DASHBOARD_PAGINATE_BY,
+        request.GET.get('page'))
+    ctx = {
+        'complaints': complaints, 'filter_set': complaint_filter,
+        'is_empty': not complaint_filter.queryset.exists()}
+    return TemplateResponse(request, 'dashboard/order/complaints/list.html', ctx)
+
+
+@staff_member_required
+@permission_required('order.view_order')
+def complaint_details(request, order_pk):
+    complaints = OrderComplaint.objects.prefetch_related('order')
+    complaint = get_object_or_404(complaints, pk=order_pk)
+    ctx = {
+        'complaint': complaint}
+    return TemplateResponse(request, 'dashboard/order/complaints/detail.html', ctx)
+
+
+@staff_member_required
+@permission_required('order.edit_order')
+def complaint_delete(request, order_pk):
+    complaint = get_object_or_404(OrderComplaint.objects.all(), pk=order_pk)
+    if request.method == 'POST':
+        complaint.delete()
+        msg = pgettext_lazy(
+            'Dashboard message', 'Complaint successfully removed')
+        messages.success(request, msg)
+        return redirect('dashboard:complaints')
+    template = 'dashboard/order/complaints/modal/remove_complaint.html'
+    ctx = {'complaint': complaint}
+    return TemplateResponse(request, template, ctx)
 
 
 @require_POST

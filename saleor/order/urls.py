@@ -5,6 +5,7 @@ from ..core import TOKEN_PATTERN
 
 urlpatterns = [
     url(r'^%s/$' % (TOKEN_PATTERN,), views.details, name='details'),
+    url(r'^%s/complaint/$' % (TOKEN_PATTERN,), views.complain, name='complain'),
     url(r'^%s/payment/$' % (TOKEN_PATTERN,),
         views.payment, name='payment'),
     url(r'^%s/payment/(?P<variant>[-\w]+)/$' % (TOKEN_PATTERN,),

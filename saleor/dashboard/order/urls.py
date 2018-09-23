@@ -57,7 +57,11 @@ urlpatterns = [
         views.order_invoice, name='order-invoice'),
     url(r'^(?P<order_pk>\d+)/mark-as-paid/$',
         views.mark_order_as_paid, name='order-mark-as-paid'),
-
     url('^(?P<order_pk>\d+)/ajax/shipping-methods/$',
         views.ajax_order_shipping_methods_list,
-        name='ajax-order-shipping-methods')]
+        name='ajax-order-shipping-methods'),
+    url(r'^complaints/$', views.complaint_list, name='complaints'),
+    url(r'^complaints/(?P<order_pk>\d+)/$', views.complaint_details, name='complaint-details'),
+    url(r'^complaints/(?P<order_pk>\d+)/delete/$',
+        views.complaint_delete, name='complaint-delete')
+]

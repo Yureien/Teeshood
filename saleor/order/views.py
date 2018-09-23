@@ -17,7 +17,7 @@ from ..account.forms import LoginForm
 from ..account.models import User
 from ..core.utils import get_client_ip
 from .forms import (
-    OrderNoteForm, PasswordForm, PaymentDeleteForm, PaymentMethodsForm)
+    OrderNoteForm, PasswordForm, PaymentDeleteForm, PaymentMethodsForm, OrderComplaintForm)
 from .models import Order, OrderNote, Payment
 from .utils import attach_order_to_user, check_order_status
 
@@ -46,6 +46,34 @@ def details(request, token):
         status=FulfillmentStatus.FULFILLED)
     ctx.update({'fulfillments': fulfillments})
     return TemplateResponse(request, 'order/details.html', ctx)
+
+
+@login_required
+def complain(request, token):
+    orders = Order.objects.confirmed().prefetch_related(
+        'lines__variant', 'fulfillments', 'fulfillments__lines',
+        'fulfillments__lines__order_line')
+    orders = orders.select_related('user')
+    order = get_object_or_404(orders, token=token)
+    ctx = {'order': order}
+    complaint_form = OrderComplaintForm(request.POST or None)
+    ctx.update({'complaint_form': complaint_form})
+    if request.method == 'POST':
+        if complaint_form.is_valid():
+            obj = complaint_form.save(commit=False)
+            obj.order = order
+            obj.save()
+            messages.success(
+                request,
+                pgettext_lazy(
+                    'Complain Success message',
+                    'Complaint sent successfully.')
+            )
+            return redirect('order:details', token=order.token)
+    fulfillments = order.fulfillments.filter(
+        status=FulfillmentStatus.FULFILLED)
+    ctx.update({'fulfillments': fulfillments})
+    return TemplateResponse(request, 'order/complaint_form.html', ctx)
 
 
 def payment(request, token):

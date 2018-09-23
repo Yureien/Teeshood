@@ -1,0 +1,30 @@
+{% extends "dashboard/base_modal.html" %}
+
+{% load i18n %}
+{% load materializecss %}
+
+{% block form_class %}{% endblock %}
+
+{% block action_url %}
+{% url 'dashboard:complaint-delete' order_pk=complaint.pk %}
+{% endblock %}
+
+{% block title %}
+{% trans "Remove complaint" context "Modal remove complaint title" %}
+{% endblock %}
+
+{% block content %}
+  <div class="col s12">
+    {% blocktrans trimmed with complaint=complaint.pk context "Modal remove order text" %}
+      Are you sure you want remove complaint {{ complaint }}?
+    {% endblocktrans %}
+  </div>
+{% endblock %}
+
+{% block cancel_action %}
+{% trans "Abort" context "Modal remove complaint cancel action" %}
+{% endblock %}
+
+{% block primary_action %}
+{% trans "Remove Complaint" context "Modal remove complaint primary action" %}
+{% endblock %}

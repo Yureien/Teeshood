@@ -3,7 +3,7 @@ from operator import attrgetter
 from uuid import uuid4
 
 from django.conf import settings
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 from django.db.models import F, Max, Sum
 from django.urls import reverse
@@ -326,3 +326,18 @@ class OrderNote(BaseNote):
 
     class Meta:
         ordering = ('date', )
+
+
+class OrderComplaint(models.Model):
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE)
+    created = models.DateTimeField(
+        default=now, editable=False)
+    phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{9,15}$',
+        message="Phone number must be entered in the format: '+999999999'. Max 15 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
+    description = models.TextField()
+
+    def __str__(self):
+        return "Complaint for Order #{}".format(self.pk)

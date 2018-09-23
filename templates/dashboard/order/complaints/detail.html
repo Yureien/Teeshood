@@ -1,0 +1,80 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% load price from taxed_prices %}
+{% load prices_i18n %}
+{% load status %}
+{% load utils %}
+{% load staticfiles %}
+
+{% block title %}{% trans "Order Complaints" context "Dashboard order complaints list" %} - {{ block.super }}{% endblock %}
+
+{% block body_class %}body-orders{% endblock %}
+
+{% block menu_complaints_class %}active{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumbs breadcrumbs--history">
+    <li>
+      <a href="{% url "dashboard:complaints" %}">
+        {% trans "Complaints" context "Dashboard order complaints list" %}
+      </a>
+    </li>
+    <li class="back-mobile">
+      <a href="{% url "dashboard:complaints" %}">
+        <svg data-src="{% static "dashboard/images/arrow-left.svg" %}" fill="#fff" width="20px" height="20px" />
+      </a>
+    </li>
+    <li>
+      <span>
+        {{ complaint }}
+      </span>
+    </li>
+  </ul>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+      <div class="col s12">
+		  <div class="card">
+              <div class="card-content">
+				  <div class="product-header">
+					  <div class="product-header__title">
+						  <span class="card-title">
+							  {{ complaint }}
+						  </span>
+					  </div>
+				  </div>
+				  <div class="row">
+					  <div class="col s12">
+						  <b>Order: </b> <a href="{% url 'dashboard:order-details' order_pk=complaint.order.pk %}">View Order</a>
+					  </div>
+					  <div class="col s12">
+						  <b>Complaint Created On: </b> {{ complaint.created }}
+					  </div>
+					  <div class="col s12">
+						  <b>Name: </b> {{ complaint.order.user.get_full_name }}
+					  </div>
+					  <div class="col s12">
+						  <b>E-Mail: </b> {{ complaint.order.user.email }}
+					  </div>
+					  {% if complaint.phone_number %}
+					  <div class="col s12">
+						  <b>Phone Number: </b> {{ complaint.phone_number }}
+					  </div>
+					  {% endif %}
+					  <div class="col s12">
+						  <b>Description: </b> {{ complaint.description }}
+					  </div>
+				  </div>
+              </div>
+              <div class="card-action">
+				  {% if perms.order.edit_order %}
+				  <a href="#base-modal" data-href="{% url 'dashboard:complaint-delete' order_pk=complaint.pk %}" class="modal-trigger-custom btn-flat waves-effect">
+					  {% trans "Remove complaint" context "Design action" %}
+				  </a>
+				  {% endif %}
+              </div>
+		  </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% load price from taxed_prices %}
+{% load prices_i18n %}
+{% load status %}
+{% load utils %}
+{% load staticfiles %}
+
+{% block title %}{% trans "Order Complaints" context "Dashboard order complaints list" %} - {{ block.super }}{% endblock %}
+
+{% block body_class %}body-orders{% endblock %}
+
+{% block menu_complaints_class %}active{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumbs">
+    <li class="visible-s">{% trans "Order Complaints" context "Dashboard order complaints list" %}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12 l9">
+		{% if complaints %}
+        <div class="card">
+			<div class="data-table-container">
+				<table class="bordered highlight responsive data-table last-right-align">
+					<thead>
+						<tr>
+							{% sorting_header 'pk' '#' %}
+							{% trans "Order Number" context "Orders table header" as label %}
+							{% sorting_header 'order' label %}
+							{% trans "Customer" context "Orders table header" as label %}
+							{% sorting_header 'email' label %}
+							{% trans "Placed on" context "Orders table header" as label %}
+							{% sorting_header 'created' label %}
+						</tr>
+					</thead>
+					<tbody>
+						{% for complaint in complaints %}
+						<tr data-action-go="{% url 'dashboard:complaint-details' order_pk=complaint.pk %}">
+							<td>
+								#{{ complaint.id }}
+							</td>
+							<td>
+								{{ complaint.order.id }}
+							</td>
+							{% trans "Guest" context "Anonymous user account value" as guest %}
+							<td>
+								{{ complaint.order.user|default:guest }}
+							</td>
+							<td>
+								{{ complaint.created }}
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+        </div>
+        <div class="row">
+			{% paginate orders %}
+        </div>
+		{% else %}
+        {% if is_empty %}
+        {% include 'dashboard/order/zero_page.html' %}
+        {% else %}
+        <div class="col s12">
+            <div class="not-found">
+				<p class="grey-text">
+					{% trans "No complaints found." context "Empty order list message" %}
+				</p>
+            </div>
+        </div>
+        {% endif %}
+		{% endif %}
+    </div>
+    <div class="col s12 l3" id="filters">
+		{% if not is_empty %}{% filters filter_set %}{% endif %}
+    </div>
+</div>
+{% endblock %}

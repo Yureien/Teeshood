@@ -4,7 +4,7 @@ from django.utils.translation import pgettext_lazy
 from payments import PaymentStatus
 
 from ..account.forms import SignupForm
-from .models import OrderNote, Payment
+from .models import OrderNote, Payment, OrderComplaint
 
 
 class PaymentMethodsForm(forms.Form):
@@ -57,3 +57,15 @@ class OrderNoteForm(forms.ModelForm):
             'content': forms.Textarea({'rows': 3, 'placeholder': False})}
         labels = {
             'content': pgettext_lazy('Order note', 'Add note to order')}
+
+
+class OrderComplaintForm(forms.ModelForm):
+    class Meta:
+        model = OrderComplaint
+        exclude = ['order']
+        labels = {
+            'name': pgettext_lazy('Name', 'Name'),
+            'email': pgettext_lazy('Email', 'E-Mail'),
+            'phone_number': pgettext_lazy('Phone Number', 'Phone Number'),
+            'description': pgettext_lazy('Description', 'Description'),
+        }
