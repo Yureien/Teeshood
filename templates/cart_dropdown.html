@@ -4,67 +4,38 @@
 {% load price from taxed_prices %}
 {% load staticfiles %}
 
-<div class="container">
-  {% if quantity > 0 %}
-    <div id="cart-dropdown-list" class="cart-dropdown__list{% if lines|length <= 2 %} overflow{% endif %}">
-    {% for line in lines %}
-      <div class="row item">
-        <div class="col-md-10">
-          <a class="link--clean" href="{{ line.variant_url }}">
-            <img class="cart-dropdown__image lazyload lazypreload"
-                 data-src="{% get_thumbnail line.image size="60x60" %}"
-                 data-srcset="{% get_thumbnail line.image size="60x60" %} 1x, {% get_thumbnail line.image size="120x120" %} 2x"
-                 alt=""
-                 src="{% placeholder size=120 %}">
-            <h3>
-              {{ line.product }}
-              <span>x{{ line.quantity }}</span>
-              <p>{{ line.variant }}</p>
-            </h3>
-          </a>
-        </div>
-        <div class="col-md-2">
-          <div class="float-right">
-            <h3>
-              {% price line.line_total %}
-            </h3>
+<div class="cart-box">
+  <div class="popup-container">
+      <div class="cart-entry">
+          <a href="#" class="image"><img src="{% static "assets/new/img/products/product-menu-1.jpg" %}" alt=""></a>
+          <div class="content">
+              <a href="#" class="title">Pullover Batwing</a>
+              <p class="quantity">Quantity: 3</p>
+              <span class="price">$45.00</span>
           </div>
-        </div>
+          <div class="button-x">
+              <i class="icon-close"></i>
+          </div>
       </div>
-    {% endfor %}
-    </div>
-    <div class="row cart-dropdown__total" data-quantity="{{ quantity }}">
-      <div class="col-md-8">
-        <h3>
-          {% trans "Subtotal" context "Order subtotal" %}<br>
-          <span>{% trans "Shipment and taxes calculated at checkout" context "Cart dropdown text" %}</span>
-        </h3>
+      <div class="cart-entry">
+          <a href="#" class="image"><img src="{% static "assets/new/img/products/product-menu-2.jpg" %}" alt=""></a>
+          <div class="content">
+              <a href="#" class="title">Pullover Batwing</a>
+              <p class="quantity">Quantity: 3</p>
+              <span class="price">$90.00</span>
+          </div>
+          <div class="button-x">
+              <i class="icon-close"></i>
+          </div>
       </div>
-      <div class="col-md-4">
-        <h3 class="float-md-right price {% if lines|length <= 2 %}single{% endif %}" data-quantity="{{ quantity }}">
-          <p>
-            {% price total %}
-          </p>
-        </h3>
+      <div class="summary">
+          <div class="subtotal">Sub Total</div>
+          <div class="price-s">$210.5</div>
       </div>
-    </div>
-    <div class="row cart-dropdown__actions">
-      <div class="col-md-1"></div>
-      <div class="col-md-5">
-        <a href="{% url "cart:index" %}" class="btn secondary narrow float-md-right">{% trans "Go to cart" context "Cart dropdown secondary action" %}</a>
+      <div class="cart-buttons">
+          <a href="#" class="btn btn-border-2">View Cart</a>
+          <a href="#" class="btn btn-common">Checkout</a>
+          <div class="clear"></div>
       </div>
-      <div class="col-md-5">
-        <a href="{% url "checkout:login" %}" class="btn primary narrow float-md-right">{% trans "Checkout" context "Cart dropdown primary action" %}</a>
-      </div>
-    </div>
-  {% else %}
-    <div class="text-md-center cart-dropdown__empty">
-      <h3>{% trans "There are no products in your shopping cart." context "Empty cart message" %}</h3>
-      <img data-src="{% static 'images/empty-cart-bg.png' %}"
-           data-srcset="{% static 'images/empty-cart-bg.png' %} 1x, {% static 'images/empty-cart-bg2x.png' %} 2x"
-           src="{% placeholder size=255 %}"
-           class="lazyload lazypreload">
-      <a href="{% url 'home' %}" class="btn primary">{% trans "Check out our sales" context "Empty cart link" %}</a>
-    </div>
-  {% endif %}
+  </div>
 </div>
