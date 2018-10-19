@@ -214,7 +214,8 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'captcha',
     'raven.contrib.django.raven_compat',
-    'django_payments_cod']
+    'django_payments_cod',
+    'django_payments_instamojo']
 
 if DEBUG:
     MIDDLEWARE.append(
@@ -298,7 +299,11 @@ PAYMENT_MODEL = 'order.Payment'
 
 PAYMENT_VARIANTS = {
     'default': ('payments.dummy.DummyProvider', {}),
-    'cod': ('django_payments_cod.CODProvider', {})
+    'cod': ('django_payments_cod.CODProvider', {}),
+    'instamojo': ('django_payments_instamojo.InstamojoProvider',
+                  {'api_key': 'test_e4b9191ace3149c49224c9568cd',
+                   'auth_token': 'test_3699d562e74ec20344360dfc50e',
+                   'base_url': 'http://localhost:8000'}),
 }
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -306,7 +311,8 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 CHECKOUT_PAYMENT_CHOICES = [
     ('default', 'Dummy provider'),
-    ('cod', 'Cash on Delivery')]
+    ('cod', 'Cash on Delivery'),
+    ('instamojo', 'Instamojo')]
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'}
