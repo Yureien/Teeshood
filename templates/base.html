@@ -27,7 +27,7 @@
 		{% endblock meta %}
 
 		{% include 'favicon.html' %}
-		{% render_bundle 'storefront' 'css' attrs='async' %}
+		{% comment %} {% render_bundle 'storefront' 'css' attrs='async' %} {% endcomment %}
 
 		{% block stylesheet %}{% endblock stylesheet %}
 
@@ -39,6 +39,30 @@
 
 		<link rel="manifest" href="{% url "manifest" %}" />
 
+		<!-- New assets -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="shortcut icon" href="{% static "assets/new/img/favicon.png" %}">
+		<link rel="stylesheet" href="{% static "assets/new/css/bootstrap.min.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/css/bootstrap-select.min.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/fonts/font-awesome.min.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/fonts/line-icons/line-icons.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/css/main.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/extras/settings.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/extras/animate.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/extras/owl.carousel.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/extras/owl.theme.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/extras/ion.rangeSlider.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/extras/ion.rangeSlider.skinFlat.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/extras/component.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/extras/slick.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/extras/slick-theme.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/extras/nivo-lightbox.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/css/color-switcher.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/css/slicknav.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/css/responsive.css" %}" type="text/css"> 
+		<link rel="stylesheet" href="{% static "assets/new/css/style.css" %}" type="text/css">
+		<!-- End New assets -->
+
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -47,120 +71,197 @@
 
     <body>
 		{% block header %}
-		<header class="navbar" role="navigation">
-			<div class="navbar__login container-fluid {% if user.is_impersonate %} bg-warning{% endif %} bg-dark">
-				<div class=" d-none d-md-block container-fluid">
-					<div class="row">
-						<div class="col-6">
-							<p class="text-left">{{ site.settings.header_text }}</p>
-						</div>
-						<div class="col-6">
-							<ul class="float-right">
-								{% include "_language_picker.html" %}
-								{% if user.is_authenticated %}
-								{% if user.is_staff or request.impersonator.is_staff %}
-								<li>
-									<a href="{% url "dashboard:index" %}" target="_blank" rel="noopener">
-										{% trans "Dashboard" context "Main navigation item" %}
-									</a>
-								</li>
-								{% endif %}
-								<li>
-									<a href="{% url "account:details" %}">
-										{% trans "Your account" context "Main navigation item" %}</a>
-								</li>
-								{% if user.is_impersonate %}
-								<li>
-									<a href="{% url "impersonate-stop" %}">
-										{% trans 'Stop impersonating' context 'Main navigation item' %}
-									</a>
-								</li>
-								{% else %}
-								<li>
-									<a href="{% url "account:logout" %}">
-										{% trans "Log out" context "Main navigation item" %}</a>
-								</li>
-								{% endif %}
-								{% else %}
-								<li>
-									<a rel="nofollow" href="{% url "account:signup" %}">
-										{% trans "Register" context "Main navigation item" %}</a>
-								</li>
-								<li>
-									<a rel="nofollow" href="{% url "account:login" %}">
-										{% trans "Log in" context "Main navigation item" %}
-									</a>
-								</li>
-								{% endif %}
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="navbar__brand container-fluid d-block">
-				<div class="container-fluid">
-					<div class="row no-gutters">
-						<div class="col-6 col-md-1 navbar__logo">
-							<div class="menu-icon-mobile d-md-none navbar__brand__menu-toggle closed open">
-								<svg data-src="{% static "images/mobile-menu.svg" %}" width="28px" height="20px" />
-							</div>
-							<a href="{% url 'home' %}">
-								<svg data-src="{% static "images/logo_new.svg" %}" height="140%" width="140%" />
-							</a>
-						</div>
-						<div class="col-2 col-md-2 navbar__nav">
-							<a href="#" class="dropdown-toggle d-none d-md-block" id="navToggle" style="font-size: 16px;">Shop <span class="caret"></span></a>
-						</div>
-						<div class="col-2 col-md-3 offset-md-4 navbar__search static">
-							{% if SEARCH_IS_ENABLED %}
-							<div class="d-md-none mobile-search-icon">
-								<svg data-src="{% static "images/search.svg" %}" width="30" height="30"/>
-							</div>
-							<form class="form-inline search-form" action="{% url "search:search" %}">
-								<div class="mobile-close-search d-md-none">
-									<svg data-src="{% static "images/close.svg" %}" width="30" height="30"/>
-								</div>
-								<input class="form-control" type="text" name="q"
-									   value="{% if query %}{{ query }}{% endif %}"
-									   placeholder="{% trans "Search for product" %}"
-									   required>
-								<button class="btn btn-link" type="submit">
-									<svg data-src="{% static "images/search.svg" %}" width="30" height="30"/>
-								</button>
-							</form>
-							{% endif %}
-						</div>
-						<div class="col-2 col-md-2">
-							<div class="navbar__brand__cart float-right">
-								<a rel="nofollow" class="cart__icon" href="{% url "cart:index" %}">
-									<span class="cart-label d-none d-md-inline-block">
-										{% trans "Your Cart" context "Main navigation item" %}
-									</span>
-									<div class="navbar__brand__cart__icon">
-										<svg data-src="{% static "images/cart.svg" %}" width="35" height="30"/>
-									</div>
-									<span class="badge {% if not cart_counter %}empty{% endif %}">
-										{% if cart_counter %}
-										{{ cart_counter }}
-										{% else %}
-										0
-										{% endif %}
-									</span>
-								</a>
-								<div class="cart-dropdown d-none">
-									{% include 'cart_dropdown.html' %}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="navbar__menu container menu-hidden">
-				<nav class="navigation">
-					{% menu site_menu=site.settings.top_menu horizontal=True %}
-				</nav>
-			</div>
-		</header>
+		<div class="header">
+		    <div class="top-bar">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col-md-6 col-sm-4">
+		                    <div class="language-wrapper">
+		                        <div class="box-language">
+		                            <a href="#"><i class="icon-phone"></i> Call Us: +91-9083250-171/225/226</a>
+		                        </div>                            
+		                    </div>
+		                    <div class="clear"></div>
+		                </div>
+		                <div class="col-md-6 col-sm-8">
+
+		                    <div class="search-area">
+		                        <form>
+		                            <div class="control-group">
+		                                <ul class="categories-filter animate-dropdown">
+		                                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
+		                                        <ul class="dropdown-menu">
+		                                            <li class="menu-header">Apparel</li>
+		                                            <li class="menu-header">Accessories</li>
+		                                            <li class="menu-header">Groceries </li>
+		                                            <li><a tabindex="-1" href="#">- Coffees</a></li>
+		                                            <li><a tabindex="-1" href="#">- Candies</a></li>
+		                                            <li class="menu-header">Books</li>
+		                                        </ul>
+		                                    </li>
+		                                </ul>
+		                                <input class="search-field" placeholder="Search here...">
+		                                <a class="search-button" href="#"><i class="icon-magnifier"></i></a>
+		                            </div>
+		                        </form>
+		                    </div>
+
+		                    <div class="shop-cart">
+		                        <ul>
+		                            <li><a class="cart-icon cart-btn" href="#"><span class="icon-heart"></span></a></li>
+		                            <li>
+		                                <a href="#" class="cart-icon cart-btn"><i class="icon-basket-loaded"></i><span class="cart-label">3</span></a>
+		                                <div class="cart-box">
+		                                    <div class="popup-container">
+		                                        <div class="cart-entry">
+		                                            <a href="#" class="image"><img src="{% static "assets/new/img/products/product-menu-1.jpg" %}" alt=""></a>
+		                                            <div class="content">
+		                                                <a href="#" class="title">Pullover Batwing</a>
+		                                                <p class="quantity">Quantity: 3</p>
+		                                                <span class="price">$45.00</span>
+		                                            </div>
+		                                            <div class="button-x">
+		                                                <i class="icon-close"></i>
+		                                            </div>
+		                                        </div>
+		                                        <div class="cart-entry">
+		                                            <a href="#" class="image"><img src="{% static "assets/new/img/products/product-menu-2.jpg" %}" alt=""></a>
+		                                            <div class="content">
+		                                                <a href="#" class="title">Pullover Batwing</a>
+		                                                <p class="quantity">Quantity: 3</p>
+		                                                <span class="price">$90.00</span>
+		                                            </div>
+		                                            <div class="button-x">
+		                                                <i class="icon-close"></i>
+		                                            </div>
+		                                        </div>
+		                                        <div class="summary">
+		                                            <div class="subtotal">Sub Total</div>
+		                                            <div class="price-s">$210.5</div>
+		                                        </div>
+		                                        <div class="cart-buttons">
+		                                            <a href="#" class="btn btn-border-2">View Cart</a>
+		                                            <a href="#" class="btn btn-common">Checkout</a>
+		                                            <div class="clear"></div>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+
+		    <nav class="navbar navbar-default" data-spy="affix" data-offset-top="50">
+		        <div class="container">
+		            <div class="row">
+		                <div class="navbar-header">
+
+		                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></button>
+		                    <a class="navbar-brand" href="./"><img src="{% static "assets/new/img/teeshood logo long.svg" %}" alt=""></a>
+		                </div>
+		                <div class="navbar-collapse collapse">
+
+		                    <ul class="nav navbar-nav">
+		                        <li><a class="active" href="./">Home</a></li>
+		                        <li><a href="#">Apparel</a></li> 
+		                        <li>
+		                            <a href="#">Accessories <span class="caret"></span></a>
+		                            <div class="dropdown mega-menu megamenu1">
+		                                <div class="row">
+		                                    <div class="col-sm-3 col-xs-12">
+		                                        <ul class="menulinks">
+		                                            <li class="maga-menu-title">
+		                                                <a href="#">Men</a>
+		                                            </li>
+		                                            <li><a href="#">Clothing</a></li>
+		                                            <li><a href="#">Handbags</a></li>
+		                                            <li><a href="#">Maternity</a></li>
+		                                            <li><a href="#">Jewelry</a></li>
+		                                            <li><a href="#">Scarves</a></li>
+		                                        </ul>
+		                                    </div>
+		                                    <div class="col-sm-3 col-xs-12">
+		                                        <ul class="menulinks">
+		                                            <li class="maga-menu-title">
+		                                                <a href="#">Women</a>
+		                                            </li>
+		                                            <li><a href="#">Handbags</a></li>
+		                                            <li><a href="#">Jewelry</a></li>
+		                                            <li><a href="#">Clothing</a></li>
+		                                            <li><a href="#">Watches</a></li>
+		                                            <li><a href="#">Hats</a></li>
+		                                        </ul>
+		                                    </div>
+		                                    <div class="col-sm-3 col-xs-12">
+		                                        <ul class="menulinks">
+		                                            <li class="maga-menu-title">
+		                                                <a href="#">Accessories</a>
+		                                            </li>
+		                                            <li><a href="#">Belts</a></li>
+		                                            <li><a href="#">Scarves</a></li>
+		                                            <li><a href="#">Hats</a></li>
+		                                            <li><a href="#">Ties</a></li>
+		                                            <li><a href="#">Handbags</a></li>
+		                                        </ul>
+		                                    </div>
+		                                    <div class="col-sm-3 col-xs-12">
+		                                        <span class="block-last"><img src="{% static "assets/new/img/block_menu.jpg" %}" alt=""></span>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </li>
+		                        <li><a href="#">Groceries <span class="caret"></span></a>
+		                            <ul class="dropdown">
+		                                <li><a href="#">Coffees</a></li>
+		                                <li><a href="#">Candies</a></li>                                        
+		                            </ul>
+		                        </li>
+		                        <li><a href="#">Books</a></li>
+		                        <li><a href="#">Contact Us</a></li>
+		                    </ul>
+
+		                    <div class="icon-right pull-right">
+		                        <div class="text-right">
+
+		                            <div class="account link-inline">
+		                                <div class="dropdown text-right">
+		                                    <a href="#" aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span> Account <span class="icon-arrow-down"></span></a>
+		                                    <ul class="dropdown-menu">
+		                                        <li><a href="#"><span class="icon icon-user"></span>My Account</a></li>
+		                                        <li><a href="#"><span class="icon icon-heart"></span>My Wishlist</a></li>
+		                                        <li><a href="#"><span class="icon icon-graph"></span>Compare</a></li>
+		                                        <li><a href="#"><span class="icon icon-check"></span>Checkout</a></li>
+		                                        <li><a href="#"><span class="icon icon-lock"></span>Log In</a></li>
+		                                        <li><a href="#"><span class="icon icon-user-follow"></span>Create an account</a></li>
+		                                        <li><a href="#"><span class="icon icon-close"></span>close</a></li>
+		                                    </ul>
+		                                </div>
+		                            </div>
+
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+
+		        <ul class="mobile-menu">
+		            <li><a class="active" href="./">Home</a></li>
+		            <li><a href="#">Apparel</a></li>
+		            <li><a href="#">Accessories</a></li>
+		            <li><a href="#">Groceries</a>
+		                <ul class="dropdown">
+		                    <li><a href="#">Coffees</a></li>
+		                    <li><a href="#">Candies</a></li>                                        
+		                </ul>
+		            </li>
+		            <li><a href="#">Books</a></li>
+		            <li><a href="#">Contact Us</a></li>
+		        </ul>
+		    </nav>
+		</div>
 		{% endblock %}
 		<div class="container">
 			{% if messages %}
@@ -182,138 +283,192 @@
 			{% endblock content %}
 		</div>
 		{% block footer %}
-		<footer class="footer bg-dark">
-			<div class="container text-left pl-4 pl-sm-0">
-				<div class="row">
-					<div class="col-md-4 col-sm-12">
-						<h1>Sitemap</h1>
-						<div class="row pl-4 pl-sm-0">
-							<div class="col-md-6 col-sm-12">
-								<ul>
-									<li>
-										<a rel="nofollow" href="{% url "cart:index" %}">
-											{% trans "Your Cart" context "Main navigation item" %}
-										</a>
-									</li>
-									{% if user.is_authenticated %}
-									{% if user.is_staff %}
-									<li>
-										<a href="{% url "dashboard:index" %}" target="_blank" rel="noopener">
-											{% trans "Dashboard" context "Main navigation item" %}
-										</a>
-									</li>
-									<li>
-										<a href="{% url "bulk-order" %}">
-											{% trans "Bulk Order" context "Main navigation item" %}
-										</a>
-									</li>
-									{% endif %}
-									<li>
-										<a href="{% url "account:details" %}">
-											{% trans "Your account" context "Main navigation item" %}
-										</a>
-									</li>
-									{% if user.is_impersonate %}
-									<li>
-										<a href="{% url "impersonate-stop" %}">
-											{% trans 'Stop impersonating' context 'Main navigation item' %}
-										</a>
-									</li>
-									{% else %}
-									<li>
-										<a href="{% url "account:logout" %}">
-											{% trans "Log out" context "Main navigation item" %}</a>
-									</li>
-									{% endif %}
-									{% else %}
-									<li>
-										<a rel="nofollow" href="{% url "account:signup" %}">
-											{% trans "Register" context "Main navigation item" %}
-										</a>
-									</li>
-									<li>
-										<a rel="nofollow" href="{% url "account:login" %}">
-											{% trans "Log in" context "Main navigation item" %}
-										</a>
-									</li>
-									{% endif %}
-								</ul>
-							</div>
-							<div class="col-md-6 col-sm-12">							
-								{% menu site_menu=site.settings.bottom_menu %}
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-12">
-						<h1>Contact Us</h1>
-						<div class="pl-4 pl-sm-0">
-							<span style='display: block;color: #fff;'>Office: Kolkata</span><br>
-							<span style='display: block;color: #fff;'>Phone: +91-9083250-171/225/226</span><br>
-							<span style='display: block;color: #fff;'>Email: contact@teeshood.com</span>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-12">
-						<h1 class="mt-4 mt-sm-0">Newsletter</h1>
-						<div class="pl-4 pl-sm-0">
-							<form action="">
-								<div class="form-row align-items-center mb-4 mt-3">
-									<div class="col-8">
-										<input class="form-control" type="email" placeholder="Email"></input>
-									</div>
-									<div class="col-4">
-										<button class="btn btn-secondary" href="#" id="button">Sign Up!</button>
-									</div>
-								</div>
-							</form>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://www.facebook.com/mirumeelabs/">
-								<svg data-src="{% static "images/facebook-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://github.com/mirumee/saleor">
-								<svg data-src="{% static "images/github-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://twitter.com/getsaleor">
-								<svg data-src="{% static "images/twitter-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://plus.google.com/+Mirumee">
-								<svg data-src="{% static "images/google-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://www.meetup.com/Mirumee-Talks/">
-								<svg data-src="{% static "images/meetup-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://linkedin.com/company/mirumee-software">
-								<svg data-src="{% static "images/linkedin-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://dribbble.com/mirumee">
-								<svg data-src="{% static "images/dribbble-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://www.instagram.com/explore/tags/mirumee/">
-								<svg data-src="{% static "images/instagram-logo.svg" %}" width="25px" height="25px"/>
-						</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<hr>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-6 col-sm-12">
-						Copyright &copy; 2018 design by Graphikker. All rights reserved.
-					</div>
-					<div class="col-md-6 col-sm-12 text-right float-right" style="align-items: middle;">
-						<span class="d-md-inline-block">100% secure payment: </span>
-						<div class="d-md-inline-block">
-							<img src="{% static 'images/masterdcard.png' %}" height="30px" class="mr-1">
-							<img src="{% static 'images/americanExpress.png' %}" height="30px" class="mr-1">
-							<img src="{% static 'images/cod.png' %}" height="30px" class="mr-1">
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+		<footer id="main-footer" class="section">
+		    <div class="container">
+		        <div class="row">
+
+		            <div class="col-md-3 col-sm-6">
+		                <div class="block-subscribe">
+		                    <h3 class="widget-title">About Company</h3>
+		                    <p>Quisque a nunc interdum tellus placerat cursus. Quisque facilisis dapibus facilisis! Vivamus dictum lectus ut porta volutpat.</p>
+		                    <img src="{% static "assets/new/img/payment.png" %}" alt="">
+		                </div>
+		            </div>
+		            <div class="col-md-3 col-sm-6">
+		                <h3 class="widget-title">Useful Links</h3>
+						{% menu site_menu=site.settings.bottom_menu %}
+		                <ul class="footer-menu-links">
+		                    <li><a href="#">My Account</a></li>
+		                    <li><a href="#">Contact</a></li>
+		                    <li><a href="#">Checkout</a></li>
+		                    <li><a href="#">404 Page</a></li>
+		                    <li><a href="#">Wishlist</a></li>
+		                    <li><a href="#">Compare</a></li>
+		                </ul>
+		            </div>
+		            <div class="col-md-3 col-sm-6">
+		                <h3 class="widget-title">Product Tags</h3>
+		                <div class="tagcloud">
+		                    <a href="#" class="tag-link">Accessories</a>
+		                    <a href="#" class="tag-link">Bags</a>
+		                    <a href="#" class="tag-link">Bestseller</a>
+		                    <a href="#" class="tag-link">Kids</a>
+		                    <a href="#" class="tag-link">Dresses</a>
+		                    <a href="#" class="tag-link">Men Fashion</a>
+		                    <a href="#" class="tag-link">Sell Off</a>
+		                    <a href="#" class="tag-link">Shoes</a>
+		                    <a href="#" class="tag-link">Specials</a>
+		                    <a href="#" class="tag-link">Tops</a>
+		                    <a href="#" class="tag-link">Women Fashion</a>
+		                </div>
+		            </div>
+		            <div class="col-md-3 col-sm-6">
+		                <div class="contact-us">
+		                    <h3 class="widget-title">Contact Us</h3>
+		                    <ul class="contact-list">
+		                        <li><i class="icon-home"></i> <span>Kolkata, India</span></li>
+		                        <li><i class="icon-call-out"></i> <span>+91 9999-9999-99 <br> +91 9999-9999-99 </span></li>
+		                        <li><i class="icon-envelope"></i> <span><a href="mailto:info@teeshood.com" class="__cf_email__" data-cfemail="b1d2dedfc5d0d2c5f1c2d9dec1c39fd2dedc">info@teeshood.com</a> <a href="mailto:sales@teeshood.com" class="__cf_email__" data-cfemail="375e59515877445f5847451954585a">sales@teeshood.com</a></span>
+		                    </ul>
+		                </div>
+		            </div>
+
+		        </div>
+		    </div>
+		</footer> 
+		<div id="copyright">
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+		                <p> Copyright &copy; 2018. Teeshood | All copyrights reserved.</p>
+		            </div> 
+		        </div>
+		    </div>
+		</div>
+		<a href="#" class="back-to-top"><i class="icon-arrow-up"></i></a>
+
+        <div class="md-modal md-effect-3" id="modal-3">
+            <div class="md-content">
+                <div class="product-info row">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="product-details-image">
+                            <div class="slider-for slider">
+                                <div>
+                                    <img src="{% static "assets/new/img/single-product/img1.jpg"  %}" alt="">
+                                </div>
+                                <div>
+                                    <img src="{% static "assets/new/img/single-product/img2.jpg" %}" alt="">
+                                </div>
+                                <div>
+                                    <img src="{% static "assets/new/img/single-product/img3.jpg" %}" alt="">
+                                </div>
+                                <div>
+                                    <img src="{% static "assets/new/img/single-product/img4.jpg" %}" alt="">
+                                </div>
+                                <div>
+                                    <img src="{% static "assets/new/img/single-product/img5.jpg" %}" alt="">
+                                </div>
+                                <div>
+                                    <img src="{% static "assets/new/img/single-product/img3.jpg" %}" alt="">
+                                </div>
+                            </div>
+                            <ul id="productthumbnail" class="slider slider-nav">
+                                <li>
+                                    <img src="{% static "assets/new/img/single-product/small/img1.jpg" %}" alt="">
+                                </li>
+                                <li>
+                                    <img src="{% static "assets/new/img/single-product/small/img2.jpg" %}" alt="">
+                                </li>
+                                <li>
+                                    <img src="{% static "assets/new/img/single-product/small/img3.jpg" %}" alt="">
+                                </li>
+                                <li>
+                                    <img src="{% static "assets/new/img/single-product/small/img4.jpg" %}" alt="">
+                                </li>
+                                <li>
+                                    <img src="{% static "assets/new/img/single-product/small/img5.jpg" %}" alt="">
+                                </li>
+                                <li>
+                                    <img src="{% static "assets/new/img/single-product/small/img3.jpg" %}" alt="">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-6 col-xs-12">
+                        <div class="info-panel">
+                            <h1 class="product-title">Proin Lectus Ipsum</h1>
+                            <div class="price-ratting">
+                                <div class="price float-left">
+                                    $ 120.00
+                                </div>
+                                <div class="ratting float-right">
+                                    <div class="product-star">
+                                        <i class="icon-star active"></i>
+                                        <i class="icon-star active"></i>
+                                        <i class="icon-star active"></i>
+                                        <i class="icon-star active"></i>
+                                        <i class="icon-star active"></i>
+                                        <span>(01 Customer Review)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="short-desc">
+                                <h5 class="sub-title">Quick Overview</h5>
+                                <p>There are many variations of passages of Lorem Ipsum avaable, b majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+                            </div> 
+                            <div class="quantity-cart">
+                                <button class="btn btn-common">add to cart <i class="icon-basket-loaded"></i></button>
+                            </div>
+                            <div class="share-icons">
+                                <span>share :</span>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="md-close"><i class="icon-close"></i></button>
+            </div>
+        </div>  
+		<div class="md-overlay"></div>   
+
 		{% endblock %}
 		{% block footer_scripts %}
 		<script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
 		{% render_bundle 'storefront' 'js' %}
 		{% endblock footer_scripts %}
+
+		<!-- New scripts -->
+		<script type="text/javascript" src="{% static "assets/new/js/jquery-min.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/bootstrap.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/bootstrap-select.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/owl.carousel.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/ion.rangeSlider.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/modalEffects.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/classie.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/jquery.themepunch.revolution.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/jquery.themepunch.tools.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/nivo-lightbox.js" %}"></script> 
+		<script type="text/javascript" src="{% static "assets/new/js/slick.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/jquery.slicknav.js" %}"></script> 
+		<script type="text/javascript" src="{% static "assets/new/js/main.js" %}"></script>
+
+
+		<script src="{% static "assets/new/js/jquery.plugin.min.js" %}"></script>
+        <script src="{% static "assets/new/js/jquery.countdown.js" %}"></script>
+        <script>
+            $(function () {
+                var liftoffTime = new Date();
+                liftoffTime = new Date(liftoffTime.getFullYear() + 1, 1 - 1, -82);
+                //$('#defaultCountdown').countdown({until: austDay});
+                //$('#defaultCountdown').countdown({until: liftoffTime, format: 'HM'});
+                $('#defaultCountdown').countdown({until: liftoffTime, layout: '{hn} {hl}, {mn} {ml}, {sn} {sl}'});
+                //$('#year').text(austDay.getFullYear());
+            }); 
+        </script>
+
+		<!-- End New scripts -->
     </body>
 </html>

@@ -2,93 +2,553 @@
 {% load staticfiles %}
 {% load i18n %}
 {% block banners %}
-<div id="carouselProductBanners" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">		    
-	{% for banner in site.settings.productbanner_set.all %}
-	<li data-target="#carouselProductBanners" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
-	{% endfor %}
-    </ol>
-    <div class="carousel-inner">
-	{% for banner in site.settings.productbanner_set.all %}
-	<div class="carousel-item{% if forloop.first %} active{% endif %}">
-	    <a href="{{ banner.product_url }}">
-		<img class="d-block w-100" src="{{ banner.image.url }}" alt="{{ banner.title }}">
-	    </a>
-	    <div class="carousel-caption d-none d-md-block">
-		<h5>{{ banner.title }}</h5>
-		<p>{{ banner.text }}</p>
-	    </div>
-	</div>
-	{% endfor %}
-    </div>
-    <a class="carousel-control-prev" href="#carouselProductBanners" role="button" data-slide="prev">
-	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	<span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselProductBanners" role="button" data-slide="next">
-	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-	<span class="sr-only">Next</span>
-    </a>
-</div>
+	<section id="slider">
+		<div class="tp-banner-container">
+			<div class="tp-banner">
+				<ul>
+					<li data-transition="fade" data-slotamount="7" data-masterspeed="2000" data-thumb="{% static "assets/new/img/slider/slide4.jpg" %}" data-delay="10000">
+						<img src="{% static "assets/new/img/dummy.png"  %}" alt="laptopmockup_sliderdy" data-lazyload="{% static "assets/new/img/slider/slide4.jpg" %}" data-bgposition="top" data-duration="12000" data-ease="Power0.easeInOut" data-bgfit="115" data-bgfitend="100" data-bgpositionend="right">
+					</li>
+					<li data-transition="fade" data-slotamount="7" data-masterspeed="2000" data-thumb="{% static "assets/new/img/slider/slide5.jpg" %}" data-delay="10000">
+						<img src="{% static "assets/new/img/dummy.png" %}" alt="laptopmockup_sliderdy" data-lazyload="{% static "assets/new/img/slider/slide5.jpg" %}" data-bgposition="top" data-duration="12000" data-ease="Power0.easeInOut" data-bgfit="115" data-bgfitend="100" data-bgpositionend="right">
+						<div class="tp-caption sft skewtotop tp-resizeme title start" data-x="20" data-y="center" data-voffset="-90" data-speed="800" data-start="950" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0.01" data-endelementdelay="0.1" data-endspeed="1000" data-endeasing="Power4.easeIn" style="z-index: 11;">
+							<h3 style="text-align: center; min-height: 0px; min-width: 0px; line-height: 94px; border-width: 0px; margin: 0px 0px 20px; padding: 0px; letter-spacing: 2px; font-size: 20px; text-transform: uppercase; font-weight: 700; color: #333;">Upto 40% Discount on men's Shoes</h3>
+						</div>
+						<div class="tp-caption largeHeadingWhite sfl str tp-resizeme start" data-x="20" data-y="center" data-voffset="-40" data-speed="1200" data-start="950" data-easing="easeInOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="800" data-endeasing="easeInOutExpo">
+							<h1 style="text-align: center; min-height: 0px; min-width: 0px; line-height: 94px; border-width: 0px; margin: 0px 0px 20px; padding: 0px; font-size: 50px; font-weight: 800; color: #333;">Grand Summer <span style="font-size: 50px;" class="text-preset">Sale!</span></h1>
+						</div>
+						<div class="tp-caption detailTextWhiteLarge sfl tp-resizeme start" data-x="20" data-y="center" data-voffset="30" data-speed="1200" data-start="1350" data-easing="easeInOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300">
+							<p style="min-height: 0px; min-width: 0px; line-height: 30px; border-width: 0px; margin: 0px 0px 20px; padding: 0px; letter-spacing: 0px; font-size: 14px; color: #333;">Lorem consectetur adipiscing elit, sed do eiusmod tempor dolor sit amet <br> contetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+						</div>
+						<div class="tp-caption sfb tp-resizeme start" data-x="20" data-hoffset="0" data-y="center" data-voffset="90" data-speed="1200" data-start="1750" data-easing="easeInOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300"><a href="#" class="btn btn-common"><i class="icon-handbag" style="font-size: 14px"></i>Start Shopping</a></div>
+					</li>
+					<li data-transition="fade" data-slotamount="7" data-masterspeed="2000" data-thumb="{% static "assets/new/img/slider/slide2.jpg" %}" data-delay="10000">
+						<img src="{% static "assets/new/img/dummy.png" %}" alt="laptopmockup_sliderdy" data-lazyload="{% static "assets/new/img/slider/slide2.jpg" %}" data-bgposition="right top" data-duration="12000" data-ease="Power0.easeInOut" data-bgfit="115" data-bgfitend="100" data-bgpositionend="center bottom">
+						<div class="tp-caption sft skewtotop tp-resizeme title start" data-x="center" data-y="center" data-voffset="-90" data-speed="800" data-start="950" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0.01" data-endelementdelay="0.1" data-endspeed="1000" data-endeasing="Power4.easeIn" style="z-index: 11;">
+							<h3 style="text-align: center; min-height: 0px; min-width: 0px; line-height: 94px; border-width: 0px; margin: 0px 0px 20px; padding: 0px; letter-spacing: 2px; font-size: 20px; text-transform: uppercase; font-weight: 700; color: #fff;">Exclusive Summer Collection for Men</h3>
+						</div>
+						<div class="tp-caption largeHeadingWhite sfl str tp-resizeme start" data-x="center" data-y="center" data-voffset="-40" data-speed="1200" data-start="950" data-easing="easeInOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="800" data-endeasing="easeInOutExpo">
+							<h1 style="text-align: center; min-height: 0px; min-width: 0px; line-height: 94px; border-width: 0px; margin: 0px 0px 20px; padding: 0px; font-size: 50px; font-weight: 800; color: #fff;">Best of This Season</h1>
+						</div>
+						<div class="tp-caption detailTextWhiteLarge sfl tp-resizeme start" data-x="center" data-y="center" data-voffset="30" data-speed="1200" data-start="1350" data-easing="easeInOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300">
+							<p style="min-height: 0px; min-width: 0px; line-height: 30px; border-width: 0px; margin: 0px 0px 20px; padding: 0px; letter-spacing: 0px; font-size: 14px; color: #fff; text-align: center;">Lorem consectetur adipiscing elit, sed do eiusmod tempor dolor sit amet <br> contetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+						</div>
+						<div class="tp-caption sfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="center" data-voffset="90" data-speed="1200" data-start="1750" data-easing="easeInOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300">
+							<a href="#why" class="btn btn-common"><i class="icon-cursor" style="font-size: 14px"></i>Click Here</a>
+						</div>
+						<!-- <div class="tp-caption sfb tp-resizeme" data-x="center" data-hoffset="78" data-y="center" data-voffset="90" data-speed="1200" data-start="1750" data-easing="easeInOutExpo" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300">
+							<a href="#why" class="btn btn-border"><i class="icon-menu" style="font-size: 14px"></i>View More</a>
+						</div> -->
+					</li> 
+				</ul>
+			</div>
+		</div> 
+	</section>
 {% endblock %}
 {% block content %}
-<div class="home">
-    {% if site.settings.categorytile_set.all %}
-    <div class="mt-4">
-	<div class="row no-gutters">
-	    {% for i in site.settings.categorytile_set.all %}
-	    <div class="col-12 col-md-6">
-		<div class="product-cat mt-1 {% if forloop.counter0|divisibleby:2 %}mr-md-1{% endif %}">
-		    <div class="background" data-src="{{ i.image.url }}">
-			<h1>{{ i }}</h1>
-		    </div>
+	<section id="deals-of-the-day" class="section">
+		<div class="container">
+			<h1 class="section-title ">Deals of the Day</h1>
+			<div class="deal-day text-center">
+				<div class="icon inline"><span class="icon-clock"></span></div>
+				<div id="defaultCountdown" class="inline"></div> 
+				<div class="text inline">remaining </div>
+			</div>
+			<hr class="lines">
+			<div class="row">
+				<div class="col-md-12">
+					<div id="new-products" class="owl-carousel">
+
+						<div class="item">
+							<div class="shop-product">
+								<div class="product-box">
+									<a href="#"><img src="{% static "assets/new/img/feature-products/img-01.jpg" %}" alt=""></a>
+									<div class="cart-overlay"></div>
+									<span class="sticker new"><strong>NEW</strong></span>
+									<div class="actions">
+										<div class="add-to-links">
+											<a href="#" class="btn-cart"><i class="icon-basket-loaded"></i></a>
+											<a href="#" class="btn-wish"><i class="icon-heart"></i></a>
+											<a class="btn-quickview md-trigger" data-modal="modal-3"><i class="icon-eye"></i></a>
+										</div>
+									</div>
+								</div>                                    
+								<div class="product-info">
+									<h4 class="product-title"><a href="#">Nisi Ut Aliqu</a></h4>
+										<div class="align-items">
+										<div class="pull-left1">
+											<span class="price">$2199.00</span>
+										</div> 
+									</div> 
+								</div>
+							</div>
+						</div>
+
+						<div class="item">
+							<div class="shop-product">
+								<div class="product-box">
+									<a href="#"><img src="{% static "assets/new/img/feature-products/img-02.jpg" %}" alt=""></a>
+									<div class="cart-overlay"></div>
+									<div class="actions">
+										<div class="add-to-links">
+											<a href="#" class="btn-cart"><i class="icon-basket-loaded"></i></a>
+											<a href="#" class="btn-wish"><i class="icon-heart"></i></a>
+											<a class="btn-quickview md-trigger" data-modal="modal-3"><i class="icon-eye"></i></a>
+										</div>
+									</div>
+								</div>
+								<div class="product-info">
+									<h4 class="product-title"><a href="#">Eius Modi Tempo</a></h4>
+										<div class="align-items">
+										<div class="pull-left1">
+											<span class="price">$59.00 <del>$79.00</del></span>
+										</div> 
+									</div> 
+								</div>
+							</div>
+						</div>
+
+						<div class="item">
+							<div class="shop-product">
+								<div class="product-box">
+									<a href="#"><img src="{% static "assets/new/img/feature-products/img-03.jpg" %}" alt=""></a>
+									<div class="cart-overlay"></div>
+									<span class="sticker sale"><strong>Sale</strong></span>
+									<div class="actions">
+										<div class="add-to-links">
+											<a href="#" class="btn-cart"><i class="icon-basket-loaded"></i></a>
+											<a href="#" class="btn-wish"><i class="icon-heart"></i></a>
+											<a class="btn-quickview md-trigger" data-modal="modal-3"><i class="icon-eye"></i></a>
+										</div>
+									</div>
+								</div>
+								<div class="product-info">
+									<h4 class="product-title"><a href="#">Quia Voluptas Sit</a></h4>
+										<div class="align-items">
+										<div class="pull-left1">
+											<span class="price">$68.00</span>
+										</div> 
+									</div>  
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="shop-product">
+								<div class="product-box">
+									<a href="#"><img src="{% static "assets/new/img/feature-products/img-04.jpg" %}" alt=""></a>
+									<div class="cart-overlay"></div>
+									<div class="actions">
+										<div class="add-to-links">
+											<a href="#" class="btn-cart"><i class="icon-basket-loaded"></i></a>
+											<a href="#" class="btn-wish"><i class="icon-heart"></i></a>
+											<a class="btn-quickview md-trigger" data-modal="modal-3"><i class="icon-eye"></i></a>
+										</div>
+									</div>
+								</div>
+								<div class="product-info">
+									<h4 class="product-title"><a href="#">An Tium Lores Eos</a></h4>
+										<div class="align-items">
+										<div class="pull-left1">
+											<span class="price">$59.00 <del>$69.00</del></span>
+										</div> 
+									</div> 
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="shop-product">
+								<div class="product-box">
+									<a href="#"><img src="{% static "assets/new/img/feature-products/img-05.jpg" %}" alt=""></a>
+									<div class="cart-overlay"></div>
+									<span class="sticker discount"><strong>-40%</strong></span>
+									<div class="actions">
+										<div class="add-to-links">
+											<a href="#" class="btn-cart"><i class="icon-basket-loaded"></i></a>
+											<a href="#" class="btn-wish"><i class="icon-heart"></i></a>
+											<a class="btn-quickview md-trigger" data-modal="modal-3"><i class="icon-eye"></i></a>
+										</div>
+									</div>
+								</div>
+								<div class="product-info">
+									<h4 class="product-title"><a href="#">Magni Dolores Eos</a></h4>
+										<div class="align-items">
+										<div class="pull-left1">
+											<span class="price">$79.00</span>
+										</div> 
+									</div> 
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="shop-product">
+								<div class="product-box">
+									<a href="#"><img src="{% static "assets/new/img/feature-products/img-06.jpg" %}" alt=""></a>
+									<div class="cart-overlay"></div>
+									<div class="actions">
+										<div class="add-to-links">
+											<a href="#" class="btn-cart"><i class="icon-basket-loaded"></i></a>
+											<a href="#" class="btn-wish"><i class="icon-heart"></i></a>
+											<a class="btn-quickview md-trigger" data-modal="modal-3"><i class="icon-eye"></i></a>
+										</div>
+									</div>
+								</div>
+								<div class="product-info">
+									<h4 class="product-title"><a href="#">Natur Aut Odit Aut</a></h4>
+										<div class="align-items">
+										<div class="pull-left1">
+											<span class="price">$69.00</span>
+										</div> 
+									</div> 
+								</div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="shop-product">
+								<div class="product-box">
+									<a href="#"><img src="{% static "assets/new/img/feature-products/img-07.jpg" %}" alt=""></a>
+									<div class="cart-overlay"></div>
+									<span class="sticker sale"><strong>Sale</strong></span>
+									<div class="actions">
+										<div class="add-to-links">
+											<a href="#" class="btn-cart"><i class="icon-basket-loaded"></i></a>
+											<a href="#" class="btn-wish"><i class="icon-heart"></i></a>
+											<a class="btn-quickview md-trigger" data-modal="modal-3"><i class="icon-eye"></i></a>
+										</div>
+									</div>
+								</div>
+								<div class="product-info">
+									<h4 class="product-title"><a href="#">Qui Ratione Volup</a></h4>
+										<div class="align-items">
+										<div class="pull-left1"><span class="price">$56.00</span></div> 
+									</div>  
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	    </div>
-	    {% endfor %}
-	</div>
-    </div>
-    {% endif %}
-    {% if products %}
-    <div class="home__featured container">
-        <h2 class="text-center">{% trans "Featured products" context "Homepage title" %}</h2>
-        <div class="row">
-            {% include "product/_items.html" %}
-        </div>
-    </div>
-    {% endif %}
-    <div class="container">
-	<h1 class="homepage-section-title m-4">Become "The Designer"</h1>
-	<h2 class="text-muted upload-subtitle">Bring out & showcase the artist in you</h2>
-	<div class="row m-4 eq-col-container">
-	    <div class="col-12 col-md-3 eq-col" id="upload-art">
-		<a href="{% url 'design-upload' %}">
-		    <h1>Upload<br>your<br>art</h1>
-		</a>
-	    </div>
-	    <div class="col-12 col-md-8 offset-md-1 eq-col">
-		<h2 class="text-dark upload-subtitle mt-4 mb-4">Hall of Fame</h2>
-		<div class="row">
-		    {% for i in site.settings.halloffame_set.all %}
-		    <div class="col-12 col-md-4 hall-of-fame">
-			<a href="{% if i.product_url %}{{ i.product_url }}{% else %}javascript:void(0);{% endif %}">
-			    <img src="{{ i.image.crop.200x200 }}">
-			</a>
-		    </div>
-		    {% empty %}
-		    <div class="col-12 col-md-4 hall-of-fame empty">
-			Image goes here.
-		    </div>
-		    <div class="col-12 col-md-4 hall-of-fame empty">
-			Image goes here.
-		    </div>
-		    <div class="col-12 col-md-4 hall-of-fame empty">
-			Image goes here.
-		    </div>
-		    {% endfor %}
+	</section>
+
+	<section class="feature-categories section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="feature-item-content">
+						<img src="{% static "assets/new/img/feature/img1.jpg" %}" alt="">
+						<div class="feature-content">
+							<div class="banner-text">
+								<h4>Apparel</h4>
+								<p>New Collection</p>
+							</div>
+							<a href="#" class="btn btn-common">Shop Now</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="feature-item-content">
+						<img src="{% static "assets/new/img/feature/img3.jpg" %}" alt="">
+						<div class="feature-content">
+							<div class="banner-text">
+								<h4>Accessories</h4>
+								<p>Upt <span>40%</span> OFF</p>
+							</div>
+							<a href="#" class="btn btn-common">Shop Now</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="feature-item-content mb-30">
+						<img src="{% static "assets/new/img/feature/img2.jpg" %}" alt="">
+						<div class="feature-content">
+							<div class="banner-text accessories">
+								<h4>Groceries </h4>
+								<p>View Collection</p>
+							</div>
+							<a href="#" class="btn btn-common">Shop Now</a>
+						</div>
+					</div>
+					<div class="feature-item-content">
+						<img src="{% static "assets/new/img/feature/img4.jpg" %}" alt="">
+						<div class="feature-content">
+							<div class="banner-text accessories">
+								<h4>Books</h4>
+								<p>View Collection</p>
+							</div>
+							<a href="#" class="btn btn-common">Shop Now</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	    </div>
+	</section>  
+
+	<div class="testimonial section">
+		<div class="container">
+			<div class="row">
+				<div class="testimonials-carousel owl-carousel">
+					<div class="item">
+						<div class="testimonial-item">
+							<div class="author-info">
+								<a href="#"><img src="{% static "assets/new/img/testimonial/img1.jpg" %}" alt=""></a>
+								<div class="author-title">
+									<h5>Jared Erondu</h5>
+									<span>- CEO & art director</span>
+								</div>
+							</div>
+							<div class="datils">
+								<p><span><i class="fa fa-quote-left" aria-hidden="true"></i></span>  Lorem Ipsum is simply dummy text of the printing andypesetting industry. Lorem ipsum a simpleLorem,Lorem Ipsum is simply dummy text of the printing andypesetting industry. Lorem ipsum a simpleLorem <span></span></p>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="testimonial-item">
+							<div class="author-info">
+								<a href="#"><img src="{% static "assets/new/img/testimonial/img2.jpg" %}" alt=""></a>
+								<div class="author-title">
+									<h5>Cadic Vegeta</h5>
+									<span>- Graphic Design</span>
+								</div>
+							</div>
+							<div class="datils">
+								<p><span><i class="fa fa-quote-left" aria-hidden="true"></i></span>  Lorem Ipsum is simply dummy text of the printing andypesetting industry. Lorem ipsum a simpleLorem,Lorem Ipsum is simply dummy text of the printing andypesetting industry. Lorem ipsum a simpleLorem <span></span></p>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="testimonial-item">
+							<div class="author-info">
+								<a href="#"><img src="{% static "assets/new/img/testimonial/img3.jpg" %}" alt=""></a>
+								<div class="author-title">
+									<h5>Jonathan Beri</h5>
+									<span>- Web Developer</span>
+								</div>
+							</div>
+							<div class="datils">
+								<p><span><i class="fa fa-quote-left" aria-hidden="true"></i></span>  Lorem Ipsum is simply dummy text of the printing andypesetting industry. Lorem ipsum a simpleLorem,Lorem Ipsum is simply dummy text of the printing andypesetting industry. Lorem ipsum a simpleLorem <span></span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-    </div>
-    <script type="application/ld+json">{{ webpage_schema|safe }}</script>
-</div>
+
+	<section id="shop-collection" class="section">
+		<div class="container">
+			<h1 class="section-title">Featured Products</h1>
+			<hr class="lines">
+			<div class="row">
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="shop-product">
+						<div class="product-box">
+							<a href="#"><img src="{% static "assets/new/img/products/img-01.jpg" %}" alt=""></a>
+						</div>
+						<div class="product-info">
+							<h4 class="product-title"><a href="#">Qui Ratione Volup</a></h4>
+							<div class="align-items">
+								<div class="pull-left1">
+									<span class="price">$2199.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="shop-product">
+						<div class="product-box">
+							<a href="#"><img src="{% static "assets/new/img/products/img-02.jpg" %}" alt=""></a>
+						</div>
+						<div class="product-info">
+							<h4 class="product-title"><a href="#">Qui Ratione Volup</a></h4>
+							<div class="align-items">
+								<div class="pull-left1">
+									<span class="price">$2199.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="shop-product">
+						<div class="product-box">
+							<a href="#"><img src="{% static "assets/new/img/products/img-03.jpg" %}" alt=""></a>
+						</div>
+						<div class="product-info">
+							<h4 class="product-title"><a href="#">Qui Ratione Volup</a></h4>
+							<div class="align-items">
+								<div class="pull-left1">
+									<span class="price">$2199.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="shop-product">
+						<div class="product-box">
+							<a href="#"><img src="{% static "assets/new/img/products/img-04.jpg" %}" alt=""></a>
+						</div>
+						<div class="product-info">
+							<h4 class="product-title"><a href="#">Qui Ratione Volup</a></h4>
+							<div class="align-items">
+								<div class="pull-left1">
+									<span class="price">$2199.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="shop-product">
+						<div class="product-box">
+							<a href="#"><img src="{% static "assets/new/img/products/img-05.jpg" %}" alt=""></a>
+						</div>
+						<div class="product-info">
+							<h4 class="product-title"><a href="#">Qui Ratione Volup</a></h4>
+							<div class="align-items">
+								<div class="pull-left1">
+									<span class="price">$2199.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="shop-product">
+						<div class="product-box">
+							<a href="#"><img src="{% static "assets/new/img/products/img-06.jpg" %}" alt=""></a>
+						</div>
+						<div class="product-info">
+							<h4 class="product-title"><a href="#">Qui Ratione Volup</a></h4>
+							<div class="align-items">
+								<div class="pull-left1">
+									<span class="price">$2199.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="shop-product">
+						<div class="product-box">
+							<a href="#"><img src="{% static "assets/new/img/products/img-07.jpg" %}" alt=""></a>
+						</div>
+						<div class="product-info">
+							<h4 class="product-title"><a href="#">Qui Ratione Volup</a></h4>
+							<div class="align-items">
+								<div class="pull-left1">
+									<span class="price">$2199.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12">
+					<div class="shop-product">
+						<div class="product-box">
+							<a href="#"><img src="{% static "assets/new/img/products/img-08.jpg" %}" alt=""></a>
+						</div>
+						<div class="product-info">
+							<h4 class="product-title"><a href="#">Qui Ratione Volup</a></h4>
+							<div class="align-items">
+								<div class="pull-left1">
+									<span class="price">$2199.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-12 text-center"><a href="#" class="btn btn-common">Shop Now</a></div>
+			</div>
+		</div>
+	</section> 
+
+	<div class="client section">
+		<div class="container">
+			<h1 class="section-title">Some of our great customers</h1>
+			<hr class="lines">
+			<div class="row">
+				<div id="client-logo" class="owl-carousel">
+					<div class="client-logo item">
+						<a href="#"><img src="{% static "assets/new/img/clients/logo-01.png" %}" alt="" /></a>
+					</div>
+					<div class="client-logo item">
+						<a href="#"><img src="{% static "assets/new/img/clients/logo-02.png" %}" alt="" /></a>
+					</div>
+					<div class="client-logo item">
+						<a href="#"><img src="{% static "assets/new/img/clients/logo-03.png" %}" alt="" /></a>
+					</div>
+					<div class="client-logo item">
+						<a href="#"><img src="{% static "assets/new/img/clients/logo-04.png" %}" alt="" /></a>
+					</div>
+					<div class="client-logo item">
+						<a href="#"><img src="{% static "assets/new/img/clients/logo-05.png" %}" alt="" /></a>
+					</div>
+					<div class="client-logo item">
+						<a href="#"><img src="{% static "assets/new/img/clients/logo-06.png" %}" alt="" /></a>
+					</div>
+					<div class="client-logo item">
+						<a href="#"><img src="{% static "assets/new/img/clients/logo-07.png" %}" alt="" /></a>
+					</div>
+					<div class="client-logo item">
+						<a href="#"><img src="{% static "assets/new/img/clients/logo-08.png" %}" alt="" /></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+
+	<section id="services" class="section">
+		<div class="container"> 
+			<h1 class="section-title">Order on Teeshood with <br/>full satisfaction</h1>
+			<hr class="lines">
+			<div class="row">
+				
+				<div class="col-md-4 col-sm-6">
+					<div class="services-box">
+						<div class="services-icon">
+							<i class="icon-screen-tablet"></i>
+						</div>
+						<div class="services-content">
+							<h4><a href="#"> Human verification at each step</a></h4>
+							<p>
+								Lorem ipsum dolor sit amet isse potenti. Vesquam ante aliquet lacusemper elit.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="services-box">
+						<div class="services-icon">
+							<i class="icon-support"></i>
+						</div>
+						<div class="services-content">
+							<h4><a href="#"> 100% Quality Guaranteed</a></h4>
+							<p>
+								Lorem ipsum dolor sit amet isse potenti. Vesquam ante aliquet lacusemper elit.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<div class="services-box">
+						<div class="services-icon">
+							<i class="icon-notebook"></i>
+						</div>
+						<div class="services-content">
+							<h4><a href="#"> Always at Lowest Price</a></h4>
+							<p>
+								Lorem ipsum dolor sit amet isse potenti. Vesquam ante aliquet lacusemper elit.
+							</p>
+						</div>
+					</div>
+				</div> 
+
+			</div>
+		</div>
+	</section>
 {% endblock %}
