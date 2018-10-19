@@ -97,15 +97,9 @@
 		                    <div class="shop-cart">
 		                        <ul>
 		                            <li><a class="cart-icon cart-btn" href="#"><span class="icon-heart"></span></a></li>
-		                            <li>
-		                                <a href="#" class="cart-icon cart-btn"><i class="icon-basket-loaded"></i>
-											<span class="cart-label">{% if cart_counter %}{{ cart_counter }}{% else %}0{% endif %}</span>
-										</a>
-		                                <div class="cart-box">
-		                                    <div class="cart-dropdown popup-container">
-												{% include 'cart_dropdown.html' %}
-		                                    </div>
-		                                </div>
+		                            <li><a href="#" class="cart-icon cart-btn"><i class="icon-basket-loaded"></i>
+											<span class="cart-label">{% if cart_counter %}{{ cart_counter }}{% else %}0{% endif %}</span></a>
+		                                {% include 'cart_dropdown.html' %}
 		                            </li>
 		                        </ul>
 		                    </div>
