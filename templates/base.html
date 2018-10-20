@@ -229,7 +229,7 @@
 		</div>
 		{% block banners %}
 		{% endblock %}
-		<div class="container-fluid maincontent">
+		<div class="maincontent">
 			{% block topcontent %}{% endblock topcontent %}
 			{% block breadcrumb %}
 			{% endblock breadcrumb %}
@@ -392,7 +392,6 @@
 		{% block footer_scripts %}
 		<script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
 		{% render_bundle 'storefront' 'js' %}
-		{% endblock footer_scripts %}
 
 		<!-- New scripts -->
 		<script type="text/javascript" src="{% static "assets/new/js/jquery-min.js" %}"></script>
@@ -413,16 +412,17 @@
 		<script src="{% static "assets/new/js/jquery.plugin.min.js" %}"></script>
         <script src="{% static "assets/new/js/jquery.countdown.js" %}"></script>
         <script>
-            $(function () {
-                var liftoffTime = new Date();
-                liftoffTime = new Date(liftoffTime.getFullYear() + 1, 1 - 1, -82);
-                //$('#defaultCountdown').countdown({until: austDay});
-                //$('#defaultCountdown').countdown({until: liftoffTime, format: 'HM'});
-                $('#defaultCountdown').countdown({until: liftoffTime, layout: '{hn} {hl}, {mn} {ml}, {sn} {sl}'});
-                //$('#year').text(austDay.getFullYear());
-            }); 
+         $(function () {
+             var liftoffTime = new Date();
+             liftoffTime = new Date(liftoffTime.getFullYear() + 1, 1 - 1, -82);
+             //$('#defaultCountdown').countdown({until: austDay});
+             //$('#defaultCountdown').countdown({until: liftoffTime, format: 'HM'});
+             $('#defaultCountdown').countdown({until: liftoffTime, layout: '{hn} {hl}, {mn} {ml}, {sn} {sl}'});
+             //$('#year').text(austDay.getFullYear());
+         }); 
         </script>
 
 		<!-- End New scripts -->
+		{% endblock footer_scripts %}
     </body>
 </html>
