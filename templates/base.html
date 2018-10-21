@@ -108,8 +108,8 @@
 								<li><a href="{% url 'home' %}">Home</a></li>
 								{% menu site_menu=site.settings.top_menu horizontal=True %}
 							</ul>
-                            <div class="icon-right pull-right">
-                                <div class="text-right">
+                            <div class="icon-right pull-right navbar-right">
+                                <div class="text-right text-right">
                                     <div class="account link-inline">
                                         <div class="dropdown text-right">
                                             <a href="#" aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span> Account <span class="icon-arrow-down"></span></a>
@@ -194,6 +194,8 @@
                             <li><a href="{% url "account:signup" %}">Sign Up</a></li>
                             <li><a href="{% url "account:login" %}">Log In</a></li>
 							{% endif %}
+							<li><a href="{% url "privacy-policy" %}">Privacy Policy</a></li>
+							<li><a href="{% url "about" %}">About Us</a></li>
                         </ul>
                     </div>
 					
