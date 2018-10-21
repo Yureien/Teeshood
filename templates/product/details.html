@@ -38,21 +38,23 @@
 {% endblock meta_tags %}
 
 {% block breadcrumb %}
-<ul class="breadcrumbs list-unstyled">
-    <li>
-		<a href="{% url 'home' %}">
-			{% trans "Home" context "Main navigation item" %}
-		</a>
-    </li>
-    {% if product.category %}
-    <li>
-        <a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a>
-    </li>
-    {% endif %}
-    <li>
-		<a href="{{ product.get_absolute_url }}">{{ product }}</a>
-    </li>
-</ul>
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb">
+                    <a href="{% url 'home' %}"><i class="icon-home"></i> Home</a>
+					{% if product.category %}
+                    <span class="crumbs-spacer"><i class="fa fa-angle-double-right"></i></span>
+					<a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a>
+					{% endif %}
+                    <span class="crumbs-spacer"><i class="fa fa-angle-double-right"></i></span>
+                    <span class="current"><a href="{{ product.get_absolute_url }}">{{ product }}</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -64,151 +66,187 @@
     {% endblocktrans %}
 </div>
 {% endif %}
-<div class="row product">
-    <script type="application/ld+json">{{ json_ld_product_data|safe }}</script>
-    <div class="col-md-6 col-12 product__gallery">
-		{% with images=product_images %}
-        {% if images %}
-        <div id="carousel-example-generic" class="carousel slide">
-            <div class="carousel-inner" role="listbox">
-				{% for image in images %}
-                <div class="carousel-item{% if forloop.first %} active{% endif %}">
-					<img class="d-block img-fluid lazyload lazypreload"
-						 data-src="{% get_thumbnail image.image method="crop" size="540x540" %}"
-						 data-src="{% get_thumbnail image.image method="crop" size="540x540" %} 1x, {% get_thumbnail image.image method="crop" size="1080x1080" %} 2x"
-						 alt=""
-						 src="{% placeholder size=540 %}">
-                </div>
-				{% endfor %}
-            </div>
-            {% if images|length > 1 %}
-            <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
-                <svg data-src="{% static "images/gallery-arrow.svg" %}" />
-            </a>
-            <a class="carousel-control-next" href="#carousel-example-generic" role="button" data-slide="next">
-                <svg data-src="{% static "images/gallery-arrow.svg" %}" />
-            </a>
-            {% endif %}
-            <ol class="carousel-indicators d-none d-md-block">
-				{% for image in images %}
-                {% if images|length > 1 %}
-                <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}>
-                    <img data-src="{% get_thumbnail image.image method="crop" size="60x60" %}"
-                         data-srcset="{% get_thumbnail image.image method="crop" size="60x60" %} 1x, {% get_thumbnail image.image method="crop" size="120x120" %} 2x"
-                         alt=""
-                         class="lazyload lazypreload"
-                         src="{% placeholder size=60 %}">
-                </li>
-                {% endif %}
-				{% endfor %}
-            </ol>
-        </div>
-        {% else %}
-        <img data-src="{% placeholder size=540 %}"
-             data-srcset="{% placeholder size=540 %} 1x, {% placeholder size=1080 %} 2x"
-             alt=""
-             class="img-fluid lazyload lazypreload">
-        {% endif %}
-		{% endwith %}
-    </div>
-    <div class="col-md-6 col-12 product__info">
-		<h1 class="product__info__name">
-			{{ product }}
-		</h1>
-		{% if user.is_staff %}
-        <p>
-			<a href="{% url "dashboard:product-details" pk=product.pk %}">
-				{% trans "Edit in dashboard" context "Product details link text" %}
-			</a>
-        </p>
-		{% endif %}
-		{% if availability.available %}
-        {% if show_variant_picker %}
-        <div id="variant-price-component"></div>
-        {% else %}
-        <h2 class="product__info__price">
-            <span>{% price_range availability.price_range %}</span>
-            {% if availability.discount %}
-            <small class="product__info__price__undiscounted">
-                {% price availability.price_range_undiscounted %}
-            </small>
-            {% endif %}
-            {% if availability.price_range_local_currency %}
-            <br>
-            <small class="text-info">
-                &asymp;
-                {% price availability.price_range_local_currency %}
-            </small>
-            {% endif %}
-            {% if request.taxes %}
-            <small>
-                {% tax_rate request.taxes product.tax_rate as tax_rate %}
-                {% if site.settings.display_gross_prices %}
-                {% blocktrans trimmed with tax_rate=tax_rate context "Product details page vat rate value" %}
-                including {{ tax_rate }}% VAT
-                {% endblocktrans %}
-                {% else %}
-                {% blocktrans trimmed with tax_rate=tax_rate context "Product details page vat rate value" %}
-                excluding {{ tax_rate }}% VAT
-                {% endblocktrans %}
-                {% endif %}
-            </small>
-            {% endif %}
-        </h2>
-        {% endif %}
-		{% endif %}
-		{% if is_visible and product.is_in_stock %}
-		<div id="pincode-validator">
-			<h5>Check Pincode</h5>
-			<form id="pincode-checker" class="form-inline">
-				<input type="text" id="pincode-text" name="pincode-text" maxlength="6" pattern="[0-9]{6}" title="6 digit pin code" class="form-control mr-md-4 mb-4 mb-md-0" placeholder="Pincode">
-				<input type="hidden" name="url" value="{% url 'product:pincode_checker' product.get_slug product.pk 0 %}">
-				<input type="submit" class="form-control btn primary">
-			</form>
-			<span class=""></span>
-		</div>
-        {% block orderform %}
-        {% if show_variant_picker %}
-        {% csrf_token %}
-        <div id="variant-picker" data-variant-picker-data="{{ variant_picker_data }}" data-action="{% url 'product:add-to-cart' product_id=product.pk slug=product.get_slug %}"></div>
-        {% else %}
-        <form id="product-form" role="form" class="product-form clearfix" method="post" action="{% url 'product:add-to-cart' product_id=product.pk slug=product.get_slug %}" novalidate>
-            {% csrf_token %}
-            {% bootstrap_field form.variant %}
-            <div class="product__info__quantity">
-                {% bootstrap_field form.quantity %}
-            </div>
 
-            <div class="form-group product__info__button">
-                <button class="btn primary">
-					{% trans "Add to cart" context "Product details primary action" %}
-                </button>
+<section id="product-collection" class="section">
+    <div class="container">
+        <div class="row">
+			{% with images=product_images %}
+			{% if images %}
+            <div class="col-md-5 col-sm-6 col-xs-12">
+                <div class="product-details-image">
+                    <div class="slider-for slider">
+						{% for image in images %}
+					    <div><img src="{% get_thumbnail image.image method="crop" size="1080x1080" %}" class="zoom" alt=""></div>
+						{% endfor %}
+                    </div>
+                    <ul id="productthumbnail" class="slider slider-nav">
+						{% for image in images %}
+						<li><img src="{% get_thumbnail image.image method="crop" size="300x300" %}" alt=""></li>
+						{% endfor %}
+                    </ul>
+                </div>
             </div>
-        </form>
-        {% endif %}
-        {% endblock %}
-        <div class="product__info__form-error">
-			<small class="text-danger"></small>
-        </div>
-		{% else %}
-        <p class="alert alert-warning">
-			{% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
-        </p>
-		{% endif %}
-		<div class="product__info__description">
-			<h3>{% trans "Description" context "Product details title" %}</h3>
-			<hr>
-			{{ product.description|safe }}
+			{% endif %}
+            <div class="{% if images %}col-md-7 col-sm-6 {% endif %}col-xs-12">
+				{% endwith %}
+				<div class="info-panel">
+                    <h1 class="product-title">{{ product }}</h1>
+					<div class="price-ratting">
+						{% if availability.available %}
+						{% if show_variant_picker %}
+						<div id="variant-price-component" class="price float-left"></div>
+						{% else %}
+						<h2 class="product__info__price">
+							<span>{% price_range availability.price_range %}</span>
+							{% if availability.discount %}
+							<small class="product__info__price__undiscounted">
+								{% price availability.price_range_undiscounted %}
+							</small>
+							{% endif %}
+							{% if availability.price_range_local_currency %}
+							<br>
+							<small class="text-info">
+								&asymp;
+								{% price availability.price_range_local_currency %}
+							</small>
+							{% endif %}
+							{% if request.taxes %}
+							<small>
+								{% tax_rate request.taxes product.tax_rate as tax_rate %}
+								{% if site.settings.display_gross_prices %}
+								{% blocktrans trimmed with tax_rate=tax_rate context "Product details page vat rate value" %}
+								including {{ tax_rate }}% VAT
+								{% endblocktrans %}
+								{% else %}
+								{% blocktrans trimmed with tax_rate=tax_rate context "Product details page vat rate value" %}
+								excluding {{ tax_rate }}% VAT
+								{% endblocktrans %}
+								{% endif %}
+							</small>
+							{% endif %}
+						</h2>
+						{% endif %}
+						{% endif %}
+						<div class="ratting float-right">						
+							{% if user.is_staff %}
+							<p>
+								<a href="{% url "dashboard:product-details" pk=product.pk %}">Edit Product</a>
+							</p>
+							{% endif %}
+						</div>
+					</div>
+					{% if is_visible and product.is_in_stock %}
+					<div id="pincode-validator">
+						<h5>Check Pincode</h5>
+						<form id="pincode-checker" class="form-inline">
+							<input type="text" id="pincode-text" name="pincode-text" maxlength="6" pattern="[0-9]{6}" title="6 digit pin code" class="form-control mr-md-4 mb-4 mb-md-0" placeholder="Pincode">
+							<input type="hidden" name="url" value="{% url 'product:pincode_checker' product.get_slug product.pk 0 %}">
+							<input type="submit" class="btn btn-common">
+						</form>
+						<span class=""></span>
+					</div>
+					{% block orderform %}
+					{% if show_variant_picker %}
+					{% csrf_token %}
+					<div id="variant-picker" data-variant-picker-data="{{ variant_picker_data }}" data-action="{% url 'product:add-to-cart' product_id=product.pk slug=product.get_slug %}"></div>
+					{% else %}
+					<form id="product-form" role="form" class="product-form clearfix" method="post" action="{% url 'product:add-to-cart' product_id=product.pk slug=product.get_slug %}" novalidate>
+						{% csrf_token %}
+						{% bootstrap_field form.variant %}
+						<div class="product__info__quantity">
+							{% bootstrap_field form.quantity %}
+						</div>
+
+						<div class="form-group product__info__button">
+							<button class="btn btn-primary btn-lg">
+								{% trans "Add to cart" context "Product details primary action" %}
+							</button>
+						</div>
+					</form>
+					{% endif %}
+					{% endblock %}
+					<div class="product__info__form-error">
+						<small class="text-danger"></small>
+					</div>
+					{% else %}
+					<p class="alert alert-warning">
+						{% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
+					</p>
+					{% endif %}
+				</div>
+			</div>
 		</div>
-		<hr>
-		<table>
-			{% for attribute, value in product_attributes.items %}
-			<tr>
-				<td>{{ attribute }}:</td>
-				<td><strong>{{ value }}</strong></td>
-			</tr>
-			{% endfor %}
-		</table>
+</section>
+
+<div class="single-pro-tab section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="single-pro-tab-menu">
+                    <ul class="">
+                        <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
+                        <li><a href="#information" data-toggle="tab">Information</a></li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="description">
+                        <div class="pro-tab-info pro-description">
+                            <h3 class="small-title">{{ product }}</h3>							
+							{{ product.description|safe }}
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="information">
+                        <div class="pro-tab-info pro-information">
+                            <h3 class="small-title">Product information</h3>							
+							<table class="table">
+								{% for attribute, value in product_attributes.items %}
+								<tr>
+									<td>{{ attribute }}:</td>
+									<td><strong>{{ value }}</strong></td>
+								</tr>
+								{% endfor %}
+							</table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-{% endblock content %}
+
+<div class="section" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+		        <div class="trust-box text-center">
+					g		        	<i class="fa fa-heart"></i>
+		        	<h4>24x7 Help</h4>
+		        	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </p>
+		        </div>
+			</div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+		        <div class="trust-box text-center">
+		        	<i class="fa fa-lock"></i>
+		        	<h4>Teeshood Trust</h4>
+		        	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </p>
+		        </div>
+			</div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+		        <div class="trust-box text-center">
+		        	<i class="fa fa-star"></i>
+		        	<h4>100% Assurance</h4>
+		        	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </p>
+		        </div>
+			</div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+		        <div class="trust-box text-center">
+		        	<i class="fa fa-shopping-bag"></i>
+		        	<h4>Paytm Mall Promise</h4>
+		        	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </p>
+		        </div>
+			</div> 
+
+		</div>
+	</div>
+</div>
+{% endblock %}

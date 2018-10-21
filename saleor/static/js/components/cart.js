@@ -1,8 +1,8 @@
 import {getAjaxError} from './misc';
 
 export const summaryLink = $('html').data('cart-summary-url');
-export const $cartDropdown = $('.cart-dropdown');
-export const $cartIcon = $('.cart__icon');
+export const $cartDropdown = $('.cart-box');
+export const $cartIcon = $('.cart-icon');
 export const $addToCartError = $('.product__info__form-error small');
 export const $removeProductSuccess = $('.remove-product-alert');
 
@@ -15,10 +15,10 @@ export const onAddToCartSuccess = () => {
     $cartDropdown.html(data);
     $addToCartError.html('');
     var newQunatity = $('.cart-dropdown__total').data('quantity');
-    $('.badge').html(newQunatity).removeClass('empty');
+    $('.cart-label').html(newQunatity).removeClass('empty');
     $cartDropdown.addClass('show');
     $cartIcon.addClass('hover');
-    $cartDropdown.find('.cart-dropdown__list').scrollTop($cartDropdown.find('.cart-dropdown__list')[0].scrollHeight);
+    $cartDropdown.find('.popup-container').scrollTop($cartDropdown.find('.popup-container')[0].scrollHeight);
     setTimeout((e) => {
       $cartDropdown.removeClass('show');
       $cartIcon.removeClass('hover');
@@ -28,10 +28,10 @@ export const onAddToCartSuccess = () => {
 
 export default $(document).ready((e) => {
   // Cart dropdown
-  $.get(summaryLink, (data) => {
+	$.get(summaryLink, (data) => {
     $cartDropdown.html(data);
   });
-  $('.navbar__brand__cart').hover((e) => {
+  $('.shop-cart').hover((e) => {
     $cartDropdown.addClass('show');
     $cartIcon.addClass('hover');
   }, (e) => {

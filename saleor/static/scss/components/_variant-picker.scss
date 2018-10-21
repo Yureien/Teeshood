@@ -8,12 +8,13 @@
 
   }
   &__options {
-    display: block;
+      display: block;
   }
   &__option {
     margin-bottom: 0;
     margin-bottom: $global-margin / 4;
     border-color: $gray;
+	background-color: $black;
     float: left;
     &.active {
       border-color: $darken-gray;

@@ -3,47 +3,44 @@
 {% load placeholder %}
 {% load price from taxed_prices %}
 {% load staticfiles %}
-
-<div class="cart-box cart-dropdown">
-	<div class="popup-container">
-		{% if quantity > 0 %}
-		{% for line in lines %}
-		<div class="cart-entry">
-			<a class="image" href="{{ line.variant_url }}">
-				<img class="cart-dropdown__image lazyload lazypreload"
-					 data-src="{% get_thumbnail line.image size="60x60" %}"
-					 data-srcset="{% get_thumbnail line.image size="60x60" %} 1x, {% get_thumbnail line.image size="120x120" %} 2x"
-					 alt=""
-					 src="{% placeholder size=120 %}">
-			</a>
-			<div class="content">
-				<a href="{{ line.variant_url }}" class="title">{{ line.product }} - {{ line.variant }}</a>
-				<p class="quantity">x{{ line.quantity }}</p>
-				<span class="price">{% price line.line_total %}</span>
-			</div>
-			<div class="button-x">
-				<i class="icon-close"></i>
-			</div>
+<div class="popup-container">
+	{% if quantity > 0 %}
+	{% for line in lines %}
+	<div class="cart-entry">
+		<a class="image" href="{{ line.variant_url }}">
+			<img class="cart-dropdown__image lazyload lazypreload"
+				 data-src="{% get_thumbnail line.image size="60x60" %}"
+				 data-srcset="{% get_thumbnail line.image size="60x60" %} 1x, {% get_thumbnail line.image size="120x120" %} 2x"
+				 alt=""
+				 src="{% placeholder size=120 %}">
+		</a>
+		<div class="content cart-dropdown__total" data-quantity="{{ quantity }}">
+			<a href="{{ line.variant_url }}" class="title">{{ line.product }} - {{ line.variant }}</a>
+			<p class="quantity">x{{ line.quantity }}</p>
+			<span class="price">{% price line.line_total %}</span>
 		</div>
-		{% endfor %}
-		<div class="summary">
-			<div class="subtotal">Sub Total (Shipment and taxes calculated at checkout)</div>
-			<div class="price-s">{{ quantity }}</div>
-      </div>
-      <div class="cart-buttons">
-          <a href="{% url "cart:index" %}" class="btn btn-border-2">View Cart</a>
-          <a href="{% url "checkout:login" %}" class="btn btn-common">Checkout</a>
-          <div class="clear"></div>
-      </div>
+		<div class="button-x">
+			<i class="icon-close"></i>
+		</div>
 	</div>
-	{% else %}
+	{% endfor %}
 	<div class="summary">
-		<h3>Your cart is empty!</h3>
-		<img data-src="{% static 'images/empty-cart-bg.png' %}"
-			 data-srcset="{% static 'images/empty-cart-bg.png' %} 1x, {% static 'images/empty-cart-bg2x.png' %} 2x"
-			 src="{% placeholder size=255 %}"
-			 class="lazyload lazypreload">
-		<a href="{% url 'home' %}" class="btn btn-common">Check Out Our Sales</a>
-	</div>
-	{% endif %}
+		<div class="subtotal">Sub Total</div>
+		<div class="price-s">{% price total %}</div>
+    </div>
+    <div class="cart-buttons">
+        <a href="{% url "cart:index" %}" class="btn btn-border-2">View Cart</a>
+        <a href="{% url "checkout:login" %}" class="btn btn-common">Checkout</a>
+        <div class="clear"></div>
+    </div>
 </div>
+{% else %}
+<div class="summary">
+	<h3>Your cart is empty!</h3>
+	<img data-src="{% static 'images/empty-cart-bg.png' %}"
+		 data-srcset="{% static 'images/empty-cart-bg.png' %} 1x, {% static 'images/empty-cart-bg2x.png' %} 2x"
+		 src="{% placeholder size=255 %}"
+		 class="lazyload lazypreload">
+	<a href="{% url 'home' %}" class="btn btn-common">Check Out Our Sales</a>
+</div>
+{% endif %}

@@ -49,10 +49,10 @@ export default observer(class VariantPrice extends Component {
       }
     }
     return (
-      <h2 className="product__info__price">
+      <div>
         <span>{priceText}&nbsp;</span>
         {isDiscount && (
-          <small className="product__info__price__undiscounted">{priceUndiscountedText}</small>
+          <span>{priceUndiscountedText}</span>
         )}
         {priceLocalCurrency && (
           <p><small className="text-info">&asymp; {priceLocalCurrency}</small></p>
@@ -64,7 +64,7 @@ export default observer(class VariantPrice extends Component {
             <small>excluding {taxRate}% VAT</small>
           )
         ]}
-      </h2>
+      </div>
     );
   }
 });
