@@ -37,6 +37,10 @@ def about(request):
     return TemplateResponse(request, 'about.html')
 
 
+def contact(request):
+    return TemplateResponse(request, 'contact.html')
+
+
 def privacy_policy(request):
     return TemplateResponse(request, 'privacy_policy.html')
 

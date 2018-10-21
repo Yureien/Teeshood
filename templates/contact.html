@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block content %}
+
+<section id="content">
+    <div class="contact-info">
+        <div class="container">
+            <div class="contact-info-wrapper clearfix">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="contact-item-wrapper">
+                        <h4>Address</h4>
+                        <div class="info">
+                            <div class="icon">
+                                <i class="icon-location-pin"></i>
+                            </div>
+                            <p>9923 South Avenue Street <br> Kolkata, India</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="contact-item-wrapper">
+                        <h4>Phone</h4>
+                        <div class="info">
+                            <div class="icon">
+                                <i class="icon-screen-smartphone"></i>
+                            </div>
+                            <p>Phone: +91-9083250-171/225/226 <br> Fax: 0-123-456</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="contact-item-wrapper">
+                        <h4>E-mail</h4>
+                        <div class="info">
+                            <div class="icon">
+                                <i class="icon-paper-plane"></i>
+                            </div>
+                            <p><a href="mailto:info@teeshood.com">info@teeshood.com</a> <br> <a href="mailto:sales@teeshood.com">sales@teeshood.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+<div class="faq section bg-grey">
+    <div class="container">                    
+        <div class="head-faq text-center"> 
+            <h2>
+                Frequently Asked Questions
+            </h2>
+            <p>Last Updated on October 10, 2018</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-group" id="accordion">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    <span class="num">Q1.</span>
+                                    How do I check the current status of My orders?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <ul>
+                                    <li>You can review the status of your orders and other related information in the My Account section.</li>
+									<li>In the My Account page, click on the My orders link to view the status of all your orders. To view the status of a specific order, click on the Order Number link.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                    <span class="num">Q2.</span>
+                                    What do the different order status mean ?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <ul>
+                                    <li><strong>Payment Pending Authorization: </strong>Your order has been logged and we are waiting for authorization from the payment gateway.</li>
+                                    <li><strong>Payment Authorized, Order under Processing: </strong>Authorization has been received from the payment gateway and your order is being processed by the seller.</li>
+                                    <li><strong>Order Shipped: </strong>Your order has been shipped by the seller and is on its way to the location specified by you for delivery.</li>
+                                    <li><strong>Order Cancelled: </strong>The order was cancelled.</li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    <span class="num">Q3.</span>
+                                    Are there any hidden costs (sales tax, octroi etc) on items sold ?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <ul>
+                                    <li>There are NO hidden charges when you make a purchase on TEESHOOD. List prices are final and all-inclusive. The price you see on the product page is exactly what you would pay.</li>
+                                    <li>Delivery charges are not hidden charges and are charged (if at all) extra depending on the Seller’s shipping policy.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                    <span class="num">Q4.</span>
+                                    Why does the estimated Delivery time vary for each seller?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <ul>
+                                    <li>You have probably noticed varying estimated delivery times for sellers of the product you are interested in. Delivery times are influenced by product availability, geographic location of the Seller, your shipping destination and the courier partner’s time-to-deliver in your location.</li>
+                                    <li>Please enter your default pin code on the product page (you don’t have to enter it every single time) to know more accurate delivery times on the product page itself.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                                    <span class="num">Q5.</span>
+                                    What is the estimated Delivery time?
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p>Sellers generally procure and ship the items within the time specified on the product page. Business days exclude public holidays and Sundays. <strong>Estimated Delivery time depends on the following factors:</strong>
+                                    <ul>
+                                        <li>The Seller offering the product</li>
+                                        <li>Product’s availability with the Seller</li>
+                                        <li>The destination to which you want the order shipped to and location of the Seller.</li> 
+                                    </ul>
+                            </div>
+                        </div>
+                    </div> 
+
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
