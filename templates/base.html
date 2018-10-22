@@ -193,18 +193,28 @@
                             <li><a href="{% url "account:signup" %}">Sign Up</a></li>
                             <li><a href="{% url "account:login" %}">Log In</a></li>
 							{% endif %}
+							{% menu site_menu=site.settings.bottom_menu %}
 							<li><a href="{% url "privacy-policy" %}">Privacy Policy</a></li>
 							<li><a href="{% url "about" %}">About Us</a></li>
 							<li><a href="{% url "contact" %}">Contact Us</a></li>
                         </ul>
                     </div>
-					
-                    <div class="col-md-3 col-sm-6">
-                        <h3 class="widget-title">Useful Links</h3>
-                        <ul class="footer-menu-links">
-							{% menu site_menu=site.settings.bottom_menu %}
-                        </ul>
-                    </div>
+					<div class="col-md-3 col-sm-6">
+		                <h3 class="widget-title">Product Tags</h3>
+		                <div class="tagcloud">
+							<a href="{% url "search:search" %}?q=Accessories" class="tag-link">Accessories</a>
+							<a href="{% url "search:search" %}?q=Bags" class="tag-link">Bags</a>
+							<a href="{% url "search:search" %}?q=Bestseller" class="tag-link">Bestseller</a>
+							<a href="{% url "search:search" %}?q=Kids" class="tag-link">Kids</a>
+							<a href="{% url "search:search" %}?q=Dresses" class="tag-link">Dresses</a>
+							<a href="{% url "search:search" %}?q=Men+Fashion" class="tag-link">Men Fashion</a>
+							<a href="{% url "search:search" %}?q=Sell+Off" class="tag-link">Sell Off</a>
+							<a href="{% url "search:search" %}?q=Shoes" class="tag-link">Shoes</a>
+							<a href="{% url "search:search" %}?q=Specials" class="tag-link">Specials</a>
+							<a href="{% url "search:search" %}?q=Tops" class="tag-link">Tops</a>
+							<a href="{% url "search:search" %}?q=Women" class="tag-link">Women Fashion</a>
+		                </div>
+		            </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="contact-us">
                             <h3 class="widget-title">Contact Us</h3>
