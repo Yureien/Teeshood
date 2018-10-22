@@ -2,6 +2,23 @@
 {% load staticfiles %}
 {% load i18n %}
 
+{% block breadcrumb %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb">
+                    <a href="{% url 'home' %}"><i class="icon-home"></i> Home</a>
+                    <span class="crumbs-spacer"><i class="fa fa-angle-double-right"></i></span>
+                    <span class="current">About Us</span>
+                    <h2 class="entry-title">About Us</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
 {% block content %}
 <section class="about section">
     <div class="container">
@@ -121,42 +138,40 @@
 </section>
 <div class="support section">
     <div class="container">
-        <div class="row">
-            <div class="support-inner">
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="row-normal clearfix">
-                        <div class="support-info">
-                            <div class="info-title">
-                                <i class="icon-plane"></i>
-                                Free Shipping Worldwide
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="row-normal clearfix">
-                        <div class="support-info">
-                            <div class="info-title">
-                                <i class="icon-earphones-alt"></i>
-                                24/7 Customer Service
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="row-normal clearfix">
-                        <div class="support-info">
-                            <div class="info-title">
-                                <i class="icon-heart"></i>
-                                Easy Return Policy
-                            </div>
+        <div class="row support-inner"> 
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="row-normal clearfix">
+                    <div class="support-info">
+                        <div class="info-title">
+                            <i class="icon-plane"></i>
+                            Free Shipping Worldwide
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="row-normal clearfix">
+                    <div class="support-info">
+                        <div class="info-title">
+                            <i class="icon-earphones-alt"></i>
+                            24/7 Customer Service
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="row-normal clearfix">
+                    <div class="support-info">
+                        <div class="info-title">
+                            <i class="icon-heart"></i>
+                            Easy Return Policy
+                        </div>
+                    </div>
+                </div>
+            </div> 
         </div>
     </div>
-</div> 
+</div>
 
 <div class="client section">
 	<div class="container">

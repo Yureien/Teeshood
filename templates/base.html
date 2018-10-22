@@ -38,6 +38,7 @@
         <link rel="stylesheet" href="{% static "assets/new/css/slicknav.css" %}" type="text/css">
         <link rel="stylesheet" href="{% static "assets/new/css/responsive.css" %}" type="text/css">
         <link rel="stylesheet" href="{% static "assets/new/css/style.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/css/ratings.css" %}" type="text/css">
 		{% block stylesheet %}{% endblock stylesheet %}
 
 		{% include 'favicon.html' %}
@@ -95,7 +96,7 @@
                 </div>
             </div>
 
-			<nav id="navbarid" class="navbar navbar-default navbar-expand-md " >
+			<nav id="navbarid" class="navbar navbar-default navbar-expand-md" >
 		        <div class="container">
 		            <div class="row">
 		                <div class="navbar-header">
@@ -112,20 +113,22 @@
                         </div>
                         <div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li><a href="{% url 'home' %}">Home</a></li>
+								{% url 'home' as url_home %}
+								<li><a href="{{ url_home }}"{% if request.path_info == url_home %} class="active"{% endif %}>Home</a></li>
 								{% menu site_menu=site.settings.top_menu horizontal=True %}
 							</ul>
 							<div class="my-account">
 		                        <div class="text-right">
 		                            <div class="account link-inline">
 		                                <div class="dropdown text-right">
-                                            <a href="#" aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span> Account <span class="icon-arrow-down"></span></a>
-                                            <ul class="dropdown-menu">
+		                                    <a class="dropdown-toggle" href="#" aria-expanded="false" data-toggle="dropdown"><span class="icon-user"></span> Account <span class="icon-arrow-down"></span></a>
+											<ul class="dropdown-menu">
 												{% if user.is_authenticated %}
 												{% if user.is_staff or request.impersonator.is_staff %}
 												<li><a href="{% url "dashboard:index" %}"><span class="icon icon-user"></span>Dashboard</a></li>
 												{% endif %}
                                                 <li><a href="{% url "account:details" %}"><span class="icon icon-user"></span>My Account</a></li>
+		                                        <li><a href="{% url "cart:index" %}"><span class="icon icon-check"></span>Checkout</a></li>
 												{% if user.is_impersonate %}
                                                 <li><a href="{% url "impersonate-stop" %}"><span class="icon icon-unlock"></span>Stop Impersonating</a></li>
 												{% else %}
@@ -240,6 +243,7 @@
 		{% endblock %}
 		{% block footer_scripts %}
 		
+		<script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
 		{% render_bundle 'storefront' 'js' %}
         <script type="text/javascript" src="{% static "assets/new/js/popper.min.js" %}"></script>
 		<script type="text/javascript" src="{% static "assets/new/js/jquery-min.js" %}"></script>
@@ -260,9 +264,9 @@
         <script>
          $(function () {
              var liftoffTime = new Date();
-             liftoffTime = new Date(liftoffTime.getFullYear() + 1, 1 - 1, -82);
+             liftoffTime = new Date(liftoffTime.getFullYear(), liftoffTime.getMonth(), liftoffTime.getDate() + 1, 0, 0);
              $('#defaultCountdown').countdown({until: liftoffTime, layout: '{hn} {hl}, {mn} {ml}, {sn} {sl}'});
-         });            
+         });
         </script>
 		{% endblock footer_scripts %}
     </body>

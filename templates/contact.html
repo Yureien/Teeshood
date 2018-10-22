@@ -2,14 +2,30 @@
 {% load staticfiles %}
 {% load i18n %}
 
-{% block content %}
+{% block breadcrumb %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb">
+                    <a href="{% url 'home' %}"><i class="icon-home"></i> Home</a>
+                    <span class="crumbs-spacer"><i class="fa fa-angle-double-right"></i></span>
+                    <span class="current">Contact Us</span>
+                    <h2 class="entry-title">Contact Us</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
+{% block content %}
 <section id="content">
     <div class="contact-info">
         <div class="container">
             <div class="contact-info-wrapper clearfix">
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="contact-item-wrapper">
+                <div class="col-xs-12">
+                    <div class="contact-item-wrapper mt-4">
                         <h4>Address</h4>
                         <div class="info">
                             <div class="icon">
@@ -19,19 +35,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="contact-item-wrapper">
+                <div class="col-xs-12">
+                    <div class="contact-item-wrapper mt-4">
                         <h4>Phone</h4>
                         <div class="info">
                             <div class="icon">
                                 <i class="icon-screen-smartphone"></i>
                             </div>
-                            <p>Phone: +91-9083250-171/225/226 <br> Fax: 0-123-456</p>
+                            <p>Phone: +91-9083250-171/225/226 <br> Fax: 0123-456</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div class="contact-item-wrapper">
+                <div class="col-xs-12">
+                    <div class="contact-item-wrapper mt-4">
                         <h4>E-mail</h4>
                         <div class="info">
                             <div class="icon">
@@ -153,10 +169,12 @@
                             </div>
                         </div>
                     </div> 
-
                 </div> 
             </div>
         </div>
     </div>
 </div>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2802.688240500036!2d-73.89170351204265!3d40.63681398024793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25cd8a299941d%3A0xb3d61d3b13833857!2s9923+Avenue+N%2C+Brooklyn%2C+NY+11236%2C+USA!5e0!3m2!1sen!2sbd!4v1507048551905" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> 
+
 {% endblock %}

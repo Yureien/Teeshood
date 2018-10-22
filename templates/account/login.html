@@ -8,16 +8,33 @@
 <meta name="robots" content="nofollow">
 {% endblock meta_tags %}
 
+{% block breadcrumb %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb">
+                    <a href="{% url 'home' %}"><i class="icon-home"></i> Home</a>
+                    <span class="crumbs-spacer"><i class="fa fa-angle-double-right"></i></span>
+                    <span class="current">Login</span>
+                    <h2 class="entry-title">Login page</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+{% endblock %}
+
 {% block content %}
 <div id="content" style="background: #f9f9f9;">
-	<div class="container" >
-		<div class="row">
+	<div class="container">
+		<div class="row justify-content-md-center">
             <div class="col-md-12 col-lg-8 col-lg-offset-2">
                 <div class="login">                        	
 					<div class="row">
 						<div class="col-lg-6">
 							<div id="left_form" class="text-center"> 
-								<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" class="heroicon-home heroicon heroicon-lg">
+								<svg xmlns="http://www.w3.org/2000/svg" width="170" height="170" viewBox="0 0 100 100" class="heroicon-home heroicon heroicon-lg">
 									<path class="heroicon-home-wall heroicon-component-fill" d="M8 50L50 8l42 42v48H8V50zm10 7v22h12V57H18zm52 0v22h12V57H70zM50 38a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"></path>
 									<polygon class="heroicon-home-roof heroicon-component-accent heroicon-component-fill" points="7 7 44.5 7 50 1.5 55 7 93 7 93 44 99 50 96 53 50 7 4 53 1 50 7 44"></polygon>
 									<path class="heroicon-home-frames heroicon-component-accent heroicon-component-fill" d="M84 79h2v4H66v-4h2V55h16v24zm-52 0h2v4H14v-4h2V55h16v24zm8-24h20v36H40V55zm10-16a9 9 0 1 1 0-18 9 9 0 0 1 0 18zm2-12v1h4.71A7.01 7.01 0 0 0 52 23.29V27zm-8.71 1H48v-4.71A7.01 7.01 0 0 0 43.29 28zM48 36.71V32h-4.71A7.01 7.01 0 0 0 48 36.71zM56.71 32H52v4.71A7.01 7.01 0 0 0 56.71 32zM18 57v22h12V57H18zm52 0v22h12V57H70z"></path>
@@ -45,7 +62,7 @@
 							</div>
 						</div>
 						<div class="col-lg-6">
-                            <div class="m-2">
+                            <div class="login-form-container">
 								{% include "account/partials/login_form.html" %}
                             </div>
 						</div>

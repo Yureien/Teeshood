@@ -20,14 +20,17 @@
 </section>
 {% endblock %}
 {% block content %}
+{% for product, availability in products %}
+{% include 'product/_quickview.html' with product=product %}
+{% endfor %}
 <section id="deals-of-the-day" class="section">
 	<div class="container">
 		<h1 class="section-title ">Deals of the Day</h1>
-		<!--<div class="deal-day text-center">
+		<div class="deal-day text-center">
 			 <div class="icon inline"><span class="icon-clock"></span></div>
 			 <div id="defaultCountdown" class="inline"></div> 
 			 <div class="text inline">remaining </div>
-			 </div>-->
+			 </div>
 		<hr class="lines">
 		<div class="row">
 			<div class="col-md-12">
@@ -40,10 +43,8 @@
 								<div class="cart-overlay"></div>
 								<div class="actions">
 									<div class="add-to-links">
-										{% if availability.available %}
 										<a href="{{ product.get_absolute_url }}" class="btn-cart"><i class="icon-basket-loaded"></i></a>
-										{% endif %}
-										<!--<a class="btn-quickview md-trigger" data-modal="modal-3"><i class="icon-eye"></i></a>-->
+										<a class="btn-quickview" id="quick-view" data-toggle="modal" data-target="#product-{{ product.pk }}-quickview"><i class="icon-eye"></i></a>
 									</div>
 								</div>
 							</div>

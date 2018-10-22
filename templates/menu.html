@@ -2,7 +2,7 @@
 {% for item in menu_items %}
 {% with children=item.get_children %}
 <li>
-	<a href="{{ item.get_url }}">{{ item }}{% if children %} <span class="caret"></span>{% endif %}</a>
+	<a href="{{ item.get_url }}" {% if horizontal %}{% if request.path_info == item.get_url %} class="active"{% endif %}{% endif %}>{{ item }}{% if children %} <span class="caret"></span>{% endif %}</a>
     {% if children %}
 	<ul class="dropdown">
 		{% for child in children %}

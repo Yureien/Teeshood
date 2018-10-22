@@ -88,10 +88,11 @@
                 </div>
             </div>
 			{% endif %}
-            <div class="{% if images %}col-md-7 col-sm-6 {% endif %}col-xs-12">
-				{% endwith %}
+			{% endwith %}
+            <div class="{% if product_images %}col-md-7 col-sm-6 {% endif %}col-xs-12">
 				<div class="info-panel">
                     <h1 class="product-title">{{ product }}</h1>
+
 					<div class="price-ratting">
 						{% if availability.available %}
 						{% if show_variant_picker %}
@@ -139,21 +140,19 @@
                             </div>
 						</div>
 					</div>
+					
 					{% if user.is_staff %}
-					<p>
-						<a href="{% url "dashboard:product-details" pk=product.pk %}">Edit Product</a>
+					<p class="mb-4">
+						<a href="{% url "dashboard:product-details" pk=product.pk %}">Edit Product in Dashboard</a>
 					</p>
 					{% endif %}
+
+					<div class="short-desc">
+                        <h5 class="sub-title">Quick Overview</h5>
+                        <p>{{ product.description|safe }}</p>
+                    </div>
+					
 					{% if is_visible and product.is_in_stock %}
-					<div id="pincode-validator">
-						<h5>Check Pincode</h5>
-						<form id="pincode-checker" class="form-inline">
-							<input type="text" id="pincode-text" name="pincode-text" maxlength="6" pattern="[0-9]{6}" title="6 digit pin code" class="form-control mr-md-4 mb-4 mb-md-0" placeholder="Pincode">
-							<input type="hidden" name="url" value="{% url 'product:pincode_checker' product.get_slug product.pk 0 %}">
-							<input type="submit" class="btn btn-common">
-						</form>
-						<span class=""></span>
-					</div>
 					{% block orderform %}
 					{% if show_variant_picker %}
 					{% csrf_token %}
@@ -165,9 +164,11 @@
 						<div class="product__info__quantity">
 							{% bootstrap_field form.quantity %}
 						</div>
-						<button class="btn btn-primary btn-lg">
-							{% trans "Add to cart" context "Product details primary action" %}
-						</button>
+						<div class="form-group product__info__button">
+							<button class="btn primary">
+								{% trans "Add to cart" context "Product details primary action" %}
+							</button>
+						</div>
 					</form>
 					{% endif %}
 					{% endblock %}
@@ -175,67 +176,78 @@
 						<small class="text-danger"></small>
 					</div>
 					<div class="pincode mt-4">
+						<div id="pincode-validator">
+							<h5>Check Pincode</h5>
+							<form id="pincode-checker" class="form-inline">
+								<input type="text" id="pincode-text" name="pincode-text" maxlength="6" pattern="[0-9]{6}" title="6 digit pin code" class="form-control mr-md-4 mb-4 mb-md-0" placeholder="Pincode">
+								<input type="hidden" name="url" value="{% url 'product:pincode_checker' product.get_slug product.pk 0 %}">
+								<input type="submit" class="btn btn-common">
+							</form>
+							<span class=""></span>
+						</div>
 						<div class="method-sec row mt-4">
 							<div class="col-xs-6 col-sm-6 col-md-3">
 								<div class="method-box">
 									<i class="fas fa-truck"></i>
 									<p>Shipping Free</p>
-									<p><strong>Free</strong>
+									<p><strong>Free</strong></p>
 								</div>
 							</div>
 							<div class="col-xs-6 col-sm-6 col-md-3">
 								<div class="method-box">
 									<i class="fas fa-money-bill-alt"></i>
-									<p>COD </p>
-									<p><strong>Available</strong>
+									<p>COD</p>
+									<p><strong>Available</strong></p>
 								</div>
 							</div>
 							<div class="col-xs-6 col-sm-6 col-md-3">
 								<div class="method-box">
 									<i class="fas fa-reply"></i>
 									<p>Replace</p>
-									<p><strong>10 days</strong>
+									<p><strong>10 days</strong></p>
 								</div>
 							</div>
 							<div class="col-xs-6 col-sm-6 col-md-3">
 								<div class="method-box">
 									<i class="fas fa-times-circle"></i>
 									<p>Cancellation</p>
-									<p><strong>Allowed</strong>
+									<p><strong>Allowed</strong></p>
 								</div>
 							</div>
 						</div>
-						{% else %}
-						<p class="alert alert-warning">
-							{% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
-						</p>
-						{% endif %}
 					</div>
+					{% else %}
+					<p class="alert alert-warning">
+						{% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
+					</p>
+					{% endif %}
 				</div>
 			</div>
+		</div>
+	</div>
 </section>
-
-<div class="single-pro-tab section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <div class="single-pro-tab-menu">
-                    <ul class="">
-                        <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
-                        <li><a href="#information" data-toggle="tab">Information</a></li>
-                        <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
-                    </ul>
-                </div>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="description">
-                        <div class="pro-tab-info pro-description">
-                            <h3 class="small-title">{{ product }}</h3>
+<section class="single-pro-tab section">
+	<div class="container"> 
+		<div class="row">
+			<div class="col-xs-12" style="width:100%">
+				<nav>
+					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Description</a>
+						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Reviews</a>
+						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Information</a>
+					</div>
+				</nav>
+				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+						<div class="pro-tab-info pro-description">
 							{{ product.description|safe }}
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="information">
-                        <div class="pro-tab-info pro-information">
-                            <h3 class="small-title">Product information</h3>							
+						</div>
+					</div>
+					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+						{% include 'product/_reviews.html' %}
+					</div>
+					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+						<div class="pro-tab-info">
 							<table class="table">
 								{% for attribute, value in product_attributes.items %}
 								<tr>
@@ -244,16 +256,13 @@
 								</tr>
 								{% endfor %}
 							</table>
-                        </div>
-                    </div>
-					<div class="tab-pane" id="reviews">
-						{% include 'product/_reviews.html' %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+						</div>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+</section>
 
 <div class="section" >
     <div class="container">

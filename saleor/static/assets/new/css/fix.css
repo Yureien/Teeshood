@@ -535,45 +535,6 @@ select.form-control {
   .table__row.fulfillment__row {
     padding: 0; }
 
-.nav-tabs {
-  display: block;
-  text-align: center;
-  border-bottom: solid 1px #D3D1D0; }
-  @media (max-width: 575.98px) {
-    .nav-tabs {
-      text-align: center;
-      padding-right: 0;
-      padding-bottom: 0.5rem; } }
-  .nav-tabs .nav-item {
-    display: inline; }
-    @media (max-width: 575.98px) {
-      .nav-tabs .nav-item {
-        display: inline-block;
-        float: none; } }
-    .nav-tabs .nav-item + .nav-item {
-      margin-left: 0; }
-    .nav-tabs .nav-item .nav-link {
-      padding: 0.5rem 2rem;
-      margin-top: 0.5rem;
-      display: inline-block;
-      transition: 0.3s;
-      border: 0;
-      text-transform: uppercase; }
-      @media (max-width: 767.98px) {
-        .nav-tabs .nav-item .nav-link {
-          padding: 0.5rem 1rem; } }
-      .nav-tabs .nav-item .nav-link h3 {
-        color: #828282; }
-        @media (max-width: 767.98px) {
-          .nav-tabs .nav-item .nav-link h3 {
-            font-size: 1rem; } }
-      .nav-tabs .nav-item .nav-link:hover h3, .nav-tabs .nav-item .nav-link.active h3 {
-        border: 0;
-        color: #44bdaa; }
-
-.tab-pane {
-  margin-top: 1rem; }
-
 @font-face {
   font-family: 'Lato';
   src: url("../fonts/Lato-Light.woff2") format("woff2"), url("../fonts/Lato-Light.woff") format("woff"), url("../fonts/Lato-Light.ttf") format("truetype");
@@ -1246,82 +1207,5 @@ a {
         right: 0; } }
   .styleguide__content__block .product-list, .styleguide__content__block .card-block, .styleguide__content__block .alert:last-of-type, .styleguide__content__block .form-group {
     margin-bottom: 0; }
-
-.btn-secondary {
-  color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d; }
-
-.btn-secondary:hover {
-  color: #fff;
-  background-color: #5a6268;
-  border-color: #545b62; }
-
-.btn-secondary:focus, .btn-secondary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }
-
-.btn-secondary.disabled, .btn-secondary:disabled {
-  color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d; }
-
-.btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {
-  color: #fff;
-  background-color: #545b62;
-  border-color: #4e555b; }
-
-.btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus, .show > .btn-secondary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }
-
-.rating {
-  display: inline-block;
-  position: relative;
-  font-size: 2rem; }
-
-.rating label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  cursor: pointer; }
-
-.rating label:last-child {
-  position: static; }
-
-.rating label:nth-child(1) {
-  z-index: 5; }
-
-.rating label:nth-child(2) {
-  z-index: 4; }
-
-.rating label:nth-child(3) {
-  z-index: 3; }
-
-.rating label:nth-child(4) {
-  z-index: 2; }
-
-.rating label:nth-child(5) {
-  z-index: 1; }
-
-.rating label input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0; }
-
-.rating label .icon {
-  float: left;
-  color: transparent; }
-
-.rating label:last-child .icon {
-  color: #000; }
-
-.rating:not(:hover) label input:checked ~ .icon,
-.rating:hover label:hover input ~ .icon {
-  color: #09f; }
-
-.rating label input:focus:not(:checked) ~ .icon:last-child {
-  color: #000;
-  text-shadow: 0 0 5px #09f; }
 
 /*# sourceMappingURL=fix.css.map */

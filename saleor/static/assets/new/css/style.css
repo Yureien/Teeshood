@@ -443,7 +443,11 @@ nav.navbar.navbar-default .container {
 .dropdown-toggle::after{display: none;}
 
 .mb-5{margin-bottom: 5px}
-
+.single-pro-tab .nav-item.nav-link.active, .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    background-color: #42beaa;
+    color: #fff;
+    border-color: #42beaa;
+}
 
 
 @media screen and (min-width:767px){

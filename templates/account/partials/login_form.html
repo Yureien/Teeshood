@@ -5,7 +5,7 @@
 <form method="post" action="{% url 'account:login' %}" novalidate>
   {% csrf_token %}
   <fieldset>
-    {% bootstrap_form form %}
+    {% bootstrap_form form show_label=False %}
     {% if REDIRECT_FIELD_VALUE %}
       <input type="hidden" name="{{ REDIRECT_FIELD_NAME }}" value="{{ REDIRECT_FIELD_VALUE }}"/>
     {% endif %}
