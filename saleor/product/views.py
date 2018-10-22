@@ -10,7 +10,8 @@ from ..checkout.utils import set_cart_cookie
 from ..core.utils import serialize_decimal
 from ..seo.schema.product import product_json_ld
 from .filters import ProductCategoryFilter, ProductCollectionFilter
-from .models import Category
+from .models import Category, ProductReview
+from .forms import ProductReviewForm
 from .utils import (
     collections_visible_to_user, get_product_images, get_product_list_context,
     handle_cart_form, products_for_cart, products_with_details)
@@ -33,6 +34,9 @@ def product_details(request, slug, product_id, form=None):
 
     form:
         The add-to-cart form.
+
+    review_form:
+        The product review form.
 
     price_range:
         The PriceRange for the product including all discounts.
@@ -58,6 +62,18 @@ def product_details(request, slug, product_id, form=None):
         product.available_on is None or product.available_on <= today)
     if form is None:
         form = handle_cart_form(request, product, create_cart=False)[0]
+    if request.user.is_authenticated:
+        try:
+            review = ProductReview.objects.get(user=request.user, product=product)
+            review_form = ProductReviewForm(request.POST or None, instance=review)
+        except ProductReview.DoesNotExist:
+            review_form = ProductReviewForm(request.POST or None)
+        if 'review_submit' in request.POST:
+            if review_form.is_valid() and request.user.is_authenticated:
+                review = review_form.save(commit=False)
+                review.product = product
+                review.user = request.user
+                review.save()
     availability = get_availability(
         product, discounts=request.discounts, taxes=request.taxes,
         local_currency=request.currency)
@@ -80,6 +96,8 @@ def product_details(request, slug, product_id, form=None):
             variant_picker_data, default=serialize_decimal),
         'json_ld_product_data': json.dumps(
             json_ld_data, default=serialize_decimal)}
+    if request.user.is_authenticated:
+        ctx.update({'review_form': review_form})
     return TemplateResponse(request, 'product/details.html', ctx)
 
 

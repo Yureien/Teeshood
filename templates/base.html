@@ -55,7 +55,7 @@
             <div class="top-bar">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 col-sm-4">
+                        <div class="col-md-6 col-sm-12">
                             <div class="language-wrapper">
                                 <div class="box-language">
                                     <a href="#"><i class="icon-phone"></i> {{ site.settings.header_text }}</a>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="clear"></div>
                         </div>
-                        <div class="col-md-6 col-sm-8">
+                        <div class="col-md-6 col-sm-8 hidden-sm">
 
                             <div class="search-area">
 								<form action="{% url "search:search" %}">
@@ -95,22 +95,30 @@
                 </div>
             </div>
 
-            <nav class="navbar navbar-default" data-spy="affix" data-offset-top="50">
-                <div class="container">
-                    <div class="row">
-                        <div class="navbar-header">
+			<nav id="navbarid" class="navbar navbar-default navbar-expand-md " >
+		        <div class="container">
+		            <div class="row">
+		                <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></button>
-                            <a class="navbar-brand pull-left" href="{% url 'home' %}"><img src="{% static 'assets/new/img/teeshood logo long.svg' %}" alt=""></a>
+                            <a class="navbar-brand pull-left" href="{% url 'home' %}"><img src="{% static 'assets/new/img/teeshood logo long.svg' %}" alt=""></a><div class="shop-cart hidden-md">
+		                        <ul> 
+		                            <li>
+		                                <a href="{% url "cart:index" %}" class="cart-icon cart-btn"><i class="icon-basket-loaded"></i><span class="cart-label">
+											{% if cart_counter %}{{ cart_counter }}{% else %}0{% endif %}
+										</span></a> 
+		                            </li>
+		                        </ul>
+		                    </div>
                         </div>
                         <div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
 								<li><a href="{% url 'home' %}">Home</a></li>
 								{% menu site_menu=site.settings.top_menu horizontal=True %}
 							</ul>
-                            <div class="icon-right pull-right navbar-right">
-                                <div class="text-right text-right">
-                                    <div class="account link-inline">
-                                        <div class="dropdown text-right">
+							<div class="my-account">
+		                        <div class="text-right">
+		                            <div class="account link-inline">
+		                                <div class="dropdown text-right">
                                             <a href="#" aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span> Account <span class="icon-arrow-down"></span></a>
                                             <ul class="dropdown-menu">
 												{% if user.is_authenticated %}
@@ -231,8 +239,9 @@
         </footer>
 		{% endblock %}
 		{% block footer_scripts %}
-		<script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+		
 		{% render_bundle 'storefront' 'js' %}
+        <script type="text/javascript" src="{% static "assets/new/js/popper.min.js" %}"></script>
 		<script type="text/javascript" src="{% static "assets/new/js/jquery-min.js" %}"></script>
         <script type="text/javascript" src="{% static "assets/new/js/bootstrap.min.js" %}"></script>
         <script type="text/javascript" src="{% static "assets/new/js/bootstrap-select.min.js" %}"></script>

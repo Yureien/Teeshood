@@ -2,39 +2,6 @@
 @import "../../../scss/bootstrap/functions";
 @import "../../../scss/bootstrap/variables";
 @import "../../../scss/bootstrap/mixins";
-//@import "../../../scss/bootstrap/root";
-//@import "../../../scss/bootstrap/reboot";
-@import "../../../scss/bootstrap/type";
-@import "../../../scss/bootstrap/images";
-@import "../../../scss/bootstrap/code";
-//@import "../../../scss/bootstrap/grid";
-//@import "../../../scss/bootstrap/tables";
-//@import "../../../scss/bootstrap/forms";
-//@import "../../../scss/bootstrap/buttons";
-@import "../../../scss/bootstrap/transitions";
-//@import "../../../scss/bootstrap/dropdown";
-@import "../../../scss/bootstrap/button-group";
-//@import "../../../scss/bootstrap/input-group";
-@import "../../../scss/bootstrap/custom-forms";
-//@import "../../../scss/bootstrap/nav";
-//@import "../../../scss/bootstrap/navbar";
-//@import "../../../scss/bootstrap/card";
-//@import "../../../scss/bootstrap/breadcrumb";
-@import "../../../scss/bootstrap/pagination";
-@import "../../../scss/bootstrap/badge";
-@import "../../../scss/bootstrap/jumbotron";
-@import "../../../scss/bootstrap/alert";
-@import "../../../scss/bootstrap/progress";
-@import "../../../scss/bootstrap/media";
-//@import "../../../scss/bootstrap/list-group";
-@import "../../../scss/bootstrap/close";
-//@import "../../../scss/bootstrap/modal";
-@import "../../../scss/bootstrap/tooltip";
-@import "../../../scss/bootstrap/popover";
-@import "../../../scss/bootstrap/carousel";
-@import "../../../scss/bootstrap/utilities";
-@import "../../../scss/bootstrap/print";
-
 
 @import "../../../scss/components/breadcrumbs";
 @import "../../../scss/components/buttons";
@@ -80,3 +47,67 @@
     border-color: #4e555b; }
     .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus, .show > .btn-secondary.dropdown-toggle:focus {
       box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); }
+
+.rating {
+  display: inline-block;
+  position: relative;
+  font-size: 2rem;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label:last-child .icon {
+  color: #000;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #09f;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #09f;
+}

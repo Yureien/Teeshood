@@ -373,15 +373,125 @@ div#list-view .shop-product .product-info {
 .modal { 
     top: 60px;
 }
+nav.navbar.navbar-default .container {
+    position: relative;
+}
+.navbar-collapse.collapse .my-account {
+    position: absolute;
+    right: 0;
+}
+.caret {
+    position: inherit;
+}
+.search-area .caret:before {
+    content: "\e604";
+    font-family: simple-line-icons;
+    left: inherit;
+    top: 8px;
+    font-size: 11px;
+    float: right;
+    position: absolute;
+    right: 4px;
+}
+.search-area .categories-filter .dropdown-menu li.menu-header {
+    font-size: 14px;
+}
+
+.navbar-default .navbar-nav>li, .navbar-default .navbar-nav>li>a { 
+    position: relative;
+}
+.caret:before {
+    content: "\e604";
+    font-family: simple-line-icons;
+    left: inherit;
+    top: inherit;
+    font-size: 11px;
+    float: inherit;
+    position: inherit; 
+}
+.navbar { 
+    padding: 0;
+} 
+/*.navbar-default .navbar-nav .dropdown { 
+    left: -40px;
+}*/
+.support-inner .support-info {
+    padding-left: 60px; 
+}
+.page-header .entry-title { 
+    position: absolute;
+    right: 0;
+}
+.sticky {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 99999;
+    box-shadow: 0 0 3px rgba(0,0,0,.2);
+}
+.sticky + .content {
+  padding-top: 60px;
+}   
+.navbar-default.sticky .navbar-nav>li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.navbar-default.sticky .navbar-brand {
+    margin: 0!important;
+    padding: 7px 15px;
+} 
+.dropdown-toggle::after{display: none;}
+
+.mb-5{margin-bottom: 5px}
+
+
 
 @media screen and (min-width:767px){
-footer#main-footer ul.footer-menu-links li {
-    float: left;
-    min-width: 120px;
-}
+    footer#main-footer ul.footer-menu-links li {
+        float: left;
+        min-width: 120px;
+    }
+    .navbar .shop-cart.hidden-md {
+        display: none;
+    }
 }
 
 @media screen and (max-width:767px){
+    .navbar>.container, .navbar>.container-fluid { 
+        display: block;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    /*.careers-box .job-action-btn {
+        position: initial;
+        right: 0;
+        top: 0;
+        padding: 5px 0;
+        text-align: center;
+    }*/
+    .hidden-sm {
+        display: none;
+    }
+    .navbar .navbar-header {
+        width: 100%;
+    }
+    .slicknav_btn { 
+        margin: 16px 60px;
+    }
+    .navbar .shop-cart {
+        float: right;
+        margin: 15px 15px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .careers-box span.share-area:hover ul.share-drop.dropdown { 
+        left: 100px;
+        top: -10px; 
+    }
+    .navbar .shop-cart ul li .cart-btn { 
+        padding: 6px 14px;
+    }
     .testimonial .owl-prev {
         position: absolute;
         top: -120px;

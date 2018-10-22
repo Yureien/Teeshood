@@ -4,6 +4,7 @@
 {% load product_first_image from product_images %}
 {% load get_thumbnail from product_images %}
 {% load placeholder %}
+{% load ratings %}
 
 {% for product, availability in products %}
 {% include 'product/_quickview.html' with product=product %}
@@ -28,7 +29,16 @@
         </div>
         <div class="product-info">
             <div class="fix">
-                <h4 class="product-title pull-left"><a href="{{ product.get_absolute_url }}">{{ product }}</a></h4>
+                <h4 class="product-title pull-left"><a href="{{ product.get_absolute_url }}">{{ product }}</a></h4>                                                        <div class="star-rating pull-right">
+					<div class="product-star">
+						{% calculate_rating product as total_stars %}
+						{% create_stars total_stars as rating %}
+						{% for i in rating %}
+						{% if i == "x" %}<i class="i-color fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
+						{% endfor %}
+						<span>({{ product.reviews.count }} Customer Reviews)</span>
+                    </div>
+                </div>
             </div>
             <div class="fix mb-10">
                 <span class="price">

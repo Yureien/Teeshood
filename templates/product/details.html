@@ -9,6 +9,7 @@
 {% load placeholder %}
 {% load staticfiles %}
 {% load taxed_prices %}
+{% load ratings %}
 
 {% block title %}
 {% if product.seo_title %}
@@ -96,7 +97,7 @@
 						{% if show_variant_picker %}
 						<div id="variant-price-component" class="price float-left"></div>
 						{% else %}
-						<h2 class="product__info__price">
+						<div class="price">
 							<span>{% price_range availability.price_range %}</span>
 							{% if availability.discount %}
 							<small class="product__info__price__undiscounted">
@@ -124,17 +125,25 @@
 								{% endif %}
 							</small>
 							{% endif %}
-						</h2>
+						</div>
 						{% endif %}
 						{% endif %}
-						<div class="ratting float-right">						
-							{% if user.is_staff %}
-							<p>
-								<a href="{% url "dashboard:product-details" pk=product.pk %}">Edit Product</a>
-							</p>
-							{% endif %}
+						<div class="ratting float-right">
+							<div class="product-star">
+								{% calculate_rating product as total_stars %}
+								{% create_stars total_stars as rating %}
+								{% for i in rating %}
+								{% if i == "x" %}<i class="i-color fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
+								{% endfor %}
+								<span>({{ product.reviews.count }} Customer Reviews)</span>
+                            </div>
 						</div>
 					</div>
+					{% if user.is_staff %}
+					<p>
+						<a href="{% url "dashboard:product-details" pk=product.pk %}">Edit Product</a>
+					</p>
+					{% endif %}
 					{% if is_visible and product.is_in_stock %}
 					<div id="pincode-validator">
 						<h5>Check Pincode</h5>
@@ -165,45 +174,45 @@
 					<div class="product__info__form-error">
 						<small class="text-danger"></small>
 					</div>
-					<div class="pincode">
-					<div class="method-sec row">
-                        <div class="col-xs-6 col-sm-6 col-md-3">
-	                        <div class="method-box">
-	                            <i class="fas fa-truck"></i>
-	                            <p>Shipping Free</p>
-	                            <p><strong>Free</strong>
-	                        </div>
-	                    </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3">
-	                        <div class="method-box">
-	                            <i class="fas fa-money-bill-alt"></i>
-	                            <p>COD </p>
-	                            <p><strong>Available</strong>
-	                        </div>
-	                    </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3">
-	                        <div class="method-box">
-	                            <i class="fas fa-reply"></i>
-	                            <p>Replace</p>
-	                            <p><strong>10 days</strong>
-	                        </div>
-	                    </div>
-                        <div class="col-xs-6 col-sm-6 col-md-3">
-	                        <div class="method-box">
-	                            <i class="fas fa-times-circle"></i>
-	                            <p>Cancellation</p>
-	                            <p><strong>Allowed</strong>
-	                        </div>
-	                    </div>
-                    </div>
-					{% else %}
-					<p class="alert alert-warning">
-						{% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
-					</p>
-					{% endif %}
+					<div class="pincode mt-4">
+						<div class="method-sec row mt-4">
+							<div class="col-xs-6 col-sm-6 col-md-3">
+								<div class="method-box">
+									<i class="fas fa-truck"></i>
+									<p>Shipping Free</p>
+									<p><strong>Free</strong>
+								</div>
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-3">
+								<div class="method-box">
+									<i class="fas fa-money-bill-alt"></i>
+									<p>COD </p>
+									<p><strong>Available</strong>
+								</div>
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-3">
+								<div class="method-box">
+									<i class="fas fa-reply"></i>
+									<p>Replace</p>
+									<p><strong>10 days</strong>
+								</div>
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-3">
+								<div class="method-box">
+									<i class="fas fa-times-circle"></i>
+									<p>Cancellation</p>
+									<p><strong>Allowed</strong>
+								</div>
+							</div>
+						</div>
+						{% else %}
+						<p class="alert alert-warning">
+							{% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
+						</p>
+						{% endif %}
+					</div>
 				</div>
 			</div>
-		</div>
 </section>
 
 <div class="single-pro-tab section">
@@ -214,6 +223,7 @@
                     <ul class="">
                         <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
                         <li><a href="#information" data-toggle="tab">Information</a></li>
+                        <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
                     </ul>
                 </div>
                 <div class="tab-content">
@@ -235,6 +245,9 @@
 								{% endfor %}
 							</table>
                         </div>
+                    </div>
+					<div class="tab-pane" id="reviews">
+						{% include 'product/_reviews.html' %}
                     </div>
                 </div>
             </div>
