@@ -18,10 +18,10 @@
 		
         <!-- <link rel="stylesheet" href="assets/css/jquery.countdown.css"> -->
         <link rel="shortcut icon" href=" {% static "assets/new/img/favicon.png" %}">
+		<link rel="stylesheet" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
         <link rel="stylesheet" href="{% static "assets/new/css/bootstrap.min.css" %}" type="text/css">
 		<link rel="stylesheet" href="{% static "assets/new/css/fix.css" %}" type="text/css">
         <link rel="stylesheet" href="{% static "assets/new/css/bootstrap-select.min.css" %}" type="text/css">
-        <link rel="stylesheet" href="{% static "assets/new/fonts/font-awesome.min.css" %}" type="text/css">
         <link rel="stylesheet" href="{% static "assets/new/fonts/line-icons/line-icons.css" %}" type="text/css">
         <link rel="stylesheet" href="{% static "assets/new/css/main.css" %}" type="text/css">
         <link rel="stylesheet" href="{% static "assets/new/extras/settings.css" %}" type="text/css">
@@ -78,7 +78,6 @@
                             </div>
                             <div class="shop-cart">
                                 <ul>
-                                    <li><a class="cart-icon cart-btn" href="wishlist.html"><span class="icon-heart"></span></a></li>
                                     <li>
                                         <a href="#" class="cart-icon cart-btn"><i class="icon-basket-loaded"></i><span class="cart-label">
 											{% if cart_counter %}{{ cart_counter }}{% else %}0{% endif %}
@@ -101,7 +100,7 @@
                     <div class="row">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></button>
-                            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'assets/new/img/teeshood logo long.svg' %}" alt=""></a>
+                            <a class="navbar-brand pull-left" href="{% url 'home' %}"><img src="{% static 'assets/new/img/teeshood logo long.svg' %}" alt=""></a>
                         </div>
                         <div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">

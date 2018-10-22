@@ -81,8 +81,8 @@
 	<div class="container">
 		<div class="row">
 			{% for i in site.settings.categorytile_set.all %}
-			<div class="col-md-4 col-sm-4 col-xs-12">
-				<div class="feature-item-content">
+			<div class="col-md-4 col-sm-4 col-xs-12 pb-md-4">
+				<div class="feature-item-content pb-md-4">
 					<img src="{{ i.image.url }}" alt="">
 					<div class="feature-content">
 						{% if i.name %}

@@ -156,18 +156,46 @@
 						<div class="product__info__quantity">
 							{% bootstrap_field form.quantity %}
 						</div>
-
-						<div class="form-group product__info__button">
-							<button class="btn btn-primary btn-lg">
-								{% trans "Add to cart" context "Product details primary action" %}
-							</button>
-						</div>
+						<button class="btn btn-primary btn-lg">
+							{% trans "Add to cart" context "Product details primary action" %}
+						</button>
 					</form>
 					{% endif %}
 					{% endblock %}
 					<div class="product__info__form-error">
 						<small class="text-danger"></small>
 					</div>
+					<div class="pincode">
+					<div class="method-sec row">
+                        <div class="col-xs-6 col-sm-6 col-md-3">
+	                        <div class="method-box">
+	                            <i class="fas fa-truck"></i>
+	                            <p>Shipping Free</p>
+	                            <p><strong>Free</strong>
+	                        </div>
+	                    </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3">
+	                        <div class="method-box">
+	                            <i class="fas fa-money-bill-alt"></i>
+	                            <p>COD </p>
+	                            <p><strong>Available</strong>
+	                        </div>
+	                    </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3">
+	                        <div class="method-box">
+	                            <i class="fas fa-reply"></i>
+	                            <p>Replace</p>
+	                            <p><strong>10 days</strong>
+	                        </div>
+	                    </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3">
+	                        <div class="method-box">
+	                            <i class="fas fa-times-circle"></i>
+	                            <p>Cancellation</p>
+	                            <p><strong>Allowed</strong>
+	                        </div>
+	                    </div>
+                    </div>
 					{% else %}
 					<p class="alert alert-warning">
 						{% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
@@ -219,7 +247,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
 		        <div class="trust-box text-center">
-					g		        	<i class="fa fa-heart"></i>
+					<i class="fa fa-heart"></i>
 		        	<h4>24x7 Help</h4>
 		        	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. </p>
 		        </div>

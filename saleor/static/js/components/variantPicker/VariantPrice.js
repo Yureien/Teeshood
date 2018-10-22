@@ -52,7 +52,7 @@ export default observer(class VariantPrice extends Component {
       <div>
         <span>{priceText}&nbsp;</span>
         {isDiscount && (
-          <span>{priceUndiscountedText}</span>
+          <del><small>{priceUndiscountedText}</small></del>
         )}
         {priceLocalCurrency && (
           <p><small className="text-info">&asymp; {priceLocalCurrency}</small></p>

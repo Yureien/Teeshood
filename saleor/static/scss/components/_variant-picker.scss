@@ -4,8 +4,9 @@
     display: inline-block;
   }
   &__label {
-    margin-bottom: $global-margin;
-
+    margin-top: $global-margin;
+	font-weight: 800;
+	font-size: 1.3rem;
   }
   &__options {
       display: block;
@@ -14,7 +15,7 @@
     margin-bottom: 0;
     margin-bottom: $global-margin / 4;
     border-color: $gray;
-	background-color: $black;
+	color: $black;
     float: left;
     &.active {
       border-color: $darken-gray;

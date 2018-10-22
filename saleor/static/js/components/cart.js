@@ -16,12 +16,16 @@ export const onAddToCartSuccess = () => {
     $addToCartError.html('');
     var newQunatity = $('.cart-dropdown__total').data('quantity');
     $('.cart-label').html(newQunatity).removeClass('empty');
-    $cartDropdown.addClass('show');
-    $cartIcon.addClass('hover');
-    $cartDropdown.find('.popup-container').scrollTop($cartDropdown.find('.popup-container')[0].scrollHeight);
-    setTimeout((e) => {
-      $cartDropdown.removeClass('show');
-      $cartIcon.removeClass('hover');
+    //$cartDropdown.addClass('show');
+	  //$cartIcon.addClass('hover');
+	  $('html, body').animate({
+          scrollTop: 0
+      }, 800, function() {
+          $cartIcon.focus();
+      });
+      setTimeout((e) => {
+      //$cartDropdown.removeClass('show');
+      //$cartIcon.removeClass('hover');
     }, 2500);
   });
 };
