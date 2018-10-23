@@ -81,9 +81,11 @@
 <section class="feature-categories section">
 	<div class="container">
 		<div class="row">
-			{% for i in site.settings.categorytile_set.all %}
-			<div class="col-md-4 col-sm-4 col-xs-12 pb-md-4">
-				<div class="feature-item-content pb-md-4">
+			{% for i in site.settings.categorytile_set.all reversed %}
+			{% if not forloop.counter|divisibleby:"4" %}
+			<div class="col-md-4 col-sm-4 col-xs-12 mb-30">
+				{% endif %}
+				<div class="feature-item-content {% if forloop.counter|add:"1"|divisibleby:"4" %}mb-30{% endif %}">
 					<img src="{{ i.image.url }}" alt="">
 					<div class="feature-content">
 						{% if i.name %}
@@ -94,7 +96,9 @@
 						<a href="{% if i.category_url %}{{ i.category_url }}{% else %}javascript:void(){% endif %}" class="btn btn-common">Shop Now</a>
 					</div>
 				</div>
+				{% if not forloop.counter|add:"1"|divisibleby:"4" %}
 			</div>
+			{% endif %}
 			{% endfor %}
 		</div>
 	</div>
