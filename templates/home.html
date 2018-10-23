@@ -203,7 +203,7 @@
 			<div id="client-logo" class="owl-carousel">
 				{% for banner in site.settings.customerbanner_set.all %}
 				<div class="client-logo item">
-					<a href="{% if banner.url %}{{ banner }}{% else %}javascript:void(){% endif %}"><img src="{{ banner.image }}" %}" alt="" /></a>
+					<a href="{% if banner.url %}{{ banner }}{% else %}javascript:void(){% endif %}"><img src="{{ banner.image.url }}" %}" alt="" /></a>
 				</div>
 				{% endfor %}
 			</div>
