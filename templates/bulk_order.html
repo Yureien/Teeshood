@@ -10,24 +10,107 @@
  }
 </style>
 {% endblock %}
-{% block content %}
-<h1 class="m-4 text-center">Bulk Order</h1>
-<div class="row">
-    <div class="col-12 col-md-6 offset-md-3">
-	<form method="post" enctype="multipart/form-data" novalidate>
-	    {% csrf_token %}
-		{% for field in bulk_order_form %}
-	    {% bootstrap_field field %}
-		{% endfor %}
-	    <div class="form-group text-center m-4">
-		<a class="btn btn-secondary" href="{% url 'bulk-order' %}" target="_blank">
-		    {% trans "Cancel" context "Dashboard cancel action" %}
-		</a>
-		<button type="submit" class="btn btn-primary">
-		    {% trans "Submit" context "Submit action" %}
-		</button>
-	    </div>
-	</form>
+{% block breadcrumb %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb">
+                    <a href="{% url 'home' %}"><i class="icon-home"></i> Home</a>
+                    <span class="crumbs-spacer"><i class="fa fa-angle-double-right"></i></span>
+                    <span class="current">Bulk Order</span>
+                    <h2 class="entry-title">Bulk Order</h2>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+{% endblock %}
+{% block content %}
+<section id="content" class="terms-and-conditions">
+    <div class="container">
+        <div class="row"> 
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h2 class="title-checkout text-center"><i class="icon-basket-loaded"></i> Bulk Order</h2>
+                <hr class="lines">
+                <form enctype="multipart/form-data" method="post">
+					{% csrf_token %}
+                    <div class="form-group">
+                        <label>Name <sup>*</sup></label>
+                        <input class="form-control" type="text" name="{{ bulk_order_form.name.name }}">
+						{{ bulk_order_form.name.errors }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+		                    <div class="form-group">
+		                        <label>E-Mail <sup>*</sup></label>
+		                        <input class="form-control" type="email" name="{{ bulk_order_form.email.name }}">
+								{{ bulk_order_form.email.errors }}
+		                    </div>
+                        </div>
+                        <div class="col-md-6">
+		                    <div class="form-group">
+		                        <label>Phone Number</label>
+		                        <input class="form-control" type="text" name="{{ bulk_order_form.phone_number.name }}">
+								{{ bulk_order_form.phone_number.errors }}
+		                    </div> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"> 
+                            <div class="form-group">
+                                <label>Order Type <sup>*</sup></label>
+								{% bootstrap_field bulk_order_form.order_type show_label=False %}
+                            </div>
+                        </div>
+                        <div class="col-md-6"> 
+                            <div class="form-group">
+                                <label>Order Color <sup>*</sup></label>
+								{% bootstrap_field bulk_order_form.order_color show_label=False %}
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label>Number of Pieces <sup>*</sup></label>
+                        <input class="form-control" type="number" name="{{ bulk_order_form.number_of_pieces.name }}">
+						{{ bulk_order_form.number_of_pieces.errors }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"> 
+                            <div class="form-group">
+                                <label>Upload Design (zip file < 25 mb) </label>
+                                <input class="form-control" type="file" name="{{ bulk_order_form.upload_design.name }}">
+								{{ bulk_order_form.upload_design.errors }}
+                            </div>
+                        </div>
+                        <div class="col-md-6"> 
+                            <div class="form-group">
+                                <label>List Of Names (if required, excel sheet) </label>
+                                <input class="form-control" type="file" name="{{ bulk_order_form.list_of_names.name }}">
+								{{ bulk_order_form.list_of_names.errors }}
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label>Additional Description <sup>*</sup></label>
+                        <textarea class="form-control" rows="5" name="{{ bulk_order_form.additional_description.name }}"></textarea> 
+						{{ bulk_order_form.additional_description.errors }}
+                    </div> 
+
+                    <div class="checkbox-group form-group-top clearfix">
+						<input id="checkBox1" type="checkbox" name="{{ bulk_order_form.teeshood_designs_product.name }}">
+						<label for="checkBox1">
+							I would like TEESHOOD to design my product?
+						</label>
+						{{ bulk_order_form.teeshood_designs_product.errors }}
+					</div>
+					<div class="text-center">
+						<a href="{% url 'home' %}" class="btn btn-danger btn-common">Cancel</a>
+						<button class="btn btn-common" type="submit">Place Order Now</button> 
+					</div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section> 
 {% endblock %}

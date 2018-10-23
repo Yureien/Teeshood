@@ -1,0 +1,18 @@
+{% extends 'dashboard/base_zero_page.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "No custom designs found." %}{% endblock %}
+{% block content %}
+{% static "dashboard/images/add.svg" as img_path %}
+{% url 'design-upload' as upload_url %}
+{% if product_types %}
+{% blocktrans %}
+You can create products by using the <span class="btn-fab-presentation"><svg data-src="{{ img_path }}" /></span> button.
+{% endblocktrans %}
+{% else %}
+{% blocktrans %}
+<a href="{{ upload_url }}">Custom designs </a> are visible here.
+{% endblocktrans %}
+{% endif %}
+{% endblock %}

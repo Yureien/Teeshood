@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import pgettext_lazy
 
-from .models import CustomDesign, BulkOrder
+from .models import CustomDesign, BulkOrder, CustomerContact
 
 
 class CustomDesignForm(forms.ModelForm):
@@ -14,6 +14,12 @@ class CustomDesignForm(forms.ModelForm):
             'image': pgettext_lazy(
                 'Design image', 'Image'),
         }
+
+
+class CustomerContactForm(forms.ModelForm):
+    class Meta:
+        model = CustomerContact
+        fields = ('name', 'email', 'subject', 'message')
 
 
 class BulkOrderForm(forms.ModelForm):

@@ -54,13 +54,69 @@
                                 <i class="icon-paper-plane"></i>
                             </div>
                             <p><a href="mailto:info@teeshood.com">info@teeshood.com</a> <br> <a href="mailto:sales@teeshood.com">sales@teeshood.com</a></p>
-                        </div>
+						</div>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="header-wrap text-center">
+                    <h3>Send us a message</h3>
+                    <p class="description">Aenean a turpis finibus euismod augue et facilisis elit. In sed quam et dui.</p>
                 </div>
             </div>
         </div>
     </div>
-</section> 
+    <div class="contact-form-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form id="contactForm" class="contact-form" data-toggle="validator" method="POST">
+						{% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="{{ contact_form.name.name }}" name="{{ contact_form.name.name }}" placeholder="Full Name" required data-error="Please enter your name">
+                                            <div class="help-block with-errors">{{ contact_form.name.errors }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" id="{{ contact_form.email.name }}" name="{{ contact_form.email.name }}" placeholder="mail@sitename.com" required data-error="Please enter your email">
+                                            <div class="help-block with-errors">{{ contact_form.email.errors }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="{{ contact_form.subject.name }}" name="{{ contact_form.subject.name }}" placeholder="Subject" required data-error="Please enter your subject">
+                                            <div class="help-block with-errors">{{ contact_form.subject.errors }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="{{ contact_form.message.name }}" name="{{ contact_form.message.name }}" placeholder="Massage" rows="9" data-error="Write your message" required></textarea>
+                                            <div class="help-block with-errors">{{ contact_form.message.errors }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                <button type="submit" id="submit" class="btn btn-common">Send Message</button>
+                                <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> 
+</section>  
 
 <div class="faq section bg-grey">
     <div class="container">                    

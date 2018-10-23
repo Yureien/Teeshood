@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from impersonate.views import impersonate as orig_impersonate
 
-from .forms import CustomDesignForm, BulkOrderForm
+from .forms import CustomDesignForm, BulkOrderForm, CustomerContactForm
 from ..account.models import User
 from ..dashboard.views import staff_member_required
 from ..product.utils import products_for_homepage
@@ -38,7 +38,18 @@ def about(request):
 
 
 def contact(request):
-    return TemplateResponse(request, 'contact.html')
+    customer_contact_form = CustomerContactForm(request.POST or None)
+    if customer_contact_form.is_valid():
+        customer_contact_form.save()
+        messages.success(
+            request,
+            pgettext_lazy(
+                'Customer Contact message',
+                'Sent message.')
+        )
+        return redirect('home')
+    ctx = {'contact_form': customer_contact_form}
+    return TemplateResponse(request, 'contact.html', ctx)
 
 
 def privacy_policy(request):

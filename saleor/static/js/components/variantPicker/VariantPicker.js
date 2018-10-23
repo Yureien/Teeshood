@@ -138,7 +138,7 @@ export default observer(class VariantPicker extends Component {
     const disableAddToCart = store.isEmpty || !this.checkVariantAvailability();
 
     const addToCartBtnClasses = classNames({
-      'btn primary': true,
+      'btn btn-common': true,
       'disabled': disableAddToCart
     });
 

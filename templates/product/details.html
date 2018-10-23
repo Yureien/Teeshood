@@ -125,11 +125,11 @@
 {% endif %}
 
 <section id="product-collection" class="section">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
 			{% with images=product_images %}
 			{% if images %}
-            <div class="col-md-5 col-sm-6 col-xs-12">
+            <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="product-details-image">
                     <div class="slider-for slider">
 						{% for image in images %}
@@ -145,7 +145,7 @@
             </div>
 			{% endif %}
 			{% endwith %}
-            <div class="{% if product_images %}col-md-7 col-sm-6 {% endif %}col-xs-12">
+            <div class="col-md-5 col-sm-6 col-xs-12">
 				<div class="info-panel">
                     <h1 class="product-title">{{ product }}</h1>
 
@@ -228,7 +228,7 @@
 							{% bootstrap_field form.quantity show_label=False %}
 						</div>
 						<div class="form-group product__info__button">
-							<button class="btn primary">
+							<button class="btn btn-common">
 								{% trans "Add to cart" context "Product details primary action" %}
 							</button>
 						</div>
@@ -286,9 +286,32 @@
 					{% endif %}
 				</div>
 			</div>
+			<div class="col-md-4 col-sm-6 col-xs-12">
+			    <div class="offer-sec">
+					{% if site.settings.productcoupon_set.count > 0 %}
+		            <h3>Select Offer</h3>
+					{% for coupon in site.settings.productcoupon_set.all %}
+		            <div class="offer-box" data-code="{{ coupon.code }}">
+		                <input type="radio" id="test1" name="radio-group">
+						<label for="test1">
+							<h5><span class="pro-code">{{ coupon.code }}</span> {{ coupon.title }}</h5>
+							<p>{{ coupon.description|safe }}</p>
+						</label>
+						<input type="hidden" name="coupon_code" value="LOL1">
+					</div>
+					{% endfor %}
+					<button class="btn btn-common btn-block" id="select-offer">
+						Select Offer
+					</button>
+					{% else %}
+					No coupons available.
+					{% endif %}
+		        </div>
+			</div>
 		</div>
 	</div>
 </section>
+
 <section class="single-pro-tab section">
 	<div class="container"> 
 		<div class="row">
@@ -451,51 +474,12 @@
 		</div>
 	</div>
 </div>
-<div id="myModal" class="modal fade offers-model" role="dialog">
-	<div class="modal-dialog modal-lg">
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">11 offers</a> from  <i class="fa fa-inr"></i> 5,188.00</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<div class="modal-body">						
-		        <div class=" row">            	
-		            <div class="col-md-12 col-xs-12">
-			            <div class="offer-sec">
-							{% if site.settings.productcoupon_set.count > 0 %}
-		                    <h3>Select Offer</h3>
-							{% for coupon in site.settings.productcoupon_set.all %}
-		                    <div class="offer-box" data-code="{{ coupon.code }}">
-		                		<input type="radio" id="test1" name="radio-group">
-								<label for="test1">
-								    <h5><span class="pro-code">{{ coupon.code }}</span> {{ coupon.title }}</h5>
-									<p>{{ coupon.description|safe }}</p>
-								</label>
-								<input type="hidden" name="coupon_code" value="LOL1">
-							</div>
-							{% endfor %}
-							<button class="btn btn-common btn-block" id="select-offer">
-								Select Offer
-							</button>
-							{% else %}
-							No coupons available.
-							{% endif %}
-		                </div>
-		            </div> 
-		        </div>
-			</div> 
-		</div>
-	</div>
-</div>
 <script type="text/javascript">
- var offers = $('#myModal .offer-box');
+ var offers = $('.offer-box');
  $("#select-offer").on('click', function() {
 	 offers.each(function() {
 		 if ($(this).find("input[type='radio']").is(":checked")) {
 			 let couponCode = $(this).data('code');
-			 $("#myModal .close").click();
-			 $(".modal-backdrop").hide();
 			 copyToClipboard(couponCode);
 			 alert("Coupon code is " + couponCode + ". Coupon code copied to clipboard. Paste it during checkout.");
 		 }

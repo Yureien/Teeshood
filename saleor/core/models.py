@@ -82,3 +82,10 @@ class BulkOrder(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CustomerContact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=150)
+    message = models.TextField()

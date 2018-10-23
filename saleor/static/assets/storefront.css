@@ -6403,10 +6403,8 @@ a.btn {
 
 .sort-by {
   text-align: right;
-  position: relative;
-  margin: 1rem 0 1rem 5rem; }
+  position: relative; }
   .sort-by .btn-link {
-    padding-right: 1rem;
     color: #44bdaa;
     outline: 0; }
     .sort-by .btn-link svg {

@@ -67,10 +67,21 @@
                             <div class="clear"></div>
                         </div>
                         <div class="col-md-6 col-sm-8 hidden-sm">
-
                             <div class="search-area">
 								<form action="{% url "search:search" %}">
 									<div class="control-group">
+										<ul class="categories-filter animate-dropdown">
+		                                    <li class="dropdown"> <a data-toggle="dropdown" href="#" aria-expanded="false">Categories <span class="caret"></span></a>
+		                                        <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 28px, 0px);">
+		                                            <li class="menu-header">Apparel</li>
+		                                            <li class="menu-header">Accessories</li>
+		                                            <li class="menu-header">Groceries </li>
+		                                            <li><a tabindex="-1" href="#">- Coffees</a></li>
+		                                            <li><a tabindex="-1" href="#">- Candies</a></li>
+		                                            <li class="menu-header">Books</li>
+		                                        </ul>
+		                                    </li>
+		                                </ul>
 										<input class="search-field" type="text" name="q"
 											   value="{% if query %}{{ query }}{% endif %}"
 											   placeholder="Search for product"
@@ -183,9 +194,9 @@
 		{% block banners %}
 		{% endblock %}
 		<div class="maincontent">
-			{% block topcontent %}{% endblock topcontent %}
 			{% block breadcrumb %}
 			{% endblock breadcrumb %}
+			{% block topcontent %}{% endblock topcontent %}
 			{% block content %}
 			{% endblock content %}
 		</div>
