@@ -39,16 +39,15 @@
 {% endblock meta_tags %}
 
 {% block breadcrumb %}
-<div class="row">
-    <div class="col-md-7">
-		<ul class="breadcrumbs list-unstyled d-none d-md-block">
-			{% block breadcrumb_part %}{% endblock %}
-		</ul>
-    </div>
-    <div class="col-md-5">
-		<h3 class="d-md-none float-left filters-toggle">
-			{% trans 'Filters' context 'Filter heading title' %}
-		</h3>
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb">
+					{% block breadcrumb_part %}{% endblock %}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
@@ -61,22 +60,24 @@
 
 {% block content %}
 {% block collection_published_warning %}{% endblock %}
-<div id="product-list-page">
+<div id="product-list-page" class="mt-4">
     <div class="row">
 		<div class="col-md-4 col-lg-3">
 			{% block filters %}{% endblock filters %}
 		</div>
-		<div class="col-md-8 col-lg-9 product-list">			
+		<div class="col-md-8 col-lg-9 product-list">
 			{% if products %}
-			<div class="shop-content">
-                <div class="col-md-12">
+			<div class="shop-content" style="width:100%">
+                <div class="">
                     <div class="product-option mb-30 clearfix">
                         <div class="row">
                             <div class="col-md-6">
-                                <ul class="shop-tab">
-		                            <li class="active"><a aria-expanded="true" href="#grid-view" data-toggle="tab"><i class="icon-grid"></i></a></li>
-		                            <li><a aria-expanded="false" href="#list-view" data-toggle="tab"><i class="icon-list"></i></a></li>
-		                        </ul>
+								<ul id="tabsJustified" class="nav nav-tabs shop-tab">
+									<li class="nav-item"><a href="" data-target="#grid-view" data-toggle="tab" class="active"><i class="icon-grid"></i></a> 
+									</li>
+									<li class="nav-item"><a href="" data-target="#list-view" data-toggle="tab"><i class="icon-list"></i></a> 
+									</li>
+		                        </ul>								
                             </div>
                             <div class="col-md-6">
                                 <!-- <div class="showing pull-right"> 
@@ -135,11 +136,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-content">
-                    <div id="grid-view" class="tab-pane active">
+                <div id="tabsJustifiedContent" class="tab-content">
+                    <div id="grid-view" class="tab-pane fade active show">
 						{% include "product/_items.html" with products=products %}
                     </div>
-                    <div id="list-view" class="tab-pane">
+                    <div id="list-view" class="tab-pane fade">
                         <div class="shop-list">
 							{% include "product/_items.html" with products=products list=True %}
 						</div>
@@ -165,4 +166,7 @@
 		</div>
     </div>
 </div>
+{% for product, availability in products %}
+{% include 'product/_quickview.html' with product=product %}
+{% endfor %}
 {% endblock content %}

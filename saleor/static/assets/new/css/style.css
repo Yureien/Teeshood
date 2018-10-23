@@ -448,7 +448,15 @@ nav.navbar.navbar-default .container {
     color: #fff;
     border-color: #42beaa;
 }
-
+.shop-tab>li a.active {
+    color: #42beaa !important;
+}
+ul.dropdown-menu.show {
+    margin-top: 12px;
+}
+.search-area .categories-filter .dropdown-menu li {
+    margin-bottom: 0;
+}
 
 @media screen and (min-width:767px){
     footer#main-footer ul.footer-menu-links li {

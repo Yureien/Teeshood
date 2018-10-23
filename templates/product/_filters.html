@@ -1,74 +1,82 @@
 {% load i18n %}
 {% load staticfiles %}
-
-<div class="product-filters">
-	<div class="product-filters__title">
-		<h2>
-			<strong>{{ object }}</strong>
-		</h2>
-		{% block title_tree %}{% endblock title_tree %}
-	</div>
+{% load bootstrap_field from bootstrap4 %}
+{% with children=object.get_children %}
+{% if children %}
+<div class="widget-ct widget-categories mb-30">
+    <div class="widget-s-title">
+        <h4>{{ object }}</h4>
+    </div>
+    <ul id="accordion-category" class="product-cat">
+		{% for child in children %}
+        <li><a href="{{ child.get_absolute_url }}">{{ child.name }}</a></li>
+        {% endfor %}
+    </ul>
 </div>
-<div class="filters-menu__body d-none d-md-block">
-	<h2>
-		{% trans 'Filters' context 'Filter heading title' %}
-		{% if filter.is_bound_unsorted %}
-		<a href="../">
-			<span class="clear-filters float-right">{% trans 'Clear filters' context 'Product list page filters' %}</span>
-		</a>
-		{% endif %}
-	</h2>
-	<div class="product-filters">
-		<div class="product-filters__attributes" data-icon-up="{% static "images/chevron-up.svg" %}" data-icon-down="{% static "images/chevron-down.svg" %}">
-			<form method="get">
-				{% for field in filter_set.form %}
-				{% if field.name == 'sort_by' %}
-				{% comment %}
-				Field 'sort_by' is hidden because it is rendered in header.
-				This is required if you want to have sorting to be kept during further filtering.
-				{% endcomment %}
-				<input type="hidden" name="sort_by" value="{% if request.GET.sort_by %}{{ request.GET.sort_by }}{% endif %}">
-				{% elif field.name == 'price' %}
-				{% else %}
-				<div class="filter-section widget-ct widget-categories mb-30" aria-expanded="true">
-					<div class="filter-section__header">
-						<h3>{{ field.label }}</h3>
-						<div class="filter-section__icon">
-							<img class="lazyload lazypreload" data-src="{% static "images/chevron-up.svg" %}">
-						</div>
-					</div>
-					<div class="filter-section__content">
-						<div class="filter-form-field">
-							{{ field }}
-						</div>
-					</div>
-				</div>
-				{% endif %}
-				{% endfor %}
-				{% for field in filter_set.form %}
-				{% if field.name == 'price' %}
-				<div class="filter-section" aria-expanded="true">
-					<div class="filter-section__header">
-						<h3>{{ field.label }}</h3>
-						<div class="filter-section__icon">
-							<img class="lazyload lazypreload" data-src="{% static "images/chevron-up.svg" %}">
-						</div>
-					</div>
-					<div class="filter-section__content">
-						<div class="filter-form-field price-field">
-							<input id="{{ field.auto_id }}_0" name="{{ field.name }}_0"
-								   value="{% if field.value.0 %}{{ field.value.0 }}{% endif %}" type="number" min="0"
-								   class="form-control d-inline"
-								   placeholder="{% trans 'from' context 'Product price filter' %}"/><span><b>to</b></span><input id="{{ field.auto_id }}_1" name="{{ field.name }}_1"
-								   value="{% if field.value.1 %}{{ field.value.1 }}{% endif %}" type="number" min="0"
-								   class="form-control d-inline" placeholder="{% trans 'to' context 'Product price filter' %}"/>
-						</div>
-					</div>
-				</div>
-				{% endif %}
-				{% endfor %}
-				<button class="btn primary" type="submit">{% trans 'Update' context 'Apply filters button' %}</button>
-			</form>
+{% endif %}
+{% endwith %}
+<form id="filter-form">
+	{% for field in filter_set.form %}
+	{% if field.name == 'sort_by' %}
+	{% comment %}
+	Field 'sort_by' is hidden because it is rendered in header.
+	This is required if you want to have sorting to be kept during further filtering.
+	{% endcomment %}
+	<input type="hidden" name="sort_by" value="{% if request.GET.sort_by %}{{ request.GET.sort_by }}{% endif %}">
+	{% elif field.name == 'price' %}
+	{% else %}
+	<div class="widget-ct widget-filter mb-30">
+		<div class="widget-s-title">
+			<h4>{{ field.label }}</h4>
+		</div>
+		<div class="widget-info" style="position: relative;">
+			<div>
+				{{ field }}
+			</div>
 		</div>
 	</div>
-</div>
+	{% endif %}
+	{% endfor %}
+	{% for field in filter_set.form %}
+	{% if field.name == 'price' %}
+	<div class="widget-ct widget-filter mb-30">
+		<div class="widget-s-title">
+			<h4>Filter By Price</h4>
+		</div>
+		<div class="widget-info filter-price" style="position: relative;">
+			<div>
+				<input type="text" id="range" value="" name="range" />
+				<input id="{{ field.auto_id }}_0" name="{{ field.name }}_0"
+					   value="{% if field.value.0 %}{{ field.value.0 }}{% endif %}" type="hidden" min="0"
+					   class="form-control d-inline"
+					   placeholder="{% trans 'from' context 'Product price filter' %}"/>
+				<input id="{{ field.auto_id }}_1" name="{{ field.name }}_1"
+					   value="{% if field.value.1 %}{{ field.value.1 }}{% endif %}" type="hidden" min="0"
+					   class="form-control d-inline" placeholder="{% trans 'to' context 'Product price filter' %}"/>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	{% endfor %}
+	<div class="widget-ct mb-30">
+		<div class="row no-gutters">
+			<div class="col">
+				<button class="btn btn-primary" type="submit" style="width: 100%; height: 100%">Apply</button>
+			</div>
+			<div class="col">
+				<a href="{{ request.path_info }}" id="clear-filters" class="btn btn-danger" style="width:100%; height: 100%">Clear</a>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+ $('#filter-form').submit(function () {
+	 var $range = $(this).find("input[name=range]");
+	 if ($range.val()) {
+		 var $range_list = $range.val().split(';');
+		 $(this).find("input[name=price_0]").val($range_list[0]);
+		 $(this).find("input[name=price_1]").val($range_list[1]);
+	 }
+ });
+</script>
