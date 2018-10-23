@@ -7,9 +7,9 @@ from django.utils.translation import pgettext_lazy
 from django.forms import modelformset_factory
 
 from ...site.models import (AuthorizationKey, SiteSettings, ProductCoupon,
-                            ProductBanner, HallOfFame, CategoryTile)
+                            ProductBanner, HallOfFame, CategoryTile, CustomerBanner)
 from ..views import staff_member_required
-from .forms import (AuthorizationKeyForm, SiteForm, ProductCouponForm,
+from .forms import (AuthorizationKeyForm, SiteForm, ProductCouponForm, CustomerBannerForm,
                     SiteSettingsForm, ProductBannerForm, HallOfFameForm, CategoryTileForm)
 
 
@@ -67,6 +67,32 @@ def product_banner_edit(request, pk):
            'site': site,
            'product_banner_formset': product_banner_formset}
     return TemplateResponse(request, 'dashboard/sites/product_banner_form.html', ctx)
+
+
+@staff_member_required
+@permission_required('site.edit_settings')
+def customer_banner_edit(request, pk):
+    site_settings = get_object_or_404(SiteSettings, pk=pk)
+    site = site_settings.site
+    CustomerBannerFormSet = modelformset_factory(
+        CustomerBanner, form=CustomerBannerForm, extra=10,
+        can_delete=True, can_order=True)
+    customer_banner_formset = CustomerBannerFormSet(request.POST or None, request.FILES or None)
+
+    if customer_banner_formset.is_valid():
+        customer_banners = customer_banner_formset.save(commit=False)
+        for obj in customer_banner_formset.deleted_objects:
+            obj.delete()
+        for instance in customer_banners:
+            instance.site_settings = site_settings
+            instance.save()
+        messages.success(request, pgettext_lazy(
+            'Dashboard message', 'Updated customer banners'))
+        return redirect('dashboard:site-details', pk=site_settings.id)
+    ctx = {'site_settings': site_settings,
+           'site': site,
+           'customer_banner_formset': customer_banner_formset}
+    return TemplateResponse(request, 'dashboard/sites/customer_banner_form.html', ctx)
 
 
 @staff_member_required

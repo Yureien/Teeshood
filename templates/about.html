@@ -173,38 +173,21 @@
     </div>
 </div>
 
+{% if site.settings.customerbanner_set.count > 0 %}
 <div class="client section">
 	<div class="container">
 		<h1 class="section-title">Some of our great customers</h1>
 		<hr class="lines">
 		<div class="row">
 			<div id="client-logo" class="owl-carousel">
+				{% for banner in site.settings.customerbanner_set.all %}
 				<div class="client-logo item">
-					<a href="#"><img src="{% static "assets/new/img/clients/logo-01.png" %}" alt="" /></a>
+					<a href="{% if banner.url %}{{ banner }}{% else %}javascript:void(){% endif %}"><img src="{{ banner.image }}" %}" alt="" /></a>
 				</div>
-				<div class="client-logo item">
-					<a href="#"><img src="{% static "assets/new/img/clients/logo-02.png" %}" alt="" /></a>
-				</div>
-				<div class="client-logo item">
-					<a href="#"><img src="{% static "assets/new/img/clients/logo-03.png" %}" alt="" /></a>
-				</div>
-				<div class="client-logo item">
-					<a href="#"><img src="{% static "assets/new/img/clients/logo-04.png" %}" alt="" /></a>
-				</div>
-				<div class="client-logo item">
-					<a href="#"><img src="{% static "assets/new/img/clients/logo-05.png" %}" alt="" /></a>
-				</div>
-				<div class="client-logo item">
-					<a href="#"><img src="{% static "assets/new/img/clients/logo-06.png" %}" alt="" /></a>
-				</div>
-				<div class="client-logo item">
-					<a href="#"><img src="{% static "assets/new/img/clients/logo-07.png" %}" alt="" /></a>
-				</div>
-				<div class="client-logo item">
-					<a href="#"><img src="{% static "assets/new/img/clients/logo-08.png" %}" alt="" /></a>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
 </div>
+{% endif %}
 {% endblock %}

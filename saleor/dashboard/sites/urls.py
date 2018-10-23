@@ -12,6 +12,8 @@ urlpatterns = [
         name='site-delete'),
     url(r'^(?P<pk>\d+)/banner-update/$', views.product_banner_edit,
         name='site-home-product-banner-update'),
+    url(r'^(?P<pk>\d+)/customer_banner_update/$', views.customer_banner_edit,
+        name='site-home-customer-banner-update'),
     url(r'^(?P<pk>\d+)/hall_of_fame_update/$', views.hall_of_fame_edit,
         name='site-home-hall-of-fame-update'),
     url(r'^(?P<pk>\d+)/product-coupon-update/$', views.product_coupon_edit,

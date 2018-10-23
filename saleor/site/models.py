@@ -72,6 +72,12 @@ class HallOfFame(models.Model):
     product_url = models.URLField(blank=True, null=True)
 
 
+class CustomerBanner(models.Model):
+    site_settings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE)
+    image = VersatileImageField(upload_to='hall-of-fame')
+    url = models.URLField(blank=True, null=True)
+
+
 class ProductCoupon(models.Model):
     site_settings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE)
     code = models.CharField(max_length=100)
