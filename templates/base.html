@@ -42,13 +42,15 @@
 		{% block stylesheet %}{% endblock stylesheet %}
 
 		{% include 'favicon.html' %}
+		<script type="text/javascript" src="{% static "assets/new/js/popper.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/jquery-min.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/bootstrap.min.js" %}"></script>
 		
 		{% block meta_tags %}
 		<meta property="og:title" content="{{ site.name }}">
 		<meta property="og:url" content="{{ request.build_absolute_uri }}">
 		<meta property="og:image" content="{% static "images/block1.png" %}">
 		{% endblock meta_tags %}
-		<link rel="manifest" href="{% url "manifest" %}" />
     </head>
     <body>
 		{% block header %}
@@ -95,7 +97,6 @@
                     </div>
                 </div>
             </div>
-
 			<nav id="navbarid" class="navbar navbar-default navbar-expand-md" >
 		        <div class="container">
 		            <div class="row">
@@ -130,9 +131,9 @@
                                                 <li><a href="{% url "account:details" %}"><span class="icon icon-user"></span>My Account</a></li>
 		                                        <li><a href="{% url "cart:index" %}"><span class="icon icon-check"></span>Checkout</a></li>
 												{% if user.is_impersonate %}
-                                                <li><a href="{% url "impersonate-stop" %}"><span class="icon icon-unlock"></span>Stop Impersonating</a></li>
+                                                <li><a href="{% url "impersonate-stop" %}"><span class="icon icon-lock"></span>Stop Impersonating</a></li>
 												{% else %}
-                                                <li><a href="{% url "account:logout" %}"><span class="icon icon-unlock"></span>Log Out</a></li>
+                                                <li><a href="{% url "account:logout" %}"><span class="icon icon-lock"></span>Log Out</a></li>
 												{% endif %}
 												{% else %}
                                                 <li><a href="{% url "account:signup" %}"><span class="icon icon-user-follow"></span>Create an account</a></li>
@@ -150,6 +151,21 @@
                 <ul class="mobile-menu">
                     <li><a class="active" href="{% url 'home' %}">Home</a></li>
 					{% menu site_menu=site.settings.top_menu horizontal=False %}
+					{% if user.is_authenticated %}
+					{% if user.is_staff or request.impersonator.is_staff %}
+					<li><a href="{% url "dashboard:index" %}">Dashboard</a></li>
+					{% endif %}
+                    <li><a href="{% url "account:details" %}">My Account</a></li>
+		            <li><a href="{% url "cart:index" %}">Checkout</a></li>
+					{% if user.is_impersonate %}
+                    <li><a href="{% url "impersonate-stop" %}">Stop Impersonating</a></li>
+					{% else %}
+                    <li><a href="{% url "account:logout" %}">Log Out</a></li>
+					{% endif %}
+					{% else %}
+                    <li><a href="{% url "account:signup" %}">Create an account</a></li>
+                    <li><a href="{% url "account:login" %}">Log In</a></li>
+					{% endif %}
                 </ul>
             </nav>
         </div>
@@ -245,7 +261,7 @@
 		
 		<script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
 		{% render_bundle 'storefront' 'js' %}
-        <script type="text/javascript" src="{% static "assets/new/js/popper.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/popper.min.js" %}"></script>
 		<script type="text/javascript" src="{% static "assets/new/js/jquery-min.js" %}"></script>
         <script type="text/javascript" src="{% static "assets/new/js/bootstrap.min.js" %}"></script>
         <script type="text/javascript" src="{% static "assets/new/js/bootstrap-select.min.js" %}"></script>

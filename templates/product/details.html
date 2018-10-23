@@ -162,7 +162,8 @@
 						{% csrf_token %}
 						{% bootstrap_field form.variant %}
 						<div class="product__info__quantity">
-							{% bootstrap_field form.quantity %}
+							<h5 class="sub-title">Quantity</h5>
+							{% bootstrap_field form.quantity show_label=False %}
 						</div>
 						<div class="form-group product__info__button">
 							<button class="btn primary">
@@ -177,7 +178,7 @@
 					</div>
 					<div class="pincode mt-4">
 						<div id="pincode-validator">
-							<h5>Check Pincode</h5>
+							<h5 class="sub-title">Check Pincode</h5>
 							<form id="pincode-checker" class="form-inline">
 								<input type="text" id="pincode-text" name="pincode-text" maxlength="6" pattern="[0-9]{6}" title="6 digit pin code" class="form-control mr-md-4 mb-4 mb-md-0" placeholder="Pincode">
 								<input type="hidden" name="url" value="{% url 'product:pincode_checker' product.get_slug product.pk 0 %}">
@@ -296,6 +297,95 @@
 		        </div>
 			</div> 
 
+		</div>
+	</div>
+</div>
+<div id="myModal-chart" class="modal fade size-chart" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Size Chart</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+		        <div class=" row">            	
+		            <div class="col-md-12 col-xs-12">
+						<nav>
+							<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+								<a class="nav-item nav-link active" id="nav-cm-tab" data-toggle="tab" href="#nav-cm" role="tab" aria-controls="nav-cm" aria-selected="true">CM</a>
+								<a class="nav-item nav-link" id="nav-inch-tab" data-toggle="tab" href="#nav-inch" role="tab" aria-controls="nav-inch" aria-selected="false">Inch</a>
+							</div>
+						</nav>
+						<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+							<div class="tab-pane fade show active" id="nav-cm" role="tabpanel" aria-labelledby="nav-cm-tab">
+		                        <div class="pro-tab-info pro-description">
+		                            <table class="table" width="100%">
+		                                <tr>
+			                                <th>Size</th>
+			                                <th>Bust</th>
+			                                <th>Waist</th>
+			                                <th>Hip</th>
+			                            </tr>
+			                            <tr>
+			                                <td>XXS</td>
+			                                <td>76.2</td>
+			                                <td>71.1</td>
+			                                <td>91.5</td>
+			                            </tr>
+			                            <tr>
+			                                <td>XS</td>
+			                                <td>76.2</td>
+			                                <td>71.1</td>
+			                                <td>91.5</td>
+			                            </tr>
+			                            <tr>
+			                                <td>S</td>
+			                                <td>76.2</td>
+			                                <td>71.1</td>
+			                                <td>91.5</td>
+			                            </tr>
+		                            </table>
+		                        </div>
+		                    </div>
+							<div class="tab-pane fade show active" id="nav-inch" role="tabpanel" aria-labelledby="nav-inch-tab">
+		                        <div class="pro-tab-info pro-information">
+		                            <table class="table" width="100%">
+		                                <tr>
+			                                <th>Size</th>
+			                                <th>Bust</th>
+			                                <th>Waist</th>
+			                                <th>Hip</th>
+			                            </tr>
+			                            <tr>
+			                                <td>XXS</td>
+			                                <td>76.2</td>
+			                                <td>71.1</td>
+			                                <td>91.5</td>
+			                            </tr>
+			                            <tr>
+			                                <td>XS</td>
+			                                <td>76.2</td>
+			                                <td>71.1</td>
+			                                <td>91.5</td>
+			                            </tr>
+			                            <tr>
+			                                <td>S</td>
+			                                <td>76.2</td>
+			                                <td>71.1</td>
+			                                <td>91.5</td>
+			                            </tr>
+		                            </table>
+		                        </div>
+		                    </div>
+
+		                </div>
+		            </div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+					    <img src="https://assetscdn.paytm.com/images/catalog/sizechart/1529383651509.jpg" width="100%">
+					</div>
+		        </div>
+			</div> 
 		</div>
 	</div>
 </div>
