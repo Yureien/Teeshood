@@ -72,6 +72,13 @@ class HallOfFame(models.Model):
     product_url = models.URLField(blank=True, null=True)
 
 
+class ProductCoupon(models.Model):
+    site_settings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE)
+    code = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=300)
+
+
 class AuthorizationKey(models.Model):
     site_settings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE)
     name = models.CharField(

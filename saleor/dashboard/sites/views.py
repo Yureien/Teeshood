@@ -6,10 +6,11 @@ from django.template.response import TemplateResponse
 from django.utils.translation import pgettext_lazy
 from django.forms import modelformset_factory
 
-from ...site.models import AuthorizationKey, SiteSettings, ProductBanner, HallOfFame, CategoryTile
+from ...site.models import (AuthorizationKey, SiteSettings, ProductCoupon,
+                            ProductBanner, HallOfFame, CategoryTile)
 from ..views import staff_member_required
-from .forms import AuthorizationKeyForm, SiteForm, \
-    SiteSettingsForm, ProductBannerForm, HallOfFameForm, CategoryTileForm
+from .forms import (AuthorizationKeyForm, SiteForm, ProductCouponForm,
+                    SiteSettingsForm, ProductBannerForm, HallOfFameForm, CategoryTileForm)
 
 
 @staff_member_required
@@ -48,11 +49,14 @@ def product_banner_edit(request, pk):
     site_settings = get_object_or_404(SiteSettings, pk=pk)
     site = site_settings.site
     ProductBannerFormSet = modelformset_factory(
-        ProductBanner, form=ProductBannerForm, extra=5)
+        ProductBanner, form=ProductBannerForm, extra=5,
+        can_delete=True, can_order=True)
     product_banner_formset = ProductBannerFormSet(request.POST or None, request.FILES or None)
 
     if product_banner_formset.is_valid():
         product_banners = product_banner_formset.save(commit=False)
+        for obj in product_banner_formset.deleted_objects:
+            obj.delete()
         for banner in product_banners:
             banner.site_settings = site_settings
             banner.save()
@@ -71,11 +75,14 @@ def hall_of_fame_edit(request, pk):
     site_settings = get_object_or_404(SiteSettings, pk=pk)
     site = site_settings.site
     HallOfFameFormSet = modelformset_factory(
-        HallOfFame, form=HallOfFameForm, max_num=3, extra=3)
+        HallOfFame, form=HallOfFameForm, max_num=3, extra=3,
+        can_delete=True, can_order=True)
     hall_of_fame_formset = HallOfFameFormSet(request.POST or None, request.FILES or None)
 
     if hall_of_fame_formset.is_valid():
         hall_of_fames = hall_of_fame_formset.save(commit=False)
+        for obj in hall_of_fame_formset.deleted_objects:
+            obj.delete()
         for instance in hall_of_fames:
             instance.site_settings = site_settings
             instance.save()
@@ -90,15 +97,42 @@ def hall_of_fame_edit(request, pk):
 
 @staff_member_required
 @permission_required('site.edit_settings')
+def product_coupon_edit(request, pk):
+    site_settings = get_object_or_404(SiteSettings, pk=pk)
+    site = site_settings.site
+    ProductCouponFormSet = modelformset_factory(
+        ProductCoupon, form=ProductCouponForm, can_delete=True, can_order=True, extra=3)
+    product_coupon_formset = ProductCouponFormSet(request.POST or None, request.FILES or None)
+
+    if product_coupon_formset.is_valid():
+        product_coupons = product_coupon_formset.save(commit=False)
+        for obj in product_coupon_formset.deleted_objects:
+            obj.delete()
+        for instance in product_coupons:
+            instance.site_settings = site_settings
+            instance.save()
+        messages.success(request, pgettext_lazy(
+            'Dashboard message', 'Updated product coupon'))
+        return redirect('dashboard:site-details', pk=site_settings.id)
+    ctx = {'site_settings': site_settings,
+           'site': site,
+           'product_coupon_formset': product_coupon_formset}
+    return TemplateResponse(request, 'dashboard/sites/product_coupon_form.html', ctx)
+
+
+@staff_member_required
+@permission_required('site.edit_settings')
 def category_tile_edit(request, pk):
     site_settings = get_object_or_404(SiteSettings, pk=pk)
     site = site_settings.site
     CategoryTileFormSet = modelformset_factory(
-        CategoryTile, form=CategoryTileForm, extra=5)
+        CategoryTile, form=CategoryTileForm, extra=5, can_delete=True, can_order=True)
     category_tile_formset = CategoryTileFormSet(request.POST or None, request.FILES or None)
 
     if category_tile_formset.is_valid():
         category_tiles = category_tile_formset.save(commit=False)
+        for obj in category_tile_formset.deleted_objects:
+            obj.delete()
         for instance in category_tiles:
             instance.site_settings = site_settings
             instance.save()

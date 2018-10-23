@@ -535,45 +535,6 @@ select.form-control {
   .table__row.fulfillment__row {
     padding: 0; }
 
-.nav-tabs {
-  display: block;
-  text-align: center;
-  border-bottom: solid 1px #D3D1D0; }
-  @media (max-width: 575.98px) {
-    .nav-tabs {
-      text-align: center;
-      padding-right: 0;
-      padding-bottom: 0.5rem; } }
-  .nav-tabs .nav-item {
-    display: inline; }
-    @media (max-width: 575.98px) {
-      .nav-tabs .nav-item {
-        display: inline-block;
-        float: none; } }
-    .nav-tabs .nav-item + .nav-item {
-      margin-left: 0; }
-    .nav-tabs .nav-item .nav-link {
-      padding: 0.5rem 2rem;
-      margin-top: 0.5rem;
-      display: inline-block;
-      transition: 0.3s;
-      border: 0;
-      text-transform: uppercase; }
-      @media (max-width: 767.98px) {
-        .nav-tabs .nav-item .nav-link {
-          padding: 0.5rem 1rem; } }
-      .nav-tabs .nav-item .nav-link h3 {
-        color: #828282; }
-        @media (max-width: 767.98px) {
-          .nav-tabs .nav-item .nav-link h3 {
-            font-size: 1rem; } }
-      .nav-tabs .nav-item .nav-link:hover h3, .nav-tabs .nav-item .nav-link.active h3 {
-        border: 0;
-        color: #44bdaa; }
-
-.tab-pane {
-  margin-top: 1rem; }
-
 @font-face {
   font-family: 'Lato';
   src: url("../fonts/Lato-Light.woff2") format("woff2"), url("../fonts/Lato-Light.woff") format("woff"), url("../fonts/Lato-Light.ttf") format("truetype");
