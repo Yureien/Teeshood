@@ -1,4 +1,21 @@
 {% url 'home' as home_url %}
+{% if search %}
+{% for item in menu_items %}
+{% with children=item.get_children %}
+<li class="menu-header">
+	<a href="{{ item.get_url }}">{{ item }}</a>
+</li>
+{% if children %}
+{% for child in children %}
+<li>
+	<a tabindex="-1" href="{{ child.get_url }}">{{ child }}</a>
+</li>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% endfor %}
+
+{% else %}
 {% for item in menu_items %}
 {% with children=item.get_children %}
 <li>
@@ -15,3 +32,4 @@
 </li>
 {% endwith %}
 {% endfor %}
+{% endif %}

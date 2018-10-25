@@ -18,7 +18,7 @@ def get_sort_by_url(context, field, descending=False):
 
 
 @register.inclusion_tag('menu.html', takes_context=True)
-def menu(context, site_menu=None, horizontal=False):
+def menu(context, site_menu=None, horizontal=False, search=False):
     request = context['request']
     if not site_menu:
         return
@@ -27,4 +27,7 @@ def menu(context, site_menu=None, horizontal=False):
     if not menu:
         return
     menu_items = [item for item in menu.items.all() if item.parent_id is None]
-    return {'menu_items': menu_items, 'horizontal': horizontal, 'request': request}
+    return {
+        'menu_items': menu_items, 'horizontal': horizontal,
+        'request': request, 'search': search
+    }

@@ -8,35 +8,34 @@
 
 {% block title %}{% trans "Checkout" context "Checkout page title" %} — {{ block.super }}{% endblock %}
 
-{% block stylesheet %}
-<link rel="shortcut icon" href=" {% static "assets/new/img/favicon.png" %}">
-{% render_bundle 'storefront' 'css' %}
-{% endblock stylesheet %}
 {% block footer_scripts %}
 {% render_bundle 'storefront' 'js' %}
 {% endblock %}
 
 {% block header %}
-<div class="container-fluid navbar__login">
-    <div class="container">
-		<p>{% trans "Easy and secure!" context "Checkout top message" %}</p>
+<div class="header">
+    <div class="top-bar">
+        <div class="container p-1">
+			<div class="row">
+				<div class="col-5">
+					<a href="{% url 'home'%}">
+						<svg data-src="{% static "images/logo.svg" %}" height="42px" width="250px" />
+					</a>
+				</div>
+				<div class="col-7">
+					<h1>Checkout</h1>
+				</div>
+			</div>
+        </div>
     </div>
 </div>
-<header class="checkout__header">
-    <div class="container">
-		<a href="{% url 'home'%}">
-			<svg data-src="{% static "images/logo.svg" %}" height="42px" width="250px" />
-		</a>
-		<h1>{% trans "Checkout" context "Checkout title" %}</h1>
-    </div>
-</header>
 {% endblock %}
 
 {% block footer %}
 {% endblock %}
 
 {% block content %}
-<div class="container maincontent">
+<div class="container maincontent mt-4">
 	<div class="row checkout">
 		<div class="col-md-7">
 			{% block forms %}{% endblock %}

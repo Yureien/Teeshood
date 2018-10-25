@@ -97,7 +97,7 @@
         </p>
 		{% endif %}
 		{% if is_visible and product.is_in_stock %}
-		<a href="{{ product.get_absolute_url }}"><button class="btn primary text-light">Buy</button></a>
+		<a href="{{ product.get_absolute_url }}"><button class="btn btn-common text-light">Buy</button></a>
 		{% else %}
         <p class="alert alert-warning">
 			{% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}

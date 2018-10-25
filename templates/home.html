@@ -5,6 +5,13 @@
 {% load product_first_image from product_images %}
 
 {% block banners %}
+<style>
+ @media (max-width: 767.98px) {
+	 .tp-banner {
+		 height: 800px !important;
+	 }
+ }
+</style>
 <section id="slider">
 	<div class="tp-banner-container">
 		<div class="tp-banner">
@@ -20,6 +27,9 @@
 </section>
 {% endblock %}
 {% block content %}
+<style>
+
+</style>
 {% for product, availability in products %}
 {% include 'product/_quickview.html' with product=product %}
 {% endfor %}

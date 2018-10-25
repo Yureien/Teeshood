@@ -71,14 +71,9 @@
 								<form action="{% url "search:search" %}">
 									<div class="control-group">
 										<ul class="categories-filter animate-dropdown">
-		                                    <li class="dropdown"> <a data-toggle="dropdown" href="#" aria-expanded="false">Categories <span class="caret"></span></a>
+		                                    <li class="dropdown"><a data-toggle="dropdown" href="#" aria-expanded="false" class="pr-4">Categories <span class="caret"></span></a>
 		                                        <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 28px, 0px);">
-		                                            <li class="menu-header">Apparel</li>
-		                                            <li class="menu-header">Accessories</li>
-		                                            <li class="menu-header">Groceries </li>
-		                                            <li><a tabindex="-1" href="#">- Coffees</a></li>
-		                                            <li><a tabindex="-1" href="#">- Candies</a></li>
-		                                            <li class="menu-header">Books</li>
+													{% menu site_menu=site.settings.top_menu search=True %}
 		                                        </ul>
 		                                    </li>
 		                                </ul>
@@ -126,8 +121,10 @@
                         <div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
 								{% url 'home' as url_home %}
+								{% url "bulk-order" as url_bulk %}
 								<li><a href="{{ url_home }}"{% if request.path_info == url_home %} class="active"{% endif %}>Home</a></li>
 								{% menu site_menu=site.settings.top_menu horizontal=True %}
+								<li><a href="{{ url_bulk }}"{% if request.path_info == url_bulk %} class="active"{% endif %}>Bulk Order</a></li>
 							</ul>
 							<div class="my-account">
 		                        <div class="text-right">

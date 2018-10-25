@@ -483,3 +483,25 @@ ul.dropdown-menu.show {
     }
 
 }
+
+#clientlogo .owl-buttons div {
+	border: 0px !important;
+    box-shadow: none !important;
+	background-color: rgba(0,0,0,0) !important;
+}
+
+#client-logo .owl-prev {
+    position: absolute;
+    top: -120px;
+    padding: 0 !important;
+    left: 0px;
+	font-size: 5rem !important;
+}
+#client-logo .owl-next {
+    position: absolute;
+    right: 0;
+    top: -120px;
+    padding: 0px !important;
+    right: 20px;
+	font-size: 5rem !important;
+}
