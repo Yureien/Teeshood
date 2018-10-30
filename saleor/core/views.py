@@ -93,9 +93,8 @@ def design_upload(request):
     return TemplateResponse(request, 'design_upload.html', ctx)
 
 
-@login_required
 def bulk_order(request):
-    bulk_order_form = BulkOrderForm(request.POST or None, request.FILES)
+    bulk_order_form = BulkOrderForm(request.POST or None, request.FILES or None)
     if bulk_order_form.is_valid():
         design = bulk_order_form.save(commit=False)
         design.user = request.user
