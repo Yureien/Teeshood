@@ -1,0 +1,74 @@
+{% extends "dashboard/base.html" %}
+
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}{{ product.name }} - {{ block.super }}{% endblock %}
+
+{% block body_class %}body-products{% endblock %}
+
+{% block menu_contact_forms_class %}active{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumbs breadcrumbs--history">
+    <li>
+	<a href="{% url "dashboard:product-list" %}" class="breadcrumb">
+            {% trans "Contact Forms" context "contact form breadcrumbs" %}
+	</a>
+    </li>
+    <li class="back-mobile">
+	<a href="{% url "dashboard:product-list" %}">
+            <svg data-src="{% static "dashboard/images/arrow-left.svg" %}" fill="#fff" width="20px" height="20px" />
+	</a>
+    </li>
+    <li>
+	<span class="breadcrumbs--ellipsed-item">
+            {{ product.subject }}
+	</span>
+    </li>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col s12">
+	<div class="card">
+            <div class="card-content">
+		<div class="product-header">
+		    <div class="product-header__title">
+			<span class="card-title">
+			    {{ product.subject }}
+			</span>
+		    </div>
+		</div>
+		<div class="row">
+			<table>
+				<thead>
+					<tr>
+						<td>Name</td>
+						<td>Subject</td>
+						<td>E-Mail</td>
+						<td>Message</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{ product.name }}</td>
+						<td>{{ product.subject }}</td>
+						<td>{{ product.email }}</td>
+						<td>{{ product.message }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+            </div>
+            <div class="card-action">
+		{% if perms.product.edit_product %}
+		<a href="#base-modal" data-href="{% url 'dashboard:contact-form-delete' pk=product.pk %}" class="modal-trigger-custom btn-flat waves-effect">
+		    {% trans "Remove contact form" context "Design action" %}
+		</a>
+		{% endif %}
+            </div>
+	</div>
+    </div>
+</div>
+{% endblock %}

@@ -27,7 +27,8 @@
           {% bootstrap_field form.voucher show_label=False show_help=False placeholder=False %}
         {% else %}
           {% bootstrap_field form.voucher show_label=False show_help=True placeholder=False %}
-        {% endif %} {% bootstrap_button use_voucher button_type="submit" button_class="btn secondary narrow" %}
+          {% endif %}
+		  <button class="btn secondary" type="submit" style="height:62%;color:#42beaa;border: 1px solid #42beaa;">Use</button>
       </div>
     </form>
   {% endif %}

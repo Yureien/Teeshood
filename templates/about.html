@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb">
+                    <a href="{% url 'home' %}"><i class="icon-home"></i> Home</a>
+                    <span class="crumbs-spacer"><i class="fa fa-angle-double-right"></i></span>
+                    <span class="current">About Us</span>
+                    <h2 class="entry-title">About Us</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="about section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="single-image">
+                    <a href="#"><img src="{% static 'assets/new/img/about/img1.jpg' %}" alt=""></a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="about-content">
+                    <h3>welcome to demo</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p>
+                    <a href="#" class="btn btn-common btn-more">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="about mission-vision section bg-grey">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="about-content">
+                    <h3>Our Mission</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p> 
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="single-image">
+                    <a href="#"><img src="{% static 'assets/new/img/about/mission.png' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="single-image">
+                    <a href="#"><img src="{% static 'assets/new/img/about/vision.png' %}" alt=""></a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="about-content">
+                    <h3>Our Vision</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="team">
+    <div class="container">
+        <h1 class="section-title">Team Members</h1>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="team-item">
+                    <figure>
+                        <img src="{% static 'assets/new/img/team/img1.jpg' %}" alt="">
+                        <figcaption>
+                            <div class="info">
+                                <h3>David Givens</h3>
+                                <p>Chief Technical Officer</p>
+                            </div>
+                            <div class="social">
+                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="team-item">
+                    <figure>
+                        <img src="{% static 'assets/new/img/team/img2.jpg' %}" alt="">
+                        <figcaption>
+                            <div class="info">
+                                <h3>Cadic Vegeta</h3>
+                                <p>Graphic Designer</p>
+                            </div>
+                            <div class="social">
+                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="team-item">
+                    <figure>
+                        <img src="{% static 'assets/new/img/team/img3.jpg' %}" alt="">
+                        <figcaption>
+                            <div class="info">
+                                <h3>Justyna Michallek</h3>
+                                <p>Buniness Manager</p>
+                            </div>
+                            <div class="social">
+                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="support section">
+    <div class="container">
+        <div class="row support-inner"> 
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="row-normal clearfix">
+                    <div class="support-info">
+                        <div class="info-title">
+                            <i class="icon-plane"></i>
+                            Free Shipping Worldwide
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="row-normal clearfix">
+                    <div class="support-info">
+                        <div class="info-title">
+                            <i class="icon-earphones-alt"></i>
+                            24/7 Customer Service
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="row-normal clearfix">
+                    <div class="support-info">
+                        <div class="info-title">
+                            <i class="icon-heart"></i>
+                            Easy Return Policy
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+{% if site.settings.customerbanner_set.count > 0 %}
+<div class="client section">
+	<div class="container">
+		<h1 class="section-title">Some of our great customers</h1>
+		<hr class="lines">
+		<div class="row">
+			<div id="client-logo" class="owl-carousel">
+				{% for banner in site.settings.customerbanner_set.all %}
+				<div class="client-logo item">
+					<a href="{% if banner.url %}{{ banner }}{% else %}javascript:void(){% endif %}"><img src="{{ banner.image.url }}" %}" alt="" /></a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,3 +1,15 @@
+window.onscroll = function() {myFunction()};
+	var navbar = document.getElementById("navbarid");
+	var sticky = navbar.offsetTop;
+	function myFunction() {
+		if (window.pageYOffset >= sticky) {
+			navbar.classList.add("sticky")
+		} else {
+			navbar.classList.remove("sticky");
+		}
+	}
+
+
 (function ($) {
 	"use strict";
 	$(window).on('load', function () {
@@ -107,9 +119,10 @@
 			navigation: false,
 			pagination: false,
 			items: 5,
+			autoPlay: 2000,
 			itemsTablet: 3,
 			stagePadding: 90,
-			smartSpeed: 450,
+			smartSpeed: 150,
 			itemsDesktop: [1199, 4],
 			itemsDesktopSmall: [980, 3],
 			itemsTablet: [768, 3],
@@ -119,7 +132,7 @@
 		});
 		var owl = $(".testimonials-carousel");
 		owl.owlCarousel({
-			navigation: false,
+			navigation: true,
 			pagination: true,
 			slideSpeed: 1000,
 			stopOnHover: true,

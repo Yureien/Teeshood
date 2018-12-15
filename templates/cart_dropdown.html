@@ -3,68 +3,44 @@
 {% load placeholder %}
 {% load price from taxed_prices %}
 {% load staticfiles %}
-
-<div class="container">
-  {% if quantity > 0 %}
-    <div id="cart-dropdown-list" class="cart-dropdown__list{% if lines|length <= 2 %} overflow{% endif %}">
-    {% for line in lines %}
-      <div class="row item">
-        <div class="col-md-10">
-          <a class="link--clean" href="{{ line.variant_url }}">
-            <img class="cart-dropdown__image lazyload lazypreload"
-                 data-src="{% get_thumbnail line.image size="60x60" %}"
-                 data-srcset="{% get_thumbnail line.image size="60x60" %} 1x, {% get_thumbnail line.image size="120x120" %} 2x"
-                 alt=""
-                 src="{% placeholder size=120 %}">
-            <h3>
-              {{ line.product }}
-              <span>x{{ line.quantity }}</span>
-              <p>{{ line.variant }}</p>
-            </h3>
-          </a>
-        </div>
-        <div class="col-md-2">
-          <div class="float-right">
-            <h3>
-              {% price line.line_total %}
-            </h3>
-          </div>
-        </div>
-      </div>
-    {% endfor %}
+<div class="popup-container">
+	{% if quantity > 0 %}
+	{% for line in lines %}
+	<div class="cart-entry">
+		<a class="image" href="{{ line.variant_url }}">
+			<img class="cart-dropdown__image lazyload lazypreload"
+				 data-src="{% get_thumbnail line.image size="60x60" %}"
+				 data-srcset="{% get_thumbnail line.image size="60x60" %} 1x, {% get_thumbnail line.image size="120x120" %} 2x"
+				 alt=""
+				 src="{% placeholder size=120 %}">
+		</a>
+		<div class="content cart-dropdown__total" data-quantity="{{ quantity }}">
+			<a href="{{ line.variant_url }}" class="title">{{ line.product }} - {{ line.variant }}</a>
+			<p class="quantity">x{{ line.quantity }}</p>
+			<span class="price">{% price line.line_total %}</span>
+		</div>
+		<div class="button-x">
+			<i class="icon-close"></i>
+		</div>
+	</div>
+	{% endfor %}
+	<div class="summary">
+		<div class="subtotal">Sub Total</div>
+		<div class="price-s">{% price total %}</div>
     </div>
-    <div class="row cart-dropdown__total" data-quantity="{{ quantity }}">
-      <div class="col-md-8">
-        <h3>
-          {% trans "Subtotal" context "Order subtotal" %}<br>
-          <span>{% trans "Shipment and taxes calculated at checkout" context "Cart dropdown text" %}</span>
-        </h3>
-      </div>
-      <div class="col-md-4">
-        <h3 class="float-md-right price {% if lines|length <= 2 %}single{% endif %}" data-quantity="{{ quantity }}">
-          <p>
-            {% price total %}
-          </p>
-        </h3>
-      </div>
+    <div class="cart-buttons">
+        <a href="{% url "cart:index" %}" class="btn btn-border-2">View Cart</a>
+        <a href="{% url "checkout:login" %}" class="btn btn-common">Checkout</a>
+        <div class="clear"></div>
     </div>
-    <div class="row cart-dropdown__actions">
-      <div class="col-md-1"></div>
-      <div class="col-md-5">
-        <a href="{% url "cart:index" %}" class="btn secondary narrow float-md-right">{% trans "Go to cart" context "Cart dropdown secondary action" %}</a>
-      </div>
-      <div class="col-md-5">
-        <a href="{% url "checkout:login" %}" class="btn primary narrow float-md-right">{% trans "Checkout" context "Cart dropdown primary action" %}</a>
-      </div>
-    </div>
-  {% else %}
-    <div class="text-md-center cart-dropdown__empty">
-      <h3>{% trans "There are no products in your shopping cart." context "Empty cart message" %}</h3>
-      <img data-src="{% static 'images/empty-cart-bg.png' %}"
-           data-srcset="{% static 'images/empty-cart-bg.png' %} 1x, {% static 'images/empty-cart-bg2x.png' %} 2x"
-           src="{% placeholder size=255 %}"
-           class="lazyload lazypreload">
-      <a href="{% url 'home' %}" class="btn primary">{% trans "Check out our sales" context "Empty cart link" %}</a>
-    </div>
-  {% endif %}
 </div>
+{% else %}
+<div class="summary">
+	<h3>Your cart is empty!</h3>
+	<img data-src="{% static 'images/empty-cart-bg.png' %}"
+		 data-srcset="{% static 'images/empty-cart-bg.png' %} 1x, {% static 'images/empty-cart-bg2x.png' %} 2x"
+		 src="{% placeholder size=255 %}"
+		 class="lazyload lazypreload">
+	<a href="{% url 'home' %}" class="btn btn-common">Check Out Our Sales</a>
+</div>
+{% endif %}

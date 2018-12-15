@@ -7,7 +7,7 @@ from django_prices.templatetags.prices_i18n import amount
 
 from ..checkout.forms import AddToCartForm
 from ..core.utils.taxes import display_gross_prices
-
+from .models import ProductReview
 
 class VariantChoiceField(forms.ModelChoiceField):
     discounts = None
@@ -53,3 +53,9 @@ class ProductForm(AddToCartForm):
 
     def get_variant(self, cleaned_data):
         return cleaned_data.get('variant')
+
+
+class ProductReviewForm(forms.ModelForm):
+    class Meta:
+        model = ProductReview
+        fields = ('stars', 'review')

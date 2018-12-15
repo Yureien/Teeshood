@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from impersonate.views import impersonate as orig_impersonate
 
-from .forms import CustomDesignForm, BulkOrderForm
+from .forms import CustomDesignForm, BulkOrderForm, CustomerContactForm
 from ..account.models import User
 from ..dashboard.views import staff_member_required
 from ..product.utils import products_for_homepage
@@ -31,6 +31,29 @@ def home(request):
 @staff_member_required
 def styleguide(request):
     return TemplateResponse(request, 'styleguide.html')
+
+
+def about(request):
+    return TemplateResponse(request, 'about.html')
+
+
+def contact(request):
+    customer_contact_form = CustomerContactForm(request.POST or None)
+    if customer_contact_form.is_valid():
+        customer_contact_form.save()
+        messages.success(
+            request,
+            pgettext_lazy(
+                'Customer Contact message',
+                'Sent message.')
+        )
+        return redirect('home')
+    ctx = {'contact_form': customer_contact_form}
+    return TemplateResponse(request, 'contact.html', ctx)
+
+
+def privacy_policy(request):
+    return TemplateResponse(request, 'privacy_policy.html')
 
 
 def impersonate(request, uid):
@@ -70,9 +93,8 @@ def design_upload(request):
     return TemplateResponse(request, 'design_upload.html', ctx)
 
 
-@login_required
 def bulk_order(request):
-    bulk_order_form = BulkOrderForm(request.POST or None, request.FILES)
+    bulk_order_form = BulkOrderForm(request.POST or None, request.FILES or None)
     if bulk_order_form.is_valid():
         design = bulk_order_form.save(commit=False)
         design.user = request.user

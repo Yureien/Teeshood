@@ -268,6 +268,14 @@ class ProductVariant(models.Model):
             self.sku, self.display_product(), prices_i18n.amount(price))
 
 
+class ProductReview(models.Model):
+    product = models.ForeignKey(
+        Product, related_name='reviews', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    stars = models.IntegerField(max_length=5)
+    review = models.TextField(blank=True)
+
+
 class ProductAttribute(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
     name = models.CharField(max_length=100)

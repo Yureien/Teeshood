@@ -131,6 +131,13 @@
 								</li>
 								{% endif %}
 								{% if perms.product.view_product %}
+								<li class="{% block menu_contact_forms_class %}{% endblock %}">
+									<a href="{% url 'dashboard:contact-form-list' %}">
+										{% trans "Contact forms" context "Contact forms list" %}
+									</a>
+								</li>
+								{% endif %}
+								{% if perms.product.view_product %}
 								<li class="{% block menu_bulk_orders_class %}{% endblock %}">
 									<a href="{% url 'dashboard:bulk-order-list' %}">
 										{% trans "Bulk Orders" context "Bulk Orders list" %}

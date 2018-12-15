@@ -29,3 +29,4 @@ webpack-bundle.json
 /templates/templated_email/compiled/*
 !/templates/templated_email/compiled/.gitkeep
 venv/
+new_t/

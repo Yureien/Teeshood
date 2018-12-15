@@ -6,7 +6,7 @@ a.btn {
   border-radius: $button-border-radius;
   text-transform: uppercase;
   font-weight: 300;
-  font-size: 1rem;
+//  font-size: 1rem;
   cursor: pointer;
   font-family: $font-family-sans-serif;
   white-space: normal;
@@ -31,6 +31,9 @@ a.btn {
     &:hover {
       background-color: $darken-blue;
     }
+	&.disabled {
+		background-color: lighten($blue, 25%);
+	}
   }
   &.secondary {
     border: 1px solid $blue;

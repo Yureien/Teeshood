@@ -1,8 +1,8 @@
 import {getAjaxError} from './misc';
 
 export const summaryLink = $('html').data('cart-summary-url');
-export const $cartDropdown = $('.cart-dropdown');
-export const $cartIcon = $('.cart__icon');
+export const $cartDropdown = $('.cart-box');
+export const $cartIcon = $('.cart-icon');
 export const $addToCartError = $('.product__info__form-error small');
 export const $removeProductSuccess = $('.remove-product-alert');
 
@@ -15,23 +15,27 @@ export const onAddToCartSuccess = () => {
     $cartDropdown.html(data);
     $addToCartError.html('');
     var newQunatity = $('.cart-dropdown__total').data('quantity');
-    $('.badge').html(newQunatity).removeClass('empty');
-    $cartDropdown.addClass('show');
-    $cartIcon.addClass('hover');
-    $cartDropdown.find('.cart-dropdown__list').scrollTop($cartDropdown.find('.cart-dropdown__list')[0].scrollHeight);
-    setTimeout((e) => {
-      $cartDropdown.removeClass('show');
-      $cartIcon.removeClass('hover');
+    $('.cart-label').html(newQunatity).removeClass('empty');
+    //$cartDropdown.addClass('show');
+	  //$cartIcon.addClass('hover');
+	  $('html, body').animate({
+          scrollTop: 0
+      }, 800, function() {
+          $cartIcon.focus();
+      });
+      setTimeout((e) => {
+      //$cartDropdown.removeClass('show');
+      //$cartIcon.removeClass('hover');
     }, 2500);
   });
 };
 
 export default $(document).ready((e) => {
   // Cart dropdown
-  $.get(summaryLink, (data) => {
+	$.get(summaryLink, (data) => {
     $cartDropdown.html(data);
   });
-  $('.navbar__brand__cart').hover((e) => {
+  $('.shop-cart').hover((e) => {
     $cartDropdown.addClass('show');
     $cartIcon.addClass('hover');
   }, (e) => {

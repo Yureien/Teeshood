@@ -1,0 +1,209 @@
+
+
+{% block content %}
+<section class="about section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="single-image">
+                    <a href="#"><img src="assets/img/about/img1.jpg" alt=""></a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="about-content">
+                    <h3>welcome to demo</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p>
+                    <a href="#" class="btn btn-common btn-more">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="about mission-vision section bg-grey">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="about-content">
+                    <h3>Our Mission</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p> 
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="single-image">
+                    <a href="#"><img src="assets/img/about/mission.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="single-image">
+                    <a href="#"><img src="assets/img/about/vision.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="about-content">
+                    <h3>Our Vision</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. U enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dol in reprehenderit in </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="team">
+    <div class="container">
+        <h1 class="section-title">Team Members</h1>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="team-item">
+                    <figure>
+                        <img src="assets/img/team/img1.jpg" alt="">
+                        <figcaption>
+                            <div class="info">
+                                <h3>David Givens</h3>
+                                <p>Chief Technical Officer</p>
+                            </div>
+                            <div class="social">
+                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="team-item">
+                    <figure>
+                        <img src="assets/img/team/img2.jpg" alt="">
+                        <figcaption>
+                            <div class="info">
+                                <h3>Cadic Vegeta</h3>
+                                <p>Graphic Designer</p>
+                            </div>
+                            <div class="social">
+                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="team-item">
+                    <figure>
+                        <img src="assets/img/team/img3.jpg" alt="">
+                        <figcaption>
+                            <div class="info">
+                                <h3>Justyna Michallek</h3>
+                                <p>Buniness Manager</p>
+                            </div>
+                            <div class="social">
+                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="support section">
+    <div class="container">
+        <div class="row">
+            <div class="support-inner">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="row-normal clearfix">
+                        <div class="support-info">
+                            <div class="info-title">
+                                <i class="icon-plane"></i>
+                                Free Shipping Worldwide
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="row-normal clearfix">
+                        <div class="support-info">
+                            <div class="info-title">
+                                <i class="icon-earphones-alt"></i>
+                                24/7 Customer Service
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="row-normal clearfix">
+                        <div class="support-info">
+                            <div class="info-title">
+                                <i class="icon-heart"></i>
+                                Easy Return Policy
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<div class="client section">
+    <div class="container">
+        <h1 class="section-title">Some of our great customers</h1>
+        <hr class="lines">
+        <div class="row">
+            <div id="client-logo" class="owl-carousel">
+                <div class="client-logo item">
+                    <a href="#">
+                        <img src="assets/img/clients/logo-01.png" alt="" />
+                    </a>
+                </div>
+                <div class="client-logo item">
+                    <a href="#">
+                        <img src="assets/img/clients/logo-02.png" alt="" />
+                    </a>
+                </div>
+                <div class="client-logo item">
+                    <a href="#">
+                        <img src="assets/img/clients/logo-03.png" alt="" />
+                    </a>
+                </div>
+                <div class="client-logo item">
+                    <a href="#">
+                        <img src="assets/img/clients/logo-04.png" alt="" />
+                    </a>
+                </div>
+                <div class="client-logo item">
+                    <a href="#">
+                        <img src="assets/img/clients/logo-05.png" alt="" />
+                    </a>
+                </div>
+                <div class="client-logo item">
+                    <a href="#">
+                        <img src="assets/img/clients/logo-06.png" alt="" />
+                    </a>
+                </div>
+                <div class="client-logo item">
+                    <a href="#">
+                        <img src="assets/img/clients/logo-07.png" alt="" />
+                    </a>
+                </div>
+                <div class="client-logo item">
+                    <a href="#">
+                        <img src="assets/img/clients/logo-08.png" alt="" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

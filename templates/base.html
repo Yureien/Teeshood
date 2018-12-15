@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 {% load i18n %}
 {% load staticfiles %}
@@ -9,158 +8,175 @@
 
 <html lang="{{ LANGUAGE_CODE }}" class="no-js" data-shipping-options-url="{% url 'cart:shipping-options' %}" data-cart-summary-url="{% url 'cart:summary' %}">
     <head>
-		<title>{% block title %}{{ site.name }}{% endblock %}</title>
+        <title>{% block title %}{{ site.name }}{% endblock %}</title>
 		{% block meta %}
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="generator" content="Saleor">
-		<meta name="theme-color" content="#44bdaa">
-		<meta name="msapplication-TileColor" content="#44bdaa">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-		<meta name="apple-mobile-web-app-title" content="{{ site.name }}">
-		<meta name="og:type" content="website">
-		{% get_available_languages as LANGUAGES %}
-		{% for lang_code, language_name in LANGUAGES %}
-		<link rel="alternate" hreflang="{{ lang_code }}" href="{% translate_url url=request.path lang_code=lang_code %}" />
-		{% endfor %}
+		<meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Ecommerce, Repairing & Dry Clining">
 		{% endblock meta %}
-
-		{% include 'favicon.html' %}
-		{% render_bundle 'storefront' 'css' attrs='async' %}
-
+		
+        <!-- <link rel="stylesheet" href="assets/css/jquery.countdown.css"> -->
+        <link rel="shortcut icon" href=" {% static "assets/new/img/favicon.png" %}">
+		<link rel="stylesheet" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+        <link rel="stylesheet" href="{% static "assets/new/css/bootstrap.min.css" %}" type="text/css">
+		<link rel="stylesheet" href="{% static "assets/new/css/fix.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/css/bootstrap-select.min.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/fonts/line-icons/line-icons.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/css/main.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/extras/settings.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/extras/animate.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/extras/owl.carousel.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/extras/owl.theme.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/extras/ion.rangeSlider.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/extras/ion.rangeSlider.skinFlat.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/extras/component.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/extras/slick.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/extras/slick-theme.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/extras/nivo-lightbox.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/css/color-switcher.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/css/slicknav.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/css/responsive.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/css/style.css" %}" type="text/css">
+        <link rel="stylesheet" href="{% static "assets/new/css/ratings.css" %}" type="text/css">
 		{% block stylesheet %}{% endblock stylesheet %}
 
+		{% include 'favicon.html' %}
+		<script type="text/javascript" src="{% static "assets/new/js/popper.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/jquery-min.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/bootstrap.min.js" %}"></script>
+		
 		{% block meta_tags %}
 		<meta property="og:title" content="{{ site.name }}">
 		<meta property="og:url" content="{{ request.build_absolute_uri }}">
 		<meta property="og:image" content="{% static "images/block1.png" %}">
 		{% endblock meta_tags %}
-
-		<link rel="manifest" href="{% url "manifest" %}" />
-
-		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
     </head>
-
     <body>
 		{% block header %}
-		<header class="navbar" role="navigation">
-			<div class="navbar__login container-fluid {% if user.is_impersonate %} bg-warning{% endif %} bg-dark">
-				<div class=" d-none d-md-block container-fluid">
-					<div class="row">
-						<div class="col-6">
-							<p class="text-left">{{ site.settings.header_text }}</p>
-						</div>
-						<div class="col-6">
-							<ul class="float-right">
-								{% include "_language_picker.html" %}
-								{% if user.is_authenticated %}
-								{% if user.is_staff or request.impersonator.is_staff %}
-								<li>
-									<a href="{% url "dashboard:index" %}" target="_blank" rel="noopener">
-										{% trans "Dashboard" context "Main navigation item" %}
-									</a>
-								</li>
-								{% endif %}
-								<li>
-									<a href="{% url "account:details" %}">
-										{% trans "Your account" context "Main navigation item" %}</a>
-								</li>
-								{% if user.is_impersonate %}
-								<li>
-									<a href="{% url "impersonate-stop" %}">
-										{% trans 'Stop impersonating' context 'Main navigation item' %}
-									</a>
-								</li>
-								{% else %}
-								<li>
-									<a href="{% url "account:logout" %}">
-										{% trans "Log out" context "Main navigation item" %}</a>
-								</li>
-								{% endif %}
-								{% else %}
-								<li>
-									<a rel="nofollow" href="{% url "account:signup" %}">
-										{% trans "Register" context "Main navigation item" %}</a>
-								</li>
-								<li>
-									<a rel="nofollow" href="{% url "account:login" %}">
-										{% trans "Log in" context "Main navigation item" %}
-									</a>
-								</li>
-								{% endif %}
+		<div class="header">
+            <div class="top-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="language-wrapper">
+                                <div class="box-language">
+                                    <a href="#"><i class="icon-phone"></i> {{ site.settings.header_text }}</a>
+                                </div>                            
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="col-md-6 col-sm-8 hidden-sm">
+                            <div class="search-area">
+								<form action="{% url "search:search" %}">
+									<div class="control-group">
+										<ul class="categories-filter animate-dropdown">
+		                                    <li class="dropdown"><a data-toggle="dropdown" href="#" aria-expanded="false" class="pr-4">Categories <span class="caret"></span></a>
+		                                        <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 28px, 0px);">
+													{% menu site_menu=site.settings.top_menu search=True %}
+		                                        </ul>
+		                                    </li>
+		                                </ul>
+										<input class="search-field" type="text" name="q"
+											   value="{% if query %}{{ query }}{% endif %}"
+											   placeholder="Search for product"
+											   required>
+                                        <a class="search-button" href="#"><i class="icon-magnifier"></i></a>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="shop-cart">
+                                <ul>
+                                    <li>
+                                        <a href="#" class="cart-icon cart-btn"><i class="icon-basket-loaded"></i><span class="cart-label">
+											{% if cart_counter %}{{ cart_counter }}{% else %}0{% endif %}
+										</span></a>
+                                        <div class="cart-box">
+                                            <div class="popup-container">
+												{% include 'cart_dropdown.html' %}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<nav id="navbarid" class="navbar navbar-default navbar-expand-md" >
+		        <div class="container">
+		            <div class="row">
+		                <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></button>
+                            <a class="navbar-brand pull-left" href="{% url 'home' %}"><img src="{% static 'assets/new/img/teeshood logo long.svg' %}" alt=""></a><div class="shop-cart hidden-md">
+		                        <ul> 
+		                            <li>
+		                                <a href="{% url "cart:index" %}" class="cart-icon cart-btn"><i class="icon-basket-loaded"></i><span class="cart-label">
+											{% if cart_counter %}{{ cart_counter }}{% else %}0{% endif %}
+										</span></a> 
+		                            </li>
+		                        </ul>
+		                    </div>
+                        </div>
+                        <div class="navbar-collapse collapse">
+							<ul class="nav navbar-nav">
+								{% url 'home' as url_home %}
+								{% url "bulk-order" as url_bulk %}
+								<li><a href="{{ url_home }}"{% if request.path_info == url_home %} class="active"{% endif %}>Home</a></li>
+								{% menu site_menu=site.settings.top_menu horizontal=True %}
+								<li><a href="{{ url_bulk }}"{% if request.path_info == url_bulk %} class="active"{% endif %}>Bulk Order</a></li>
 							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="navbar__brand container-fluid d-block">
-				<div class="container-fluid">
-					<div class="row no-gutters">
-						<div class="col-6 col-md-1 navbar__logo">
-							<div class="menu-icon-mobile d-md-none navbar__brand__menu-toggle closed open">
-								<svg data-src="{% static "images/mobile-menu.svg" %}" width="28px" height="20px" />
-							</div>
-							<a href="{% url 'home' %}">
-								<svg data-src="{% static "images/logo_new.svg" %}" height="140%" width="140%" />
-							</a>
-						</div>
-						<div class="col-2 col-md-2 navbar__nav">
-							<a href="#" class="dropdown-toggle d-none d-md-block" id="navToggle" style="font-size: 16px;">Shop <span class="caret"></span></a>
-						</div>
-						<div class="col-2 col-md-3 offset-md-4 navbar__search static">
-							{% if SEARCH_IS_ENABLED %}
-							<div class="d-md-none mobile-search-icon">
-								<svg data-src="{% static "images/search.svg" %}" width="30" height="30"/>
-							</div>
-							<form class="form-inline search-form" action="{% url "search:search" %}">
-								<div class="mobile-close-search d-md-none">
-									<svg data-src="{% static "images/close.svg" %}" width="30" height="30"/>
-								</div>
-								<input class="form-control" type="text" name="q"
-									   value="{% if query %}{{ query }}{% endif %}"
-									   placeholder="{% trans "Search for product" %}"
-									   required>
-								<button class="btn btn-link" type="submit">
-									<svg data-src="{% static "images/search.svg" %}" width="30" height="30"/>
-								</button>
-							</form>
-							{% endif %}
-						</div>
-						<div class="col-2 col-md-2">
-							<div class="navbar__brand__cart float-right">
-								<a rel="nofollow" class="cart__icon" href="{% url "cart:index" %}">
-									<span class="cart-label d-none d-md-inline-block">
-										{% trans "Your Cart" context "Main navigation item" %}
-									</span>
-									<div class="navbar__brand__cart__icon">
-										<svg data-src="{% static "images/cart.svg" %}" width="35" height="30"/>
-									</div>
-									<span class="badge {% if not cart_counter %}empty{% endif %}">
-										{% if cart_counter %}
-										{{ cart_counter }}
-										{% else %}
-										0
-										{% endif %}
-									</span>
-								</a>
-								<div class="cart-dropdown d-none">
-									{% include 'cart_dropdown.html' %}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="navbar__menu container menu-hidden">
-				<nav class="navigation">
-					{% menu site_menu=site.settings.top_menu horizontal=True %}
-				</nav>
-			</div>
-		</header>
+							<div class="my-account">
+		                        <div class="text-right">
+		                            <div class="account link-inline">
+		                                <div class="dropdown text-right">
+		                                    <a class="dropdown-toggle" href="#" aria-expanded="false" data-toggle="dropdown"><span class="icon-user"></span> Account <span class="icon-arrow-down"></span></a>
+											<ul class="dropdown-menu">
+												{% if user.is_authenticated %}
+												{% if user.is_staff or request.impersonator.is_staff %}
+												<li><a href="{% url "dashboard:index" %}"><span class="icon icon-user"></span>Dashboard</a></li>
+												{% endif %}
+                                                <li><a href="{% url "account:details" %}"><span class="icon icon-user"></span>My Account</a></li>
+		                                        <li><a href="{% url "cart:index" %}"><span class="icon icon-check"></span>Checkout</a></li>
+												{% if user.is_impersonate %}
+                                                <li><a href="{% url "impersonate-stop" %}"><span class="icon icon-lock"></span>Stop Impersonating</a></li>
+												{% else %}
+                                                <li><a href="{% url "account:logout" %}"><span class="icon icon-lock"></span>Log Out</a></li>
+												{% endif %}
+												{% else %}
+                                                <li><a href="{% url "account:signup" %}"><span class="icon icon-user-follow"></span>Create an account</a></li>
+                                                <li><a href="{% url "account:login" %}"><span class="icon icon-lock"></span>Log In</a></li>
+												{% endif %}
+                                                <li><a href="#"><span class="icon icon-close"></span>close</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="mobile-menu">
+                    <li><a class="active" href="{% url 'home' %}">Home</a></li>
+					{% menu site_menu=site.settings.top_menu horizontal=False %}
+					{% if user.is_authenticated %}
+					{% if user.is_staff or request.impersonator.is_staff %}
+					<li><a href="{% url "dashboard:index" %}">Dashboard</a></li>
+					{% endif %}
+                    <li><a href="{% url "account:details" %}">My Account</a></li>
+		            <li><a href="{% url "cart:index" %}">Checkout</a></li>
+					{% if user.is_impersonate %}
+                    <li><a href="{% url "impersonate-stop" %}">Stop Impersonating</a></li>
+					{% else %}
+                    <li><a href="{% url "account:logout" %}">Log Out</a></li>
+					{% endif %}
+					{% else %}
+                    <li><a href="{% url "account:signup" %}">Create an account</a></li>
+                    <li><a href="{% url "account:login" %}">Log In</a></li>
+					{% endif %}
+                </ul>
+            </nav>
+        </div>
 		{% endblock %}
 		<div class="container">
 			{% if messages %}
@@ -174,146 +190,108 @@
 		</div>
 		{% block banners %}
 		{% endblock %}
-		<div class="container-fluid maincontent">
-			{% block topcontent %}{% endblock topcontent %}
+		<div class="maincontent">
 			{% block breadcrumb %}
 			{% endblock breadcrumb %}
+			{% block topcontent %}{% endblock topcontent %}
 			{% block content %}
 			{% endblock content %}
 		</div>
 		{% block footer %}
-		<footer class="footer bg-dark">
-			<div class="container text-left pl-4 pl-sm-0">
-				<div class="row">
-					<div class="col-md-4 col-sm-12">
-						<h1>Sitemap</h1>
-						<div class="row pl-4 pl-sm-0">
-							<div class="col-md-6 col-sm-12">
-								<ul>
-									<li>
-										<a rel="nofollow" href="{% url "cart:index" %}">
-											{% trans "Your Cart" context "Main navigation item" %}
-										</a>
-									</li>
-									{% if user.is_authenticated %}
-									{% if user.is_staff %}
-									<li>
-										<a href="{% url "dashboard:index" %}" target="_blank" rel="noopener">
-											{% trans "Dashboard" context "Main navigation item" %}
-										</a>
-									</li>
-									<li>
-										<a href="{% url "bulk-order" %}">
-											{% trans "Bulk Order" context "Main navigation item" %}
-										</a>
-									</li>
-									{% endif %}
-									<li>
-										<a href="{% url "account:details" %}">
-											{% trans "Your account" context "Main navigation item" %}
-										</a>
-									</li>
-									{% if user.is_impersonate %}
-									<li>
-										<a href="{% url "impersonate-stop" %}">
-											{% trans 'Stop impersonating' context 'Main navigation item' %}
-										</a>
-									</li>
-									{% else %}
-									<li>
-										<a href="{% url "account:logout" %}">
-											{% trans "Log out" context "Main navigation item" %}</a>
-									</li>
-									{% endif %}
-									{% else %}
-									<li>
-										<a rel="nofollow" href="{% url "account:signup" %}">
-											{% trans "Register" context "Main navigation item" %}
-										</a>
-									</li>
-									<li>
-										<a rel="nofollow" href="{% url "account:login" %}">
-											{% trans "Log in" context "Main navigation item" %}
-										</a>
-									</li>
-									{% endif %}
-								</ul>
-							</div>
-							<div class="col-md-6 col-sm-12">							
-								{% menu site_menu=site.settings.bottom_menu %}
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-12">
-						<h1>Contact Us</h1>
-						<div class="pl-4 pl-sm-0">
-							<span style='display: block;color: #fff;'>Office: Kolkata</span><br>
-							<span style='display: block;color: #fff;'>Phone: +91-9083250-171/225/226</span><br>
-							<span style='display: block;color: #fff;'>Email: contact@teeshood.com</span>
-						</div>
-					</div>
-					<div class="col-md-4 col-sm-12">
-						<h1 class="mt-4 mt-sm-0">Newsletter</h1>
-						<div class="pl-4 pl-sm-0">
-							<form action="">
-								<div class="form-row align-items-center mb-4 mt-3">
-									<div class="col-8">
-										<input class="form-control" type="email" placeholder="Email"></input>
-									</div>
-									<div class="col-4">
-										<button class="btn btn-secondary" href="#" id="button">Sign Up!</button>
-									</div>
-								</div>
-							</form>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://www.facebook.com/mirumeelabs/">
-								<svg data-src="{% static "images/facebook-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://github.com/mirumee/saleor">
-								<svg data-src="{% static "images/github-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://twitter.com/getsaleor">
-								<svg data-src="{% static "images/twitter-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://plus.google.com/+Mirumee">
-								<svg data-src="{% static "images/google-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://www.meetup.com/Mirumee-Talks/">
-								<svg data-src="{% static "images/meetup-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://linkedin.com/company/mirumee-software">
-								<svg data-src="{% static "images/linkedin-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://dribbble.com/mirumee">
-								<svg data-src="{% static "images/dribbble-logo.svg" %}" width="25px" height="25px"/>
-							</a>
-							<a target="_blank" rel="noopener" class="social-footer" href="https://www.instagram.com/explore/tags/mirumee/">
-								<svg data-src="{% static "images/instagram-logo.svg" %}" width="25px" height="25px"/>
-						</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<hr>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-6 col-sm-12">
-						Copyright &copy; 2018 design by Graphikker. All rights reserved.
-					</div>
-					<div class="col-md-6 col-sm-12 text-right float-right" style="align-items: middle;">
-						<span class="d-md-inline-block">100% secure payment: </span>
-						<div class="d-md-inline-block">
-							<img src="{% static 'images/masterdcard.png' %}" height="30px" class="mr-1">
-							<img src="{% static 'images/americanExpress.png' %}" height="30px" class="mr-1">
-							<img src="{% static 'images/cod.png' %}" height="30px" class="mr-1">
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+		<footer id="main-footer" class="section">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-3 col-sm-6">
+                        <div class="block-subscribe">
+                            <h3 class="widget-title">About Company</h3>
+                            <p>Quisque a nunc interdum tellus placerat cursus. Quisque facilisis dapibus facilisis! Vivamus dictum lectus ut porta volutpat.</p>
+                            <img src="{% static 'assets/new/img/payment.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <h3 class="widget-title">Useful Links</h3>
+                        <ul class="footer-menu-links">
+							{% if user.is_authenticated %}
+							{% if user.is_staff or request.impersonator.is_staff %}
+							<li><a href="{% url "dashboard:index" %}">Dashboard</a></li>
+							{% endif %}
+							<li><a href="{% url "cart:index" %}">Your Cart</a></li>
+                            <li><a href="{% url "account:details" %}">My Account</a></li>
+							<li><a href="{% url "bulk-order" %}">Bulk Order</a></li>
+							{% if user.is_impersonate %}
+                            <li><a href="{% url "impersonate-stop" %}">Log Out</a></li>
+							{% else %}
+                            <li><a href="{% url "account:logout" %}">Log Out</a></li>
+							{% endif %}
+							{% else %}
+                            <li><a href="{% url "account:signup" %}">Sign Up</a></li>
+                            <li><a href="{% url "account:login" %}">Log In</a></li>
+							{% endif %}
+							{% menu site_menu=site.settings.bottom_menu %}
+							<li><a href="{% url "privacy-policy" %}">Privacy Policy</a></li>
+							<li><a href="{% url "about" %}">About Us</a></li>
+							<li><a href="{% url "contact" %}">Contact Us</a></li>
+                        </ul>
+                    </div>
+					<div class="col-md-3 col-sm-6">
+		                <h3 class="widget-title">Product Tags</h3>
+		                <div class="tagcloud">
+							<a href="{% url "search:search" %}?q=Accessories" class="tag-link">Accessories</a>
+							<a href="{% url "search:search" %}?q=Bags" class="tag-link">Bags</a>
+							<a href="{% url "search:search" %}?q=Bestseller" class="tag-link">Bestseller</a>
+							<a href="{% url "search:search" %}?q=Kids" class="tag-link">Kids</a>
+							<a href="{% url "search:search" %}?q=Dresses" class="tag-link">Dresses</a>
+							<a href="{% url "search:search" %}?q=Men+Fashion" class="tag-link">Men Fashion</a>
+							<a href="{% url "search:search" %}?q=Sell+Off" class="tag-link">Sell Off</a>
+							<a href="{% url "search:search" %}?q=Shoes" class="tag-link">Shoes</a>
+							<a href="{% url "search:search" %}?q=Specials" class="tag-link">Specials</a>
+							<a href="{% url "search:search" %}?q=Tops" class="tag-link">Tops</a>
+							<a href="{% url "search:search" %}?q=Women" class="tag-link">Women Fashion</a>
+		                </div>
+		            </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="contact-us">
+                            <h3 class="widget-title">Contact Us</h3>
+                            <ul class="contact-list">
+                                <li><i class="icon-home"></i> <span>Kolkata, India</span></li>
+                                <li><i class="icon-call-out"></i> <span>+91 9999-9999-99 <br> +91 9999-9999-99 </span></li>
+                                <li><i class="icon-envelope"></i> <span><a href="mailto:info@teeshood.com">sales@teeshood.com</a></span>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
 		{% endblock %}
 		{% block footer_scripts %}
+		
 		<script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
 		{% render_bundle 'storefront' 'js' %}
+		<script type="text/javascript" src="{% static "assets/new/js/popper.min.js" %}"></script>
+		<script type="text/javascript" src="{% static "assets/new/js/jquery-min.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/bootstrap.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/bootstrap-select.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/owl.carousel.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/ion.rangeSlider.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/modalEffects.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/classie.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/jquery.themepunch.revolution.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/jquery.themepunch.tools.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/nivo-lightbox.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/slick.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/jquery.slicknav.js" %}"></script>
+        <script type="text/javascript" src="{% static "assets/new/js/main.js" %}"></script>
+        <script src="{% static "assets/new/js/jquery.plugin.min.js" %}"></script>
+        <script src="{% static "assets/new/js/jquery.countdown.js" %}"></script>
+        <script>
+         $(function () {
+             var liftoffTime = new Date();
+             liftoffTime = new Date(liftoffTime.getFullYear(), liftoffTime.getMonth(), liftoffTime.getDate() + 1, 0, 0);
+             $('#defaultCountdown').countdown({until: liftoffTime, layout: '{hn} {hl}, {mn} {ml}, {sn} {sl}'});
+         });
+        </script>
 		{% endblock footer_scripts %}
     </body>
 </html>

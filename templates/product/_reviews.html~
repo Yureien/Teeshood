@@ -1,0 +1,86 @@
+<div class="pro-tab-info pro-reviews">
+    <div class="customer-review">
+        <h3 class="small-title">Customer review</h3>
+        <ul class="product-comments clearfix">
+			{% for review in product.reviews_set.all %}
+            <li class="mb-30">
+                <div class="pro-reviewers-comment">
+                    <div class="fix">
+                        <div class="pull-left mbl-center">
+                            <h5><strong>{{ review.user.get_full_name }}</strong></h5>
+                            <div class="star-rating">
+	                            <div class="reviews-icon">
+	                                <i class="i-color fa fa-star"></i>
+	                                <i class="i-color fa fa-star"></i>
+	                                <i class="i-color fa fa-star"></i>
+	                                <i class="fa fa-star-o"></i>
+	                                <i class="fa fa-star-o"></i>
+	                            </div>
+                            </div>
+                            <p class="reply-date">27 Jun, 2016 at 2:30pm</p>
+                        </div>
+                    </div>
+                    <p>Message</p>
+                </div>
+			</li>
+			{% empty %}
+			<li class="mv-30">
+				<p>No reviews yet! Be the first to review...</p>
+			</li>
+			{% endfor %}
+        </ul>
+    </div>
+	{% if request.user.is_authenticated %}
+    <div class="leave-review">
+        <h3 class="small-title">Leave your review</h3>
+        <div class="reply-box">
+			<form class="form-horizontal" method="POST">
+				{% csrf_token %}
+				<p class="mb-4"><strong>Your Rating</strong></p>
+				<div class="form-group rating ml-1">
+					<label>
+						<input type="radio" name="{{ review_form.stars.name }}" value="1" />
+						<i class="icon fas fa-star"></i>
+					</label>
+					<label>
+						<input type="radio" name="{{ review_form.stars.name }}" value="2" />
+						<i class="icon fas fa-star"></i>
+						<i class="icon fas fa-star"></i>
+					</label>
+					<label>
+						<input type="radio" name="{{ review_form.stars.name }}" value="3" />
+						<i class="icon fas fa-star"></i>
+						<i class="icon fas fa-star"></i>
+						<i class="icon fas fa-star"></i>   
+					</label>
+					<label>
+						<input type="radio" name="{{ review_form.stars.name }}" value="4" />
+						<i class="icon fas fa-star"></i>
+						<i class="icon fas fa-star"></i>
+						<i class="icon fas fa-star"></i>
+						<i class="icon fas fa-star"></i>
+					</label>
+					<label>
+						<input type="radio" name="{{ review_form.stars.name }}" value="5" />
+						<i class="icon fas fa-star"></i>
+						<i class="icon fas fa-star"></i>
+						<i class="icon fas fa-star"></i>
+						<i class="icon fas fa-star"></i>
+						<i class="icon fas fa-star"></i>
+					</label>
+				</div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <textarea class="form-control input-lg" name="{{ review_form.review.name }}" rows="4" placeholder="Your review here..."></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <button class="btn btn-common" type="submit" name="review_submit">Submit Review</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+	{% endif %}
+</div>

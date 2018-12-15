@@ -18,7 +18,7 @@ export default class QuantityInput extends Component {
     });
     return (
       <div className={formGroupClasses}>
-        <label className="control-label product__variant-picker__label" htmlFor="id_quantity">{pgettext('Add to cart form field label', 'Quantity')}</label>
+        <h5 className="sub-title">{pgettext('Add to cart form field label', 'Quantity')}</h5>
         <input
           className="form-control"
           defaultValue={quantity}

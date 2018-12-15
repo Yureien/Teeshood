@@ -4,44 +4,117 @@
 {% load product_first_image from product_images %}
 {% load get_thumbnail from product_images %}
 {% load placeholder %}
+{% load ratings %}
 
-{% for product, availability in products %}
-{% include 'product/_quickview.html' with product=product %}
-<div class="col-6 col-lg-3 product-list">
-    <a href="{{ product.get_absolute_url }}" class="link--clean">
-		<div class="text-center">
-			<div>
-				<div class="container-image">
+{% if list %}
+<div class="row">
+	{% for product, availability in products %}
+	<div class="col-md-12">
+		<div class="shop-product clearfix">
+			<div class="product-box">
+				<a href="{{ product.get_absolute_url }}">				
 					<img class="img-responsive lazyload lazypreload"
 						 data-src="{% product_first_image product method="crop" size="255x255" %}"
 						 data-srcset="{% product_first_image product method="crop" size="255x255" %} 1x, {% product_first_image product method="crop" size="510x510" %} 2x"
 						 alt=""
 						 src="{% placeholder size=255 %}">
-					<div class="hover">
-						<h5><a id="quick-view" data-toggle="modal" data-target="#product-{{ product.pk }}-quickview">Quick View</a></h5>
+				</a>
+				<div class="cart-overlay"></div>
+				<!--<span class="sticker new"><strong>NEW</strong></span>-->
+				<div class="actions">
+					<div class="add-to-links">
+						<a href="{{ product.get_absolute_url }}" class="btn-cart"><i class="icon-basket-loaded"></i></a>
+						<a class="btn-quickview" id="quick-view" data-toggle="modal" data-target="#product-{{ product.pk }}-quickview"><i class="icon-eye"></i></a>
 					</div>
 				</div>
-				<span class="product-list-item-name" title="{{ product }}">{{ product }}</span>
 			</div>
-			<div class="panel-footer">
-				{% if availability.available %}
-				{% price_range availability.price_range %}
-				{% if availability.discount %}
-				{% if availability.price_range_undiscounted.start != availability.price_range.start %}
-                <div class="product-list__sale">
-					<svg data-src="{% static "images/sale-bg.svg" %}" />
-					<span class="product-list__sale__text">
-						{% comment %}Translators: Layout may break if character length is different than four.{% endcomment %}
-						{% trans "Sale" context "Sale (discount) label for item in product list" %}
+			<div class="product-info">
+				<div class="fix">
+					<h4 class="product-title pull-left"><a href="{{ product.get_absolute_url }}">{{ product }}</a></h4>                                                        <div class="star-rating pull-right">
+						<div class="product-star">
+							{% calculate_rating product as total_stars %}
+							{% create_stars total_stars as rating %}
+							{% for i in rating %}
+							{% if i == "x" %}<i class="i-color fas fa-star"></i>{% else %}<i class="far fa-star"></i>{% endif %}
+							{% endfor %}
+							<span>({{ product.reviews.count }} Customer Reviews)</span>
+						</div>
+					</div>
+				</div>
+				<div class="fix mb-10">
+					<span class="price">
+						{% if availability.available %}
+						{% if availability.discount %}
+						{% if availability.price_range_undiscounted.start != availability.price_range.start %}
+						{% price availability.price_range %} <del>{% price availability.price_range_undiscounted %}</del> 
+						{% endif %}
+						{% else %}
+						{% price availability.price_range %}
+						{% endif %}
+						{% else %}
+						Out of Stock
+						{% endif %}
 					</span>
-                </div>
-				{% endif %}
-				{% endif %}
-				{% else %}
-				&nbsp;
-				{% endif %}
+				</div>
+				<div class="product-description mb-20">
+					<p>{{ product.description|safe }}</p>
+				</div>
 			</div>
 		</div>
-    </a>
+	</div>
+	{% endfor %}
 </div>
+{% else %}
+{% for product, availability in products %}
+{% if forloop.counter0|divisibleby:"3" %}
+{% if not forloop.first %}
+</div>
+{% endif %}
+<div class="row">
+	{% endif %}
+	<div class="col-md-4 col-sm-6 col-xs-12">
+		<div class="shop-product">
+			<div class="product-box">
+				<a href="{{ product.get_absolute_url }}">				
+					<img class="img-responsive lazyload lazypreload"
+						 data-src="{% product_first_image product method="crop" size="255x255" %}"
+						 data-srcset="{% product_first_image product method="crop" size="255x255" %} 1x, {% product_first_image product method="crop" size="510x510" %} 2x"
+						 alt=""
+						 src="{% placeholder size=255 %}">
+				</a>
+				<div class="cart-overlay"></div>
+				{% if availability.available %}
+				{% if availability.discount %}
+				{% if availability.price_range_undiscounted.start != availability.price_range.start %}
+				<span class="sticker new"><strong>SALE</strong></span>
+				{% endif %}
+				{% endif %}
+				{% endif %}
+				<div class="actions">
+					<div class="add-to-links">
+						<a href="{{ product.get_absolute_url }}" class="btn-cart"><i class="icon-basket-loaded"></i></a>
+						<a class="btn-quickview" id="quick-view" data-toggle="modal" data-target="#product-{{ product.pk }}-quickview"><i class="icon-eye"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="product-info clearfix">
+				<h4 class="product-title"><a href="{{ product.get_absolute_url }}">{{ product }}</a></h4>
+				<div class="align-items">
+					<div class="pull-left">
+						<span class="price">
+							{% if availability.available %}
+							{% price_range availability.price_range %}
+							{% else %}
+							Not in stock
+							{% endif %}
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% if forloop.last %}
+</div>
+{% endif %}
 {% endfor %}
+{% endif %}
