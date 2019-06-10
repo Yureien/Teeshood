@@ -85,6 +85,16 @@ class ProductCoupon(models.Model):
     description = models.CharField(max_length=300)
 
 
+class Career(models.Model):
+    site_settings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    forms_link = models.URLField()
+    experience = models.CharField(max_length=40)
+    openings = models.IntegerField()
+    categories = models.CharField(max_length=200, blank=True, null=True)
+    location = models.CharField(max_length=40)
+
+
 class AuthorizationKey(models.Model):
     site_settings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE)
     name = models.CharField(

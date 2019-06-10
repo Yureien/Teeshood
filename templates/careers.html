@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% load categories %}
+{% block stylesheet %}
+<style>
+ h1 {
+     font-family: 'Lato', sans-serif;
+     font-weight: 300;
+     text-transform: uppercase;
+ }
+</style>
+{% endblock %}
+{% block breadcrumb %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb">
+                    <a href="{% url 'home' %}"><i class="icon-home"></i> Home</a>
+                    <span class="crumbs-spacer"><i class="fa fa-angle-double-right"></i></span>
+                    <span class="current">Careers</span>
+                    <h2 class="entry-title">Careers</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+<div id="content" class="careers">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+                <div class="search-panel clearfix">
+					<form class="form-inline">
+						<label class="sr-only" for="searchInput">Search for Job</label>
+						<input type="text" class="form-control mb-2 mr-sm-2" id="searchInput" name="search" placeholder="Job Title, Category, Location etc." style="width:70%">
+						<button type="submit" class="btn btn-common mb-2">Search</button>
+					</form>
+				</div>
+
+                <div class="content-inner clearfix">
+					{% for career in careers.qs %}
+	                <div class="services-box careers-box clearfix">
+						<div class="services-icon">
+							<i class="far fa-file-alt"></i>
+						</div>
+						<div class="services-content">
+							<h4><a href="{{ career.forms_link }}">{{ career.title }}</a></h4>
+							<div class="meta">
+								<span class="meta-part"><a href="{{ career.forms_link }}"><i class="fas fa-briefcase"></i> {{career.experience}}</a></span>
+								<span class="meta-part"><a href="{{ career.forms_link }}"><i class="fas fa-user-friends"></i>  {{career.openings}} Openings</a></span>
+								<span class="meta-part"><a href="{{ career.forms_link }}"><i class="fas fa-map-marker-alt"></i>  {{career.location}}</a></span>
+								<span class="meta-part"><a href="{{ career.forms_link }}"><i class="fas fa-search"></i> {{career.categories|categorify}}</span>
+							</div>
+						</div>
+
+						<div class="job-action-btn">
+							<a href="{{ career.forms_link }}" class="btn btn-common btn-large js-direct-job-application">APPLY</a>
+						</div>
+					</div>
+					{% empty %}
+					<h6 class="text-center">No job found matching required criteria.</h6>
+					{% endfor %}
+				</div>
+            </div>
+            <aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 right-sidebar">
+				<div class="widget widget-categories">
+					<h4 class="w-title">About</h4>
+					<div class="about-widget-content">
+					    <h5>Pellentesque malesapibus maximus.</h5>
+					    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias illum ratione,</p>
+					</div>
+				</div>
+				<div class="widget widget-categories">
+					<h4 class="w-title">Categories</h4>
+					<ul class="cat-list">
+						{% for cat, n in categories.items %}
+					    <li>
+					        <a href="?search={{cat}}"><i class="icon-folder-alt"></i> {{cat|titleify}} <span class="num-posts">({{n}})</span></a>
+					    </li>
+						{% endfor %}
+					</ul>
+				</div>
+			</aside> 
+        </div>
+    </div>
+</div> 
+{% endblock %}

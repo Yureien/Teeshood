@@ -1,5 +1,6 @@
 from django.utils.translation import npgettext
-from django_filters import FilterSet
+from django_filters import FilterSet, CharFilter
+from ..site.models import Career
 
 
 class SortedFilterSet(FilterSet):
@@ -27,3 +28,17 @@ class SortedFilterSet(FilterSet):
             'Found %(counter)d matching record',
             'Found %(counter)d matching records',
             number=counter) % {'counter': counter}
+
+
+class CareerFilter(FilterSet):
+    search = CharFilter(method='career_custom_filter')
+
+    class Meta:
+        model = Career
+        fields = ['search']
+
+    def career_custom_filter(self, queryset, name, value):
+        return (queryset.filter(title__icontains=value) |
+                queryset.filter(experience__icontains=value) |
+                queryset.filter(location__icontains=value) |
+                queryset.filter(categories__icontains=value))

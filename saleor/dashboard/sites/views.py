@@ -6,11 +6,12 @@ from django.template.response import TemplateResponse
 from django.utils.translation import pgettext_lazy
 from django.forms import modelformset_factory
 
-from ...site.models import (AuthorizationKey, SiteSettings, ProductCoupon,
+from ...site.models import (AuthorizationKey, SiteSettings, ProductCoupon, Career,
                             ProductBanner, HallOfFame, CategoryTile, CustomerBanner)
 from ..views import staff_member_required
-from .forms import (AuthorizationKeyForm, SiteForm, ProductCouponForm, CustomerBannerForm,
-                    SiteSettingsForm, ProductBannerForm, HallOfFameForm, CategoryTileForm)
+from .forms import (AuthorizationKeyForm, SiteForm, ProductCouponForm,
+                    CustomerBannerForm, CareerAvailableForm, SiteSettingsForm,
+                    ProductBannerForm, HallOfFameForm, CategoryTileForm)
 
 
 @staff_member_required
@@ -144,6 +145,31 @@ def product_coupon_edit(request, pk):
            'site': site,
            'product_coupon_formset': product_coupon_formset}
     return TemplateResponse(request, 'dashboard/sites/product_coupon_form.html', ctx)
+
+
+@staff_member_required
+@permission_required('site.edit_settings')
+def career_openings_edit(request, pk):
+    site_settings = get_object_or_404(SiteSettings, pk=pk)
+    site = site_settings.site
+    CareerFormSet = modelformset_factory(
+        Career, form=CareerAvailableForm, extra=5, can_delete=True, can_order=True)
+    career_formset = CareerFormSet(request.POST or None, request.FILES or None)
+
+    if career_formset.is_valid():
+        careers = career_formset.save(commit=False)
+        for obj in career_formset.deleted_objects:
+            obj.delete()
+        for instance in careers:
+            instance.site_settings = site_settings
+            instance.save()
+        messages.success(request, pgettext_lazy(
+            'Dashboard message', 'Updated career openings'))
+        return redirect('dashboard:site-details', pk=site_settings.id)
+    ctx = {'site_settings': site_settings,
+           'site': site,
+           'career_formset': career_formset}
+    return TemplateResponse(request, 'dashboard/sites/career_form.html', ctx)
 
 
 @staff_member_required

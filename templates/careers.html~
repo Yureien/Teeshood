@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">  
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Ecommerce, Repairing & Dry Clining">
+        <title>Graphikerr - TEESHOOD</title>
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="shortcut icon" href="assets/img/favicon.png">
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
+		<link rel="stylesheet" href="assets/css/bootstrap-select.min.css" type="text/css">
+		<link rel="stylesheet" href="assets/fonts/font-awesome.min.css" type="text/css">
+		<link rel="stylesheet" href="assets/fonts/line-icons/line-icons.css" type="text/css">
+		<link rel="stylesheet" href="assets/css/main.css" type="text/css">
+		<link rel="stylesheet" href="assets/extras/settings.css" type="text/css">
+		<link rel="stylesheet" href="assets/extras/animate.css" type="text/css">
+		<link rel="stylesheet" href="assets/extras/owl.carousel.css" type="text/css">
+		<link rel="stylesheet" href="assets/extras/owl.theme.css" type="text/css">
+		<link rel="stylesheet" href="assets/extras/ion.rangeSlider.css" type="text/css">
+		<link rel="stylesheet" href="assets/extras/ion.rangeSlider.skinFlat.css" type="text/css">
+		<link rel="stylesheet" href="assets/extras/component.css" type="text/css">
+		<link rel="stylesheet" href="assets/extras/slick.css" type="text/css">
+		<link rel="stylesheet" href="assets/extras/slick-theme.css" type="text/css">
+		<link rel="stylesheet" href="assets/extras/nivo-lightbox.css" type="text/css">
+		<link rel="stylesheet" href="assets/css/color-switcher.css" type="text/css">
+		<link rel="stylesheet" href="assets/css/slicknav.css" type="text/css">
+		<link rel="stylesheet" href="assets/css/responsive.css" type="text/css">  
+		<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+
+    </head>
+    <body>
+        <div class="header">
+
+		    <div class="top-bar">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col-md-6 col-sm-4">
+		                    <div class="language-wrapper">
+		                        <div class="box-language">
+		                            <a href="#"><i class="icon-phone"></i> Call Us: +91-9083250-171/225/226</a>
+		                        </div>                            
+		                    </div>
+		                    <div class="clear"></div>
+		                </div>
+		                <div class="col-md-6 col-sm-8">
+
+		                    <div class="search-area">
+		                        <form>
+		                            <div class="control-group">
+		                                <ul class="categories-filter animate-dropdown">
+		                                    <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
+		                                        <ul class="dropdown-menu">
+		                                            <li class="menu-header">Apparel</li>
+		                                            <li class="menu-header">Accessories</li>
+		                                            <li class="menu-header">Groceries </li>
+		                                            <li><a tabindex="-1" href="#">- Coffees</a></li>
+		                                            <li><a tabindex="-1" href="#">- Candies</a></li>
+		                                            <li class="menu-header">Books</li>
+		                                        </ul>
+		                                    </li>
+		                                </ul>
+		                                <input class="search-field" placeholder="Search here...">
+		                                <a class="search-button" href="#"><i class="icon-magnifier"></i></a>
+		                            </div>
+		                        </form>
+		                    </div>
+
+		                    <div class="shop-cart">
+		                        <ul>
+		                            <li><a class="cart-icon cart-btn" href="#"><span class="icon-heart"></span></a></li>
+		                            <li>
+		                                <a href="#" class="cart-icon cart-btn"><i class="icon-basket-loaded"></i><span class="cart-label">3</span></a>
+		                                <div class="cart-box">
+		                                    <div class="popup-container">
+		                                        <div class="cart-entry">
+		                                            <a href="#" class="image"><img src="assets/img/products/product-menu-1.jpg" alt=""></a>
+		                                            <div class="content">
+		                                                <a href="#" class="title">Pullover Batwing</a>
+		                                                <p class="quantity">Quantity: 3</p>
+		                                                <span class="price">$45.00</span>
+		                                            </div>
+		                                            <div class="button-x">
+		                                                <i class="icon-close"></i>
+		                                            </div>
+		                                        </div>
+		                                        <div class="cart-entry">
+		                                            <a href="#" class="image"><img src="assets/img/products/product-menu-2.jpg" alt=""></a>
+		                                            <div class="content">
+		                                                <a href="#" class="title">Pullover Batwing</a>
+		                                                <p class="quantity">Quantity: 3</p>
+		                                                <span class="price">$90.00</span>
+		                                            </div>
+		                                            <div class="button-x">
+		                                                <i class="icon-close"></i>
+		                                            </div>
+		                                        </div>
+		                                        <div class="summary">
+		                                            <div class="subtotal">Sub Total</div>
+		                                            <div class="price-s">$210.5</div>
+		                                        </div>
+		                                        <div class="cart-buttons">
+		                                            <a href="#" class="btn btn-border-2">View Cart</a>
+		                                            <a href="#" class="btn btn-common">Checkout</a>
+		                                            <div class="clear"></div>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+
+		    <nav class="navbar navbar-default" data-spy="affix" data-offset-top="50">
+		        <div class="container">
+		            <div class="row">
+		                <div class="navbar-header">
+
+		                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></button>
+		                    <a class="navbar-brand" href="./"><img src="assets/img/teeshood logo long.svg" alt=""></a>
+		                </div>
+		                <div class="navbar-collapse collapse">
+
+		                    <ul class="nav navbar-nav">
+		                        <li><a class="active" href="./">Home</a></li>
+		                        <li><a href="#">Apparel</a></li> 
+		                        <li>
+		                            <a href="#">Accessories <span class="caret"></span></a>
+		                            <div class="dropdown mega-menu megamenu1">
+		                                <div class="row">
+		                                    <div class="col-sm-3 col-xs-12">
+		                                        <ul class="menulinks">
+		                                            <li class="maga-menu-title">
+		                                                <a href="#">Men</a>
+		                                            </li>
+		                                            <li><a href="#">Clothing</a></li>
+		                                            <li><a href="#">Handbags</a></li>
+		                                            <li><a href="#">Maternity</a></li>
+		                                            <li><a href="#">Jewelry</a></li>
+		                                            <li><a href="#">Scarves</a></li>
+		                                        </ul>
+		                                    </div>
+		                                    <div class="col-sm-3 col-xs-12">
+		                                        <ul class="menulinks">
+		                                            <li class="maga-menu-title">
+		                                                <a href="#">Women</a>
+		                                            </li>
+		                                            <li><a href="#">Handbags</a></li>
+		                                            <li><a href="#">Jewelry</a></li>
+		                                            <li><a href="#">Clothing</a></li>
+		                                            <li><a href="#">Watches</a></li>
+		                                            <li><a href="#">Hats</a></li>
+		                                        </ul>
+		                                    </div>
+		                                    <div class="col-sm-3 col-xs-12">
+		                                        <ul class="menulinks">
+		                                            <li class="maga-menu-title">
+		                                                <a href="#">Accessories</a>
+		                                            </li>
+		                                            <li><a href="#">Belts</a></li>
+		                                            <li><a href="#">Scarves</a></li>
+		                                            <li><a href="#">Hats</a></li>
+		                                            <li><a href="#">Ties</a></li>
+		                                            <li><a href="#">Handbags</a></li>
+		                                        </ul>
+		                                    </div>
+		                                    <div class="col-sm-3 col-xs-12">
+		                                        <span class="block-last"><img src="assets/img/block_menu.jpg" alt=""></span>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </li>
+		                        <li><a href="#">Groceries <span class="caret"></span></a>
+		                            <ul class="dropdown">
+		                                <li><a href="#">Coffees</a></li>
+		                                <li><a href="#">Candies</a></li>                                        
+		                            </ul>
+		                        </li>
+		                        <li><a href="#">Books</a></li>
+		                        <li><a href="#">Contact Us</a></li>
+		                    </ul>
+
+		                    <div class="icon-right pull-right">
+		                        <div class="text-right">
+
+		                            <div class="account link-inline">
+		                                <div class="dropdown text-right">
+		                                    <a href="#" aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span> Account <span class="icon-arrow-down"></span></a>
+		                                    <ul class="dropdown-menu">
+		                                        <li><a href="#"><span class="icon icon-user"></span>My Account</a></li>
+		                                        <li><a href="#"><span class="icon icon-heart"></span>My Wishlist</a></li>
+		                                        <li><a href="#"><span class="icon icon-graph"></span>Compare</a></li>
+		                                        <li><a href="#"><span class="icon icon-check"></span>Checkout</a></li>
+		                                        <li><a href="#"><span class="icon icon-lock"></span>Log In</a></li>
+		                                        <li><a href="#"><span class="icon icon-user-follow"></span>Create an account</a></li>
+		                                        <li><a href="#"><span class="icon icon-close"></span>close</a></li>
+		                                    </ul>
+		                                </div>
+		                            </div>
+
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+
+		        <ul class="mobile-menu">
+		            <li><a class="active" href="./">Home</a></li>
+		            <li><a href="#">Apparel</a></li>
+		            <li><a href="#">Accessories</a></li>
+		            <li><a href="#">Groceries</a>
+		                <ul class="dropdown">
+		                    <li><a href="#">Coffees</a></li>
+		                    <li><a href="#">Candies</a></li>                                        
+		                </ul>
+		            </li>
+		            <li><a href="#">Books</a></li>
+		            <li><a href="#">Contact Us</a></li>
+		        </ul>
+		    </nav>
+		</div> 	
+        <div class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="breadcrumb">
+                            <a href="#"><i class="icon-home"></i> Home</a>
+                            <span class="crumbs-spacer"><i class="fa fa-angle-double-right"></i></span>
+                            <span class="current">Careers</span>
+                            <h2 class="entry-title">Careers page</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="content" class="careers">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+                    	<div class="search-panel clearfix">
+						    <form method="post" action="#">
+								<div class="no-gutters custom-search-input-2">
+									<div class="col-lg-4">
+										<div class="form-group">
+											<input class="form-control" type="text" placeholder="Type a job name, role or skill...">
+											<i class="icon_search"></i>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<div class="form-group">
+											<input class="form-control" type="text" placeholder="Location">
+											<i class="icon_pin_alt"></i>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<select class="form-control">
+											<option>Experience</option>	 
+										</select>
+									</div>
+									<div class="col-lg-2">
+										<input type="submit" class="btn btn-common" value="Search">
+									</div>
+								</div> 
+							</form>
+						</div>
+
+                    	<div class="content-inner clearfix">
+
+	                    	<div class="services-box careers-box clearfix">
+								<div class="services-icon">
+									<i class="fa fa-file-text-o"></i>
+								</div>
+								<div class="services-content">
+									<h4><a href="#">Senior Software Engineer - React Native</a></h4>
+									<div class="meta">
+										<span class="meta-part"><a href="#"><i class="fas fa-briefcase"></i> 3-6 Years</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-user-friends"></i> 4 Openings	</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru</a></span>
+									</div>
+								</div>
+
+								<div class="job-action-btn">
+								    <a href="careers-form.html" class="btn btn-common btn-large js-direct-job-application">APPLY</a>
+								    <span class="share-area">
+								        <a href="#" class="drop">SHARE <i class="icon-glyph-35 font-md"></i></a>
+								        <ul class="share-drop dropdown" >
+								            <li>
+								                <a href="#" class="js-facebook-share">
+								                    <i class="fa fa-facebook-square fs16"></i>
+								                    Share on Facebook
+								                </a>
+								            </li> 
+								            <li>
+								                <a href="#" class="js-twitter-share">
+								                    <i class="fa fa-twitter fs16"></i>
+								                    Tweet this job
+								                </a>
+								            </li>
+								            <li>
+								                <a href="#" class="js-email-share">
+								                    <i class="fa fa-envelope fs16"></i>
+								                    Email your friends
+								                </a>
+								            </li>
+								        </ul>
+								    </span>
+								</div>
+							</div>
+
+	                    	<div class="services-box careers-box clearfix">
+								<div class="services-icon">
+									<i class="fa fa-file-text-o"></i>
+								</div>
+								<div class="services-content">
+									<h4><a href="#">Senior Software Engineer- Backend</a></h4>
+									<div class="meta">
+										<span class="meta-part"><a href="#"><i class="fas fa-briefcase"></i> 3-6 Years</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-user-friends"></i> 4 Openings	</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru</a></span>
+									</div>
+								</div>
+
+								<div class="job-action-btn">
+								    <a href="careers-form.html" class="btn btn-common btn-large js-direct-job-application">APPLY</a>
+								    <span class="share-area">
+								        <a href="#" class="drop">SHARE <i class="icon-glyph-35 font-md"></i></a>
+								        <ul class="share-drop dropdown" >
+								            <li>
+								                <a href="#" class="js-facebook-share">
+								                    <i class="fa fa-facebook-square fs16"></i>
+								                    Share on Facebook
+								                </a>
+								            </li> 
+								            <li>
+								                <a href="#" class="js-twitter-share">
+								                    <i class="fa fa-twitter fs16"></i>
+								                    Tweet this job
+								                </a>
+								            </li>
+								            <li>
+								                <a href="#" class="js-email-share">
+								                    <i class="fa fa-envelope fs16"></i>
+								                    Email your friends
+								                </a>
+								            </li>
+								        </ul>
+								    </span>
+								</div>
+							</div>
+
+	                    	<div class="services-box careers-box clearfix">
+								<div class="services-icon">
+									<i class="fa fa-file-text-o"></i>
+								</div>
+								<div class="services-content">
+									<h4><a href="#">Data Analyst</a></h4>
+									<div class="meta">
+										<span class="meta-part"><a href="#"><i class="fas fa-briefcase"></i> 3-6 Years</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-user-friends"></i> 4 Openings	</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru</a></span>
+									</div>
+								</div>
+
+								<div class="job-action-btn">
+								    <a href="careers-form.html" class="btn btn-common btn-large js-direct-job-application">APPLY</a>
+								    <span class="share-area">
+								        <a href="#" class="drop">SHARE <i class="icon-glyph-35 font-md"></i></a>
+								        <ul class="share-drop dropdown" >
+								            <li>
+								                <a href="#" class="js-facebook-share">
+								                    <i class="fa fa-facebook-square fs16"></i>
+								                    Share on Facebook
+								                </a>
+								            </li> 
+								            <li>
+								                <a href="#" class="js-twitter-share">
+								                    <i class="fa fa-twitter fs16"></i>
+								                    Tweet this job
+								                </a>
+								            </li>
+								            <li>
+								                <a href="#" class="js-email-share">
+								                    <i class="fa fa-envelope fs16"></i>
+								                    Email your friends
+								                </a>
+								            </li>
+								        </ul>
+								    </span>
+								</div>
+							</div>
+
+	                    	<div class="services-box careers-box clearfix">
+								<div class="services-icon">
+									<i class="fa fa-file-text-o"></i>
+								</div>
+								<div class="services-content">
+									<h4><a href="#">Senior Software Engineer ( UI )</a></h4>
+									<div class="meta">
+										<span class="meta-part"><a href="#"><i class="fas fa-briefcase"></i> 3-6 Years</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-user-friends"></i> 4 Openings	</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru</a></span>
+									</div>
+								</div>
+
+								<div class="job-action-btn">
+								    <a href="careers-form.html" class="btn btn-common btn-large js-direct-job-application">APPLY</a>
+								    <span class="share-area">
+								        <a href="#" class="drop">SHARE <i class="icon-glyph-35 font-md"></i></a>
+								        <ul class="share-drop dropdown" >
+								            <li>
+								                <a href="#" class="js-facebook-share">
+								                    <i class="fa fa-facebook-square fs16"></i>
+								                    Share on Facebook
+								                </a>
+								            </li> 
+								            <li>
+								                <a href="#" class="js-twitter-share">
+								                    <i class="fa fa-twitter fs16"></i>
+								                    Tweet this job
+								                </a>
+								            </li>
+								            <li>
+								                <a href="#" class="js-email-share">
+								                    <i class="fa fa-envelope fs16"></i>
+								                    Email your friends
+								                </a>
+								            </li>
+								        </ul>
+								    </span>
+								</div>
+							</div>
+
+	                    	<div class="services-box careers-box clearfix">
+								<div class="services-icon">
+									<i class="fa fa-file-text-o"></i>
+								</div>
+								<div class="services-content">
+									<h4><a href="#">Senior Software Engineer - Data Products</a></h4>
+									<div class="meta">
+										<span class="meta-part"><a href="#"><i class="fas fa-briefcase"></i> 3-6 Years</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-user-friends"></i> 4 Openings	</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru</a></span>
+									</div>
+								</div>
+
+								<div class="job-action-btn">
+								    <a href="careers-form.html" class="btn btn-common btn-large js-direct-job-application">APPLY</a>
+								    <span class="share-area">
+								        <a href="#" class="drop">SHARE <i class="icon-glyph-35 font-md"></i></a>
+								        <ul class="share-drop dropdown" >
+								            <li>
+								                <a href="#" class="js-facebook-share">
+								                    <i class="fa fa-facebook-square fs16"></i>
+								                    Share on Facebook
+								                </a>
+								            </li> 
+								            <li>
+								                <a href="#" class="js-twitter-share">
+								                    <i class="fa fa-twitter fs16"></i>
+								                    Tweet this job
+								                </a>
+								            </li>
+								            <li>
+								                <a href="#" class="js-email-share">
+								                    <i class="fa fa-envelope fs16"></i>
+								                    Email your friends
+								                </a>
+								            </li>
+								        </ul>
+								    </span>
+								</div>
+							</div>
+
+	                    	<div class="services-box careers-box clearfix">
+								<div class="services-icon">
+									<i class="fa fa-file-text-o"></i>
+								</div>
+								<div class="services-content">
+									<h4><a href="#">Senior Software Engineer - React Native</a></h4>
+									<div class="meta">
+										<span class="meta-part"><a href="#"><i class="fas fa-briefcase"></i> 3-6 Years</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-user-friends"></i> 4 Openings	</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru</a></span>
+									</div>
+								</div>
+
+								<div class="job-action-btn">
+								    <a href="careers-form.html" class="btn btn-common btn-large js-direct-job-application">APPLY</a>
+								    <span class="share-area">
+								        <a href="#" class="drop">SHARE <i class="icon-glyph-35 font-md"></i></a>
+								        <ul class="share-drop dropdown" >
+								            <li>
+								                <a href="#" class="js-facebook-share">
+								                    <i class="fa fa-facebook-square fs16"></i>
+								                    Share on Facebook
+								                </a>
+								            </li> 
+								            <li>
+								                <a href="#" class="js-twitter-share">
+								                    <i class="fa fa-twitter fs16"></i>
+								                    Tweet this job
+								                </a>
+								            </li>
+								            <li>
+								                <a href="#" class="js-email-share">
+								                    <i class="fa fa-envelope fs16"></i>
+								                    Email your friends
+								                </a>
+								            </li>
+								        </ul>
+								    </span>
+								</div>
+							</div>
+
+	                    	<div class="services-box careers-box clearfix">
+								<div class="services-icon">
+									<i class="fa fa-file-text-o"></i>
+								</div>
+								<div class="services-content">
+									<h4><a href="#">Senior Software Engineer ( Rapid Team)</a></h4>
+									<div class="meta">
+										<span class="meta-part"><a href="#"><i class="fas fa-briefcase"></i> 3-6 Years</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-user-friends"></i> 4 Openings	</a></span>
+										<span class="meta-part"><a href="#"><i class="fas fa-map-marker-alt"></i> Bengaluru</a></span>
+									</div>
+								</div>
+
+								<div class="job-action-btn">
+								    <a href="careers-form.html" class="btn btn-common btn-large js-direct-job-application">APPLY</a>
+								    <span class="share-area">
+								        <a class="btn-link dropdown-toggle share-link" href="#" data-toggle="dropdown" aria-expanded="false">SHARE<i class="icon-glyph-35 font-md"></i></a>
+								        <ul class="dropdown-menu dropdown-menu-right drop-down-pos" role="menu" style="display: none;">
+								            <li>
+								                <a href="#" class="js-facebook-share">
+								                    <div><i class="fa fa-facebook-square fs16"></i></div>
+								                    Share on Facebook
+								                </a>
+								            </li> 
+								            <li>
+								                <a href="#" class="js-twitter-share">
+								                    <div><i class="fa fa-twitter fs16"></i></div>
+								                    Tweet this job
+								                </a>
+								            </li>
+								            <li>
+								                <a href="#" class="js-email-share">
+								                    <div><i class="fa fa-envelope fs16"></i></div>
+								                    Email your friends
+								                </a>
+								            </li>
+								        </ul>
+								    </span>
+								</div>
+							</div>
+						</div>
+                    </div>  
+                	<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4 col-lg-4 right-sidebar">
+					    <!-- <div class="widget widget-popular-posts">
+					        <h4 class="w-title">Recent Posts</h4>
+					        <ul class="posts-list">
+					            <li>
+					                <div class="widget-thumb">
+					                    <a href="#"><img src="assets/img/post/thumb1.jpg" alt=""></a>
+					                </div>
+					                <div class="widget-content">
+					                    <a href="#">Nam lobortis elit justo ultrices</a>
+					                    <span><i class="icon-calendar"></i>27-07-2017</span>
+					                </div>
+					                <div class="clearfix"></div>
+					            </li>
+					            <li>
+					                <div class="widget-thumb">
+					                    <a href="#"><img src="assets/img/post/thumb2.jpg" alt=""></a>
+					                </div>
+					                <div class="widget-content">
+					                    <a href="#">Sed ut perspiciatis unde</a>
+					                    <span><i class="icon-calendar"></i>27-07-2017</span>
+					                </div>
+					                <div class="clearfix"></div>
+					            </li>
+					            <li>
+					                <div class="widget-thumb">
+					                    <a href="#"><img src="assets/img/post/thumb3.jpg" alt=""></a>
+					                </div>
+					                <div class="widget-content">
+					                    <a href="#">Sed in odio faucibus sagittis</a>
+					                    <span><i class="icon-calendar"></i>27-07-2017</span>
+					                </div>
+					                <div class="clearfix"></div>
+					            </li>
+					        </ul>
+					    </div> -->
+					    <div class="widget widget-categories">
+					        <h4 class="w-title">About</h4>
+					        <img src="assets/img/blog/about-w.jpg" alt="">
+					        <div class="about-widget-content">
+					            <h5>Pellentesque malesapibus maximus.</h5>
+					            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias illum ratione,</p>
+					        </div>
+					    </div>
+					    <div class="widget widget-categories">
+					        <h4 class="w-title">Categories</h4>
+					        <ul class="cat-list">
+					            <li>
+					                <a href="#"><i class="icon-folder-alt"></i> All about clothing <span class="num-posts">(50)</span></a>
+					            </li>
+					            <li>
+					                <a href="#"><i class="icon-folder-alt"></i> Make-up &amp; beauty <span class="num-posts">(18)</span></a>
+					            </li>
+					            <li>
+					                <a href="#"><i class="icon-folder-alt"></i> Accessories <span class="num-posts">(0)</span></a>
+					            </li>
+					            <li>
+					                <a href="#"><i class="icon-folder-alt"></i> Fashion trends <span class="num-posts">(11)</span></a>
+					            </li>
+					            <li>
+					                <a href="#"><i class="icon-folder-alt"></i> Haircuts &amp; hairstyles <span class="num-posts">(15)</span></a>
+					            </li>
+					        </ul>
+					    </div><!-- 
+					    <div class="add">
+					        <img src="assets/img/blog/add-blog.jpg" alt="">
+					    </div> -->
+					    <!-- <div class="widget tag">
+					        <h4 class="w-title">Popular Tags</h4>
+					        <a href="#"> Fashion</a>
+					        <a href="#"> Clothing</a>
+					        <a href="#"> Trends</a>
+					        <a href="#"> Shoes</a>
+					        <a href="#"> Tops</a>
+					        <a href="#"> Sell Off</a>
+					        <a href="#"> Women Fashion</a>
+					    </div> -->
+					</aside> 
+                </div>
+            </div>
+        </div>  
+
+
+        <footer id="main-footer" class="section">
+		    <div class="container">
+		        <div class="row">
+
+		            <div class="col-md-3 col-sm-6">
+		                <div class="block-subscribe">
+		                    <h3 class="widget-title">About Company</h3>
+		                    <p>Quisque a nunc interdum tellus placerat cursus. Quisque facilisis dapibus facilisis! Vivamus dictum lectus ut porta volutpat.</p>
+		                    <img src="assets/img/payment.png" alt="">
+		                </div>
+		            </div>
+		            <div class="col-md-3 col-sm-6">
+		                <h3 class="widget-title">Useful Links</h3>
+		                <ul class="footer-menu-links">
+		                    <li><a href="#">My Account</a></li>
+		                    <li><a href="#">Contact</a></li>
+		                    <li><a href="#">Checkout</a></li>
+		                    <li><a href="#">404 Page</a></li>
+		                    <li><a href="#">Wishlist</a></li>
+		                    <li><a href="#">Compare</a></li>
+		                </ul>
+		            </div>
+		            <div class="col-md-3 col-sm-6">
+		                <h3 class="widget-title">Product Tags</h3>
+		                <div class="tagcloud">
+		                    <a href="#" class="tag-link">Accessories</a>
+		                    <a href="#" class="tag-link">Bags</a>
+		                    <a href="#" class="tag-link">Bestseller</a>
+		                    <a href="#" class="tag-link">Kids</a>
+		                    <a href="#" class="tag-link">Dresses</a>
+		                    <a href="#" class="tag-link">Men Fashion</a>
+		                    <a href="#" class="tag-link">Sell Off</a>
+		                    <a href="#" class="tag-link">Shoes</a>
+		                    <a href="#" class="tag-link">Specials</a>
+		                    <a href="#" class="tag-link">Tops</a>
+		                    <a href="#" class="tag-link">Women Fashion</a>
+		                </div>
+		            </div>
+		            <div class="col-md-3 col-sm-6">
+		                <div class="contact-us">
+		                    <h3 class="widget-title">Contact Us</h3>
+		                    <ul class="contact-list">
+		                        <li><i class="icon-home"></i> <span>Kolkata, India</span></li>
+		                        <li><i class="icon-call-out"></i> <span>+91 9999-9999-99 <br> +91 9999-9999-99 </span></li>
+		                        <li><i class="icon-envelope"></i> <span><a href="mailto:info@teeshood.com" class="__cf_email__" data-cfemail="b1d2dedfc5d0d2c5f1c2d9dec1c39fd2dedc">info@teeshood.com</a> <a href="mailto:sales@teeshood.com" class="__cf_email__" data-cfemail="375e59515877445f5847451954585a">sales@teeshood.com</a></span>
+		                    </ul>
+		                </div>
+		            </div>
+
+		        </div>
+		    </div>
+		</footer> 
+		<div id="copyright">
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+		                <p> Copyright &copy; 2018. Teeshood | All copyrights reserved.</p>
+		            </div> 
+		        </div>
+		    </div>
+		</div>
+		<a href="#" class="back-to-top"><i class="icon-arrow-up"></i></a>  
+
+		<div id="preloader">
+		    <div id="status">  
+		        <svg version="1.1" id="L1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+				    <circle fill="none" stroke="#42beaa" stroke-width="6" stroke-miterlimit="15" stroke-dasharray="14.2472,14.2472" cx="50" cy="50" r="47" >
+				      <animateTransform 
+				         attributeName="transform" 
+				         attributeType="XML" 
+				         type="rotate"
+				         dur="5s" 
+				         from="0 50 50"
+				         to="360 50 50" 
+				         repeatCount="indefinite" />
+				    </circle>
+				    <circle fill="none" stroke="#42beaa" stroke-width="1" stroke-miterlimit="10" stroke-dasharray="10,10" cx="50" cy="50" r="39">
+				      <animateTransform 
+				         attributeName="transform" 
+				         attributeType="XML" 
+				         type="rotate"
+				         dur="5s" 
+				         from="0 50 50"
+				         to="-360 50 50" 
+				         repeatCount="indefinite" />
+				    </circle>
+				    <g fill="#42beaa">
+				        <rect x="30" y="35" width="5" height="30">
+				            <animateTransform 
+				            attributeName="transform" 
+				            dur="1s" 
+				            type="translate" 
+				            values="0 5 ; 0 -5; 0 5" 
+				            repeatCount="indefinite" 
+				            begin="0.1"/>
+				        </rect>
+				        <rect x="40" y="35" width="5" height="30" >
+				            <animateTransform 
+				        attributeName="transform" 
+				        dur="1s" 
+				        type="translate" 
+				        values="0 5 ; 0 -5; 0 5" 
+				        repeatCount="indefinite" 
+				        begin="0.2"/>
+				        </rect>
+				        <rect x="50" y="35" width="5" height="30" >
+				            <animateTransform 
+				        attributeName="transform" 
+				        dur="1s" 
+				        type="translate" 
+				        values="0 5 ; 0 -5; 0 5" 
+				        repeatCount="indefinite" 
+				        begin="0.3"/>
+				        </rect>
+				        <rect x="60" y="35" width="5" height="30" >
+				            <animateTransform 
+				        attributeName="transform" 
+				        dur="1s" 
+				        type="translate" 
+				        values="0 5 ; 0 -5; 0 5"  
+				        repeatCount="indefinite" 
+				        begin="0.4"/>
+				        </rect>
+				        <rect x="70" y="35" width="5" height="30" >
+				            <animateTransform 
+				        attributeName="transform" 
+				        dur="1s" 
+				        type="translate" 
+				        values="0 5 ; 0 -5; 0 5" 
+				        repeatCount="indefinite" 
+				        begin="0.5"/>
+				        </rect>
+				    </g>
+				</svg>
+		    </div>
+		</div>  
+		
+		<script type="text/javascript" src="assets/js/jquery-min.js"></script>
+		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="assets/js/bootstrap-select.min.js"></script>
+		<script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
+		<script type="text/javascript" src="assets/js/ion.rangeSlider.js"></script>
+		<script type="text/javascript" src="assets/js/modalEffects.js"></script>
+		<script type="text/javascript" src="assets/js/classie.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.themepunch.revolution.min.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.themepunch.tools.min.js"></script>
+		<script type="text/javascript" src="assets/js/nivo-lightbox.js"></script> 
+		<script type="text/javascript" src="assets/js/slick.min.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.slicknav.js"></script> 
+		<script type="text/javascript" src="assets/js/main.js"></script>
+    </body>
+</html>

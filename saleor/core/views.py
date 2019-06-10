@@ -8,7 +8,9 @@ from django.shortcuts import redirect
 from impersonate.views import impersonate as orig_impersonate
 
 from .forms import CustomDesignForm, BulkOrderForm, CustomerContactForm
+from .filters import CareerFilter
 from ..account.models import User
+from ..site.models import Career
 from ..dashboard.views import staff_member_required
 from ..product.utils import products_for_homepage
 from ..product.utils.availability import products_with_availability
@@ -108,3 +110,23 @@ def bulk_order(request):
         return redirect('home')
     ctx = {'bulk_order_form': bulk_order_form}
     return TemplateResponse(request, 'bulk_order.html', ctx)
+
+
+def career_openings(request):
+    careers = Career.objects.all()
+    career_filter = CareerFilter(request.GET, queryset=careers)
+    categories = {}
+    for i in careers:
+        if not i.categories:
+            continue
+        cat = [i.lower() for i in i.categories.split(',')]
+        for c in cat:
+            if c in categories.keys():
+                categories[c] += 1
+            else:
+                categories.update({c: 1})
+    ctx = {
+        'careers': career_filter,
+        'categories': categories
+    }
+    return TemplateResponse(request, 'careers.html', ctx)

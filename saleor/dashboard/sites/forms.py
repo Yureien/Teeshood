@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.sites.models import Site
 from django.utils.translation import pgettext_lazy
 
-from ...site.models import (AuthorizationKey, SiteSettings, ProductCoupon,
+from ...site.models import (AuthorizationKey, SiteSettings, ProductCoupon, Career,
                             ProductBanner, HallOfFame, CategoryTile, CustomerBanner)
 
 
@@ -115,4 +115,24 @@ class CategoryTileForm(forms.ModelForm):
                 'Banner image', 'Image'),
             'category_url': pgettext_lazy(
                 'Link to product', 'Link'),
+        }
+
+
+class CareerAvailableForm(forms.ModelForm):
+    class Meta:
+        model = Career
+        exclude = ['site_settings']
+        labels = {
+            'title': pgettext_lazy(
+                'Job Title', 'Job Title'),
+            'forms_link': pgettext_lazy(
+                'Link to job application form', 'Job Apply Link'),
+            'experience': pgettext_lazy(
+                'Experience', 'Experience'),
+            'openings': pgettext_lazy(
+                'Openings', 'Openings'),
+            'location': pgettext_lazy(
+                'Job Location', 'Job Location'),
+            'categories': pgettext_lazy(
+                'Job Categories', 'Job Categories (comma-separated, lowercase)'),
         }

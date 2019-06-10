@@ -1,0 +1,7 @@
+from django import template
+
+register = template.Library()
+
+@register.filter
+def categorify(text):
+    return ", ".join([i for i in text.split(',')])

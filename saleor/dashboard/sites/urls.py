@@ -20,6 +20,8 @@ urlpatterns = [
         name='site-home-product-coupon-update'),
     url(r'^(?P<pk>\d+)/category-tile-update/$', views.category_tile_edit,
         name='site-home-category-tile-update'),
+    url(r'^(?P<pk>\d+)/career-openings-update/$', views.career_openings_edit,
+        name='site-career-openings-update'),
 
     url(r'^(?P<site_settings_pk>\d+)/authorization_key/add/$',
         views.authorization_key_add, name='authorization-key-add'),
