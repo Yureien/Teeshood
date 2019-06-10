@@ -219,7 +219,6 @@
 							<li><a href="{% url "cart:index" %}">Your Cart</a></li>
                             <li><a href="{% url "account:details" %}">My Account</a></li>
 							<li><a href="{% url "bulk-order" %}">Bulk Order</a></li>
-							<li><a href="{% url "career-openings" %}">Join Us</a></li>
 							{% if user.is_impersonate %}
                             <li><a href="{% url "impersonate-stop" %}">Log Out</a></li>
 							{% else %}
@@ -229,6 +228,7 @@
                             <li><a href="{% url "account:signup" %}">Sign Up</a></li>
                             <li><a href="{% url "account:login" %}">Log In</a></li>
 							{% endif %}
+							<li><a href="{% url "career-openings" %}">Join Us</a></li>
 							{% menu site_menu=site.settings.bottom_menu %}
 							<li><a href="{% url "privacy-policy" %}">Privacy Policy</a></li>
 							<li><a href="{% url "about" %}">About Us</a></li>
